@@ -11,7 +11,7 @@
       
     <header>
       <div class="grid_ mt-2 mb-10 md:mb-20">
-        <squarespace:navigation navigationId="mainNav" template="site-navigation" />
+        <squarespace:navigation navigationId="mainNav" template="navigation" />
       </div>
     </header>
 
@@ -22,8 +22,8 @@
     </main>
 
     <footer>
-      <squarespace:navigation navigationId="mainNav" template="site-footer" />
-      <squarespace:navigation navigationId="footerNav" template="site-sub-footer" />
+      <squarespace:navigation navigationId="mainNav" template="footer" />
+      <squarespace:navigation navigationId="footerNav" template="sub-footer" />
     </footer>
 
     <!-- combo and minify scripts when not logged in -->
