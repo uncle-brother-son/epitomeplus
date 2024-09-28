@@ -11,7 +11,13 @@
   <p class="filtered-by">Filtered by Author: {author.displayName}</p>
 {.end}
 
-{@|safe} —
+<squarespace:category collection="{urlId}">
+    {.if categories}
+      <div class="category-wrapper">
+        <span class="category">{.repeated section categories}{name}{.alternates with}, {.end}</span>
+      </div>
+    {.end}
+  </squarespace:category>
 
 <!-- item loop -->
 {.repeated section items}
