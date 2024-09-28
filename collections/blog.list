@@ -15,6 +15,10 @@
  {@|json}, 
 {.end}
 
+{.section categories}
+{@|safe}
+{.end}
+
 <h1>hello — {categories|json}</h1>
 
 <!-- item loop -->
