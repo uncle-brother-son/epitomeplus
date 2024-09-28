@@ -7,7 +7,8 @@
   </head>
   <body id="{squarespace.page-id}">
 
-      {website.id}
+      <script>console.log("hello");</script>
+      <p>{website.id}</p>
 
     <header class="grid_"><squarespace:navigation navigationId="siteNav" template="site-navigation" /></header>
     <main class="grid_" role="main" data-content-field="main-content">{squarespace.main-content}</main>
