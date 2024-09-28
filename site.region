@@ -1,35 +1,5 @@
-<!doctype html>
-<html>
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    {squarespace-headers}
-  </head>
-  <body id="{squarespace.page-id}">
-
-    <script>console.log({website|json});</script>
-      
-    <header>
-      <div class="grid_ mt-2 mb-10 md:mb-20">
-        <squarespace:navigation navigationId="mainNav" template="navigation" />
-      </div>
-    </header>
-
-    <main class="" role="main" data-content-field="main-content">
-      <div class="col-span-full">
-        {squarespace.main-content}
-      </div>
-    </main>
-
-    <footer>
-      <squarespace:navigation navigationId="mainNav" template="footer" />
-      <squarespace:navigation navigationId="footerNav" template="sub-footer" />
-    </footer>
-
-    <!-- combo and minify scripts when not logged in -->
-    <squarespace:script src="site.js" combo="{.if authenticatedAccount}false{.or}true{.end}" />
-    <!-- other scripts, and footer code injection -->
-    {squarespace-footers}
-
-  </body>
-</html>
+<main class="" role="main" data-content-field="main-content">
+  <div class="col-span-full">
+    {squarespace.main-content}
+  </div>
+</main>
