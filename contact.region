@@ -14,7 +14,7 @@
     </header>
 
     <main role="main" data-content-field="main-content">
-      <div class="grid_ mb-10 md:mb-20">
+      <div class="grid_ gap-y-3 mb-10 md:mb-20">
         <div class="col-start-1 col-span-1">
           <squarespace:block-field id="contact-intro" columns="12" lock-layout="true"/>
         </div>
