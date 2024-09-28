@@ -7,12 +7,11 @@
   </head>
   <body id="{squarespace.page-id}">
 
-      <script>console.log({website|json});</script>
+    <script>console.log({website|json});</script>
       
-
     <header>
       <div class="grid_ mt-2 mb-10 md:mb-20">
-        <squarespace:navigation navigationId="siteNav" template="site-navigation" />
+        <squarespace:navigation navigationId="mainNav" template="site-navigation" />
       </div>
     </header>
 
@@ -23,7 +22,7 @@
     </main>
 
     <footer>
-      <squarespace:navigation navigationId="siteNav" template="site-footer" />
+      <squarespace:navigation navigationId="mainNav" template="site-footer" />
       <squarespace:navigation navigationId="footerNav" template="site-sub-footer" />
     </footer>
 
