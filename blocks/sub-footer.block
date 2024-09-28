@@ -17,7 +17,7 @@
 </div>
 
 <script>
-  const d = new Date(); 
-  d.getFullYear();
-  document.getElementById("demo").innerHTML = d;
+  const d = new Date();
+  d.setFullYear(d.getFullYear());
+  document.getElementById("year").innerHTML = d;
 </script> 
