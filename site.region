@@ -12,7 +12,7 @@
 
     <header class="grid_"><squarespace:navigation navigationId="siteNav" template="site-navigation" /></header>
     <main class="grid_" role="main" data-content-field="main-content">
-      <p>{website.templateID}</p>
+      <p>{website.id}</p>
       {squarespace.main-content}
     </main>
     <footer class="grid_"><squarespace:block-field id="footerBlocks" columns="12" /></footer>
