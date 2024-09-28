@@ -1,4 +1,4 @@
-<div class="grid_ mt-2 mb-20 md:mb-40">
+<div class="grid_ my-20 md:my-40">
 
   <ul class="col-start-1 col-end-4 md:col-start-2 md:col-end-4">
     {.repeated section items}
