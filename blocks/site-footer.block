@@ -1,23 +1,10 @@
-
-<div class=" ">
-  <ul class="w-full flex flex-row gap-4">
+<div class="flex flex-row gap-2 md:gao-4 mx-2 mb-2">
+  <div class="grow">@ 2024 {website.siteTitle}</div>
+  <div class="flex flex-row gap-2">
     {.repeated section items}
-      <li class="{.section active} active-link{.end} text-right grow">
-        {.section collection}
-          <a href="{fullUrl}">{navigationTitle}</a>
-        {.end}
-        {.section externalLink}
-          <a href="{url}"{.section newWindow} target="_blank"{.end}>
-            {title}
-          </a>
-        {.end}
+      <li class="{.section active}active-link {.end} text-right">
+        <a href="{fullUrl}">{navigationTitle}</a>
       </li>
     {.end}
-  </ul>
-</div>
-
-<div class="col-start-1 col-end-2">@ 2024 Epitome+</div>
-<div class="col-start-6 col-end-7 flex flex-row gap-2">
-  <a href="/">Terms & Conditions</a>
-  <a href="/">Privacy Policy</a>
+  </div>
 </div>
