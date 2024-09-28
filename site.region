@@ -21,7 +21,10 @@
         {squarespace.main-content}
       </div>
     </main>
-    <footer class="grid_"><squarespace:block-field id="footerBlocks" columns="12" /></footer>
+
+    <footer class="grid_ mb-2">
+      <squarespace:block-field id="footerBlocks" />
+    </footer>
 
     <!-- combo and minify scripts when not logged in -->
     <squarespace:script src="site.js" combo="{.if authenticatedAccount}false{.or}true{.end}" />
