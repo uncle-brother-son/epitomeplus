@@ -13,4 +13,4 @@
       </div>
     </header>
 
-    <script>console.log(@|json);</script>
+    <script>console.log(website|json);</script>
