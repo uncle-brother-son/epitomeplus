@@ -7,11 +7,8 @@
   </head>
   <body id="{squarespace.page-id}">
       
-    <header>
-      <div class="grid_ mt-2 mb-10 md:mb-20">
-        <squarespace:navigation navigationId="mainNav" template="navigation" />
-      </div>
-    </header>
+    
+      
 
     <main role="main" data-content-field="main-content">
       <div class="grid_ gap-y-3 mb-10 md:mb-20">
