@@ -16,7 +16,7 @@
 <nav class="col-start-3 col-end-4 md:col-start-4 md:col-end-7">
   <ul class="w-full flex flex-row gap-4">
     {.repeated section items}
-      <li class="{.section active}active{.end} text-right grow">
+      <li class="{.section active}active{.end} text-right grow hidden md:block">
         {.section collection}
           <a href="{fullUrl}">{navigationTitle}</a>
         {.end}
@@ -26,6 +26,7 @@
           </a>
         {.end}
       </li>
+      <li class="md:hidden">Menu</li>
     {.end}
   </ul>
 </nav>
