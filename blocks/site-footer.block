@@ -8,4 +8,5 @@
     {.end}
   </ul>
 </div>
-{section.id}
+
+<script>console.log({section|json}, hi);</script>
