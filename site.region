@@ -7,7 +7,7 @@
   </head>
   <body id="{squarespace.page-id}">
 
-      <script>console.log({@|json});</script>
+      <script>console.log({website|json});</script>
       
 
     <header class="grid_"><squarespace:navigation navigationId="siteNav" template="site-navigation" /></header>
