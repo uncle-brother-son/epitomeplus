@@ -11,6 +11,10 @@
   <p class="filtered-by">Filtered by Author: {author.displayName}</p>
 {.end}
 
+{.repeated section categories}
+ {name}, 
+{.end}
+
 <!-- item loop -->
 {.repeated section items}
 
