@@ -756,8 +756,32 @@ input.disabled + .selector{
   transition-duration: 160ms;
   transition-timing-function: linear;
 }
+.col-span-2{
+  grid-column: span 2 / span 2;
+}
+.col-span-3{
+  grid-column: span 3 / span 3;
+}
+.col-start-1{
+  grid-column-start: 1;
+}
+.col-start-3{
+  grid-column-start: 3;
+}
 .block{
   display: block;
+}
+.flex{
+  display: flex;
+}
+.flex-row{
+  flex-direction: row;
+}
+.gap-4{
+  gap: 2rem;
+}
+.text-right{
+  text-align: right;
 }
 @keyframes fadein {
     0% {
