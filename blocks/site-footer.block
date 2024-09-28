@@ -8,4 +8,4 @@
     {.end}
   </ul>
 </div>
-{section|json}
+{section.id|json}
