@@ -10,8 +10,10 @@
       <script>console.log({website|json});</script>
       
 
-    <header>      
-      <squarespace:navigation navigationId="siteNav" template="site-navigation" />
+    <header>
+      <div class="grid_ mt-2 mb-10 md:mb-20">
+        <squarespace:navigation navigationId="siteNav" template="site-navigation" />
+      </div>
     </header>
 
     <main class="grid_" role="main" data-content-field="main-content">
