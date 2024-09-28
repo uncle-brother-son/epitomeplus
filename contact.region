@@ -14,10 +14,20 @@
     </header>
 
     <main class="grid_" role="main" data-content-field="main-content">
-      <div class="col-start-1 col-end-4 md:col-end-7">
-        [contact page]
-        <squarespace:block-field id="blockField1" columns="12" lock-layout="true"/>
-        <script>console.log({squarespace.main-content|json});</script>
+      <div class="col-start-2 col-end-4 md:col-start-3 md:col-end-4 mb-3 mf:mb-20">
+        <squarespace:block-field id="contact-intro" columns="12" lock-layout="true"/>
+      </div>
+      <div class="col-start-2 col-end-4 md:col-start-4 md:col-end-5 mb-10 mf:mb-20"">
+        <squarespace:block-field id="contact-general" columns="12" lock-layout="true"/>
+      </div>
+      <div class="col-start-2 col-end-4 md:col-start-3 md:col-end-4">
+        <squarespace:block-field id="contact-1" columns="12" lock-layout="true"/>
+      </div>
+      <div class="col-start-2 col-end-4 md:col-start-4 md:col-end-5">
+        <squarespace:block-field id="contact-2" columns="12" lock-layout="true"/>
+      </div>
+      <div class="col-start-2 col-end-4 md:col-start-5 md:col-end-6">
+        <squarespace:block-field id="contact-3" columns="12" lock-layout="true"/>
       </div>
     </main>
 
