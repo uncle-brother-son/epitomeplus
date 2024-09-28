@@ -1,4 +1,4 @@
-<div class="relative col-start-1 col-span-2 md:col-start-1 md:col-span-2">
+<div class="col-start-2 col-span-2">
   <a href="/">      
     <svg class="fill-black" width="210" height="32" viewBox="0 0 210 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M209.458 12.72H202.415V5.62H196.623V12.72H189.58V18.835H196.623V25.935H202.415V18.835H209.458V12.72Z"/>
@@ -11,22 +11,4 @@
       <path d="M173.493 24.93V18.835H184.654V12.435H173.493V7.06999H187.174V0.269989H165.922V31.73H187.618V24.93H173.493Z"/>
     </svg>
   </a>
-</div>
-<div class="relative col-start-3 col-span-1 md:col-start-3 md:col-span-4">
-  <nav>
-    <ul class="w-full flex flex-row gap-4">
-      {.repeated section items}
-        <li class="{.section active} active-link{.end} text-right">
-          {.section collection}
-            <a href="{fullUrl}">{navigationTitle}</a>
-          {.end}
-          {.section externalLink}
-            <a href="{url}"{.section newWindow} target="_blank"{.end}>
-              {title}
-            </a>
-          {.end}
-        </li>
-      {.end}
-    </ul>
-  </nav>
 </div>
