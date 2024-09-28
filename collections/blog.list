@@ -15,7 +15,7 @@
  {@|json}, 
 {.end}
 
-<h1>hello</h1>
+<h1>hello — {categories|json}</h1>
 
 <!-- item loop -->
 {.repeated section items}
