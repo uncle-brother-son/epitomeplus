@@ -1,5 +1,5 @@
 <div class="flex flex-row gap-2 md:gao-4 mx-2 mb-2">
-  <div class="grow">@ 2024 {website.siteTitle}</div>
+  <div class="grow">&copy; <script>doviment.write(date.getFullYear();)</script> 2024 {website.siteTitle}</div>
   <ul class="flex flex-row gap-2">
     {.repeated section items}
       <li class="{.section active}active-link {.end} text-right">
