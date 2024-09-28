@@ -26,7 +26,7 @@
           </a>
         {.end}
       </li>
-      <li class="md:hidden">Menu</li>
     {.end}
+    <li class="md:hidden">Menu</li>
   </ul>
 </nav>
