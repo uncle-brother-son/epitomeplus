@@ -22,7 +22,7 @@
       </div>
     </main>
 
-    <footer class="grid_ mb-2">
+    <footer>
       <squarespace:block-field id="footerBlocks" />
       <squarespace:navigation navigationId="footerNav" template="site-footer" />
     </footer>
