@@ -594,140 +594,9 @@ svg[class*=payment-]{
          column-gap: 2rem;
   }
 }
-.field{
-  position: relative;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-.field:last-child{
-  margin-bottom: 0rem;
-}
-.field input:-webkit-autofill, .field textarea:-webkit-autofill{
-  box-sizing: border-box;
-  display: inline-block;
-  width: 100%;
-  scroll-margin-top: 6rem;
-  -webkit-appearance: none;
-          appearance: none;
-  border-radius: 2px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(246 245 243 / var(--tw-bg-opacity));
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  font-family: Roboto, Helvetica Neue, Helvetica, Arial, Frutiger, Frutiger Linotype, Univers, Calibri, Gill Sans, Gill Sans MT, Myriad Pro, Myriad, DejaVu Sans Condensed, Liberation Sans, Nimbus Sans L, Tahoma, Geneva, sans-serif;
-  font-size: 0.875rem;
-  letter-spacing: .0175em;
-  --tw-text-opacity: 1;
-  color: rgb(51 51 51 / var(--tw-text-opacity));
-}
-.field input,
-  .field input:autofill,
-  .field input:-webkit-autofill,
-  .field textarea,
-  .field textarea:autofill,
-  .field textarea:-webkit-autofill,
-  .field select{
-  box-sizing: border-box;
-  display: inline-block;
-  width: 100%;
-  scroll-margin-top: 6rem;
-  -webkit-appearance: none;
-          appearance: none;
-  border-radius: 2px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(246 245 243 / var(--tw-bg-opacity));
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  font-family: Roboto, Helvetica Neue, Helvetica, Arial, Frutiger, Frutiger Linotype, Univers, Calibri, Gill Sans, Gill Sans MT, Myriad Pro, Myriad, DejaVu Sans Condensed, Liberation Sans, Nimbus Sans L, Tahoma, Geneva, sans-serif;
-  font-size: 0.875rem;
-  letter-spacing: .0175em;
-  --tw-text-opacity: 1;
-  color: rgb(51 51 51 / var(--tw-text-opacity));
-}
-.field input:-webkit-autofill::placeholder, .field textarea:-webkit-autofill::placeholder{
-  letter-spacing: .0175em;
-  --tw-text-opacity: 1;
-  color: rgb(51 51 51 / var(--tw-text-opacity));
-}
-.field input::placeholder,
-  .field input:autofill::placeholder,
-  .field input:-webkit-autofill::placeholder,
-  .field textarea::placeholder,
-  .field textarea:autofill::placeholder,
-  .field textarea:-webkit-autofill::placeholder,
-  .field select::placeholder{
-  letter-spacing: .0175em;
-  --tw-text-opacity: 1;
-  color: rgb(51 51 51 / var(--tw-text-opacity));
-}
-.field input:-webkit-autofill:focus, .field textarea:-webkit-autofill:focus{
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-.field input:focus,
-  .field input:autofill:focus,
-  .field input:-webkit-autofill:focus,
-  .field textarea:focus,
-  .field textarea:autofill:focus,
-  .field textarea:-webkit-autofill:focus,
-  .field select:focus{
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-.field input[type=search]{
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
 input[type=search]::-webkit-search-cancel-button{
   -webkit-appearance: none;
           appearance: none;
-}
-.field label{
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  cursor: text;
-  font-size: 0.875rem;
-  --tw-text-opacity: 1;
-  color: rgb(51 51 51 / var(--tw-text-opacity));
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 160ms;
-}
-.field input:-webkit-autofill:focus + label, .field textarea:-webkit-autofill:focus + label{
-  top: 0.5rem;
-  font-size: 0.75rem;
-}
-.field input:focus + label,
-  .field input:autofill:focus + label,
-  .field input:-webkit-autofill:focus + label,
-  .field input:not(:placeholder-shown) + label,
-  .field textarea:focus + label,
-  .field textarea:autofill:focus + label,
-  .field textarea:-webkit-autofill:focus + label,
-  .field textarea:not(:placeholder-shown) + label{
-  top: 0.5rem;
-  font-size: 0.75rem;
-}
-.field select:valid + label{
-  top: 0.5rem;
-  font-size: 0.75rem;
-}
-.field select:invalid{
-  --tw-text-opacity: 1;
-  color: rgb(246 245 243 / var(--tw-text-opacity));
-}
-.field .form__message{
-  margin-left: 1rem;
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-  --tw-text-opacity: 1;
-  color: rgb(67 104 153 / var(--tw-text-opacity));
 }
 button.disabled, button:disabled{
   cursor: not-allowed;
@@ -767,9 +636,6 @@ input.disabled + .selector{
 }
 .col-start-3{
   grid-column-start: 3;
-}
-.block{
-  display: block;
 }
 .flex{
   display: flex;
