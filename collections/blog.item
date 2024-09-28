@@ -2,7 +2,7 @@
 {.section item}
 
   <!--WRAPPER-->
-  <article id="post-{id}" class="{@|item-classes}" data-item-id="{id}">
+  <article id="post-{id}" class="{@|item-classes} col-span-full" data-item-id="{id}">
 
     <!--POST TILE-->
     <h1 class="title" data-content-field="title">
