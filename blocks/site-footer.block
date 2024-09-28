@@ -3,7 +3,14 @@
   <ul class="flex flex-row gap-2">
     {.repeated section items}
       <li class="{.section active}active-link {.end} text-right">
-        <a href="{fullUrl}">{navigationTitle}</a>
+        {.section collection}
+          <a href="{fullUrl}">{navigationTitle}</a>
+        {.end}
+        {.section externalLink}
+          <a href="{url}"{.section newWindow} target="_blank"{.end}>
+            {title}
+          </a>
+        {.end}
       </li>
     {.end}
   </ul>
