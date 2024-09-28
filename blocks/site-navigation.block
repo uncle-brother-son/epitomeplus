@@ -1,4 +1,4 @@
-<div class="col-start-1 col-span-2 md:col-start-1 md:col-span-2">
+<div class="col-span-full md:col-start-1 md:col-span-2">
   <a href="/">      
     <svg class="fill-black" width="210" height="32" viewBox="0 0 210 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M209.458 12.72H202.415V5.62H196.623V12.72H189.58V18.835H196.623V25.935H202.415V18.835H209.458V12.72Z"/>
