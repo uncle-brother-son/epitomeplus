@@ -11,15 +11,7 @@
   <p class="filtered-by">Filtered by Author: {author.displayName}</p>
 {.end}
 
-{.repeated section categories}
- {@|json}, 
-{.end}
-
-{.section categories}
-{@|safe}
-{.end}
-
-<h1>hello — {categories|json}</h1>
+{@|safe} —
 
 <!-- item loop -->
 {.repeated section items}
