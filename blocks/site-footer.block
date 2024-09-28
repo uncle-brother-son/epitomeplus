@@ -2,7 +2,7 @@
 
   <ul class="col-start-1 col-end-4 md:col-start-2 md:col-end-4">
     {.repeated section items}
-      <li class="{.section active}active-link {.end} text-right">
+      <li class="{.section active}active-link {.end}">
         {.section collection}
           <a href="{fullUrl}">{navigationTitle}</a>
         {.end}
