@@ -8,10 +8,13 @@
   <body id="{squarespace.page-id}">
 
       <script>console.log("hello");</script>
-      <p>{website.id}</p>
+      
 
     <header class="grid_"><squarespace:navigation navigationId="siteNav" template="site-navigation" /></header>
-    <main class="grid_" role="main" data-content-field="main-content">{squarespace.main-content}</main>
+    <main class="grid_" role="main" data-content-field="main-content">
+      <p>{website.id}</p>
+      {squarespace.main-content}
+    </main>
     <footer class="grid_"><squarespace:block-field id="footerBlocks" columns="12" /></footer>
 
     <!-- combo and minify scripts when not logged in -->
