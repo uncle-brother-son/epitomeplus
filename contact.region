@@ -22,7 +22,7 @@
           <squarespace:block-field id="contact-general" columns="12" lock-layout="true"/>
         </div>
       </div>
-      <div class="grid_">
+      <div class="grid_ gap-y-3">
         <div class="col-start-2 col-end-4">
           <squarespace:block-field id="contact-1" columns="12" lock-layout="true"/>
         </div>
