@@ -9,4 +9,4 @@
   </ul>
 </div>
 
-<script>console.log('hi', {section|json});</script>
+<script>console.log('hi', {@|json});</script>
