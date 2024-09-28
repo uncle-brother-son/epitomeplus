@@ -23,8 +23,8 @@
     </main>
 
     <footer>
-      <squarespace:block-field id="footerBlocks" />
-      <squarespace:navigation navigationId="footerNav" template="site-footer" />
+      <squarespace:navigation navigationId="siteNav" template="site-footer" />
+      <squarespace:navigation navigationId="footerNav" template="site-sub-footer" />
     </footer>
 
     <!-- combo and minify scripts when not logged in -->
