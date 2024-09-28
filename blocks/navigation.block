@@ -27,6 +27,6 @@
         {.end}
       </li>
     {.end}
-    <li class="md:hidden">Menu</li>
+    <li class="text-right grow md:hidden">Menu</li>
   </ul>
 </nav>
