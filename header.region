@@ -12,3 +12,5 @@
         <squarespace:navigation navigationId="mainNav" template="navigation" />
       </div>
     </header>
+
+    <script>console.log(@|json);</script>
