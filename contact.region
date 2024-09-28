@@ -16,6 +16,7 @@
     <main class="" role="main" data-content-field="main-content">
       <div class="col-span-full">
         {squarespace.main-content} [contact page]
+        <squarespace:block-field id="blockField1" columns="12" lock-layout="true"/>
         <script>console.log({squarespace.main-content|json});</script>
       </div>
     </main>
