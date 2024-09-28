@@ -11,10 +11,6 @@
   <p class="filtered-by">Filtered by Author: {author.displayName}</p>
 {.end}
 
-{.repeated section categories}
- {@|json}, 
-{.end}
-
 <!-- item loop -->
 {.repeated section items}
 
@@ -32,6 +28,7 @@
       {.or}
         <a href="{fullUrl}">{title}</a>
       {.end}
+      Hello
     </h1>
     <!-- excerpt or body -->
     {.if excerpt}
