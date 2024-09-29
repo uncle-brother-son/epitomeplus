@@ -1,4 +1,10 @@
 
+<div class="flex flex-row gap-2">
+  <a href="/">All</a>
+  <a href="/">Still</a>
+  <a href="/">Motion</a>
+</div>
+
 {.section categoryFilter}
   <p class="filtered-by">Filtered by Category: {@|safe}</p>
 {.end}
