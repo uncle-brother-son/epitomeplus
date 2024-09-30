@@ -12,27 +12,20 @@
 {.end}
 
 <!-- item loop -->
-{.repeated section items}
-
-  <article id="post-{id}" class="blog-list-item {@|item-classes}" data-item-id="{id}">
-    <!-- main image (thumbnail) -->
-    {.main-image?}
-      <a href="{fullUrl}" class="main-image content-fill">
-        <img {@|image-meta} />
-      </a>
-    {.end}
-     <img {@|image-meta} />
-    <!-- post title -->
-    <h2 class="title" data-content-field="title">
-      {.passthrough?}
-        <a href="{sourceUrl}" target="_blank">{title}</a>
-      {.or}
-        <a href="{fullUrl}">{title}</a>
-      {.end}
-    </h2>
-  </article>
-
-{.or}
+<ul class="grid grid-cols-2 md:grid-cols-3 gap-1 mx-2">
+  {.repeated section items}
+    <li>
+      <article id="post-{id}" class="blog-list-item {@|item-classes}" data-item-id="{id}">
+        <a href="{fullUrl}" class="main-image content-fill">
+          <img {@|image-meta} />
+        </a>
+        <h2 class="title" data-content-field="title">
+          <a href="{fullUrl}">{title}</a>
+        </h2>
+      </article>
+    </li>
+  {.or}
+</ul>
 
   <!-- no items means no blog posts -->
   <p><em>No blog posts yet.</em></p>
