@@ -10,8 +10,6 @@
   {.end}
 </ul>
 
-{@|json}
-
 <script>console.log({@|json});</script>
 
 
