@@ -1,7 +1,7 @@
 
 <ul class="flex flex-col gap-2 mx-2">
   <li class="{.section active}active{.end}">
-    <a href="">All</a>
+    <a href="{fullUrl}">All</a>
   </li>
   {.repeated section categories}
     <li class="{.section categoryFilter}active{.end}">
