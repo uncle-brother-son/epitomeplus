@@ -16,11 +16,12 @@
 
   <article id="post-{id}" class="blog-list-item {@|item-classes}" data-item-id="{id}">
     <!-- main image (thumbnail) -->
-    {.feature-image?}
+    {.main-image?}
       <a href="{fullUrl}" class="main-image content-fill">
         <img {@|image-meta} />
       </a>
     {.end}
+     <img {@|image-meta} />
     <!-- post title -->
     <h2 class="title" data-content-field="title">
       {.passthrough?}
