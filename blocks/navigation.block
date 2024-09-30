@@ -18,11 +18,11 @@
     {.repeated section items}
       <li class="{.section active}active{.end} text-right grow hidden md:block">
         {.section collection}
-          <a href="{fullUrl}">{navigationTitle}</a> ??
+          <a href="{fullUrl}">{navigationTitle}</a>
         {.end}
         {.section externalLink}
           <a href="{url}"{.section newWindow} target="_blank"{.end}>
-            {title} ??
+            {title}
           </a>
         {.end}
       </li>

@@ -8,13 +8,15 @@
   <article id="post-{id}" class="col-span-full" data-item-id="{id}">
 
     <!--POST TILE-->
-    <h1 class="title" data-content-field="title">
-      {.passthrough?}
-        <a href="{sourceUrl}" target="_blank">{title}</a>
-      {.or}
-        {title}
-      {.end}dcwecw
-    </h1>
+    <div class="col-start-1 col-end-4 md:col-end-7">
+      <h1 class="text-22" data-content-field="title">
+        {.passthrough?}
+          <a href="{sourceUrl}" target="_blank">{title}</a>
+        {.or}
+          {title}
+        {.end}dcwecw
+      </h1>
+    </div>
 
     <!--AUTHOR AND DATE-->
     <p class="meta">
