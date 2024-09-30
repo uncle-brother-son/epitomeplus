@@ -20,7 +20,7 @@
 
     <div class="col-start-1 col-end-4 col-start-4 md:col-end-5">
       {.repeated section categories}
-        <a class="category" href="{collection.fullUrl}?category={@|url-encode}">{@}</a>{.alternates with},
+        <a class="category" href="{collection.fullUrl}?category={@|url-encode}">{@}</a>{.alternates with} &
       {.end}
     </div>
 
