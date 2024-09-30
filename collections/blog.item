@@ -14,26 +14,24 @@
       </h1>
     </div>
 
-    <!--AUTHOR AND DATE-->
-    <p class="meta">
-      <a href="{fullUrl}" class="permalink"><time datetime="{addedOn|date %F}">{addedOn|date %B %d, %Y}</time></a> by <a href="{collection.fullUrl}?author={author.id}">{author.displayName}</a>
-    </p>
+    <div class="col-start-1 col-end-4 md:col-end-3">
+      [copy-1]
+    </div>
 
-    <!--MAIN CONTENT-->
-    {body}
+    <div class="col-start-1 col-end-4 col-start-4 md:col-end-5">
+      {.repeated section categories}
+        <a class="category" href="{collection.fullUrl}?category={@|url-encode}">{@}</a>{.alternates with},
+      {.end}
+    </div>
+
+    <div class="col-start-1 col-end-4 md:col-start-5 md:col-end-6">
+      [copy-2]
+    </div>
+
 
     <!--BLOG INJECTION-->
     {postItemInjectCode}
 
-    <!--CATEGORIES-->
-    {.repeated section categories}
-      <a class="category" href="{collection.fullUrl}?category={@|url-encode}">{@}</a>{.alternates with},
-    {.end}
-
-    <!--TAGS-->
-    {.repeated section tags}
-      <a class="tag" href="{collection.fullUrl}?tag={@|url-encode}">{@}</a>{.alternates with},
-    {.end}
 
     <!--SHARE AND LIKE-->
     {@|like-button}
