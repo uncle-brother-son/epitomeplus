@@ -16,7 +16,7 @@
 
   <article id="post-{id}" class="blog-list-item {@|item-classes}" data-item-id="{id}">
     <!-- main image (thumbnail) -->
-    {.main-image?}
+    {.feature-image?}
       <a href="{fullUrl}" class="main-image content-fill">
         <img {@|image-meta} />
       </a>
