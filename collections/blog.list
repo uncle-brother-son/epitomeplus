@@ -16,7 +16,9 @@
   {.repeated section items}
     <li>
       <article id="post-{id}" class="blog-list-item {@|item-classes}" data-item-id="{id}">
+        <a href="{fullUrl}" class="block">
           <img {@|image-meta} />
+        </a>
         <h2 class="title" data-content-field="title">
           <a href="{fullUrl}">{title}</a>
         </h2>
