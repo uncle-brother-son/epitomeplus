@@ -1,15 +1,12 @@
 
-{.section categoryFilter}
-  <p class="filtered-by">Filtered by Category: {@|safe}</p>
-{.end}
-
-{.section tagFilter}
-  <p class="filtered-by">Filtered by Tag: {@|safe}</p>
-{.end}
-
-{.if authorFilter}
-  <p class="filtered-by">Filtered by Author: {author.displayName}</p>
-{.end}
+<ul class="flex flex-col gap-2 mx-2">
+  <li><a href="">All</a></li>
+  {.repeated section categories}
+    <li>
+      <a class="{.section categoryFilter}active{.end}" href="{collection.fullUrl}?category={@|url-encode}">{@}</a>
+    </li>
+  {.end}
+</ul>
 
 <!-- item loop -->
 <ul class="grid grid-cols-2 md:grid-cols-3 gap-1 mx-2">
