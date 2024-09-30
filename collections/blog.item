@@ -1,5 +1,7 @@
 {.section item}
 
+  <script>console.log('hi', {@|json});</script>
+
   <!--WRAPPER-->
   <article id="post-{id}" class="col-start-1 col-end-4 md:col-end-6 grid_" data-item-id="{id}">
 

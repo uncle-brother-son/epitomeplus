@@ -6,11 +6,8 @@
     {squarespace-headers}
   </head>
   <body id="{squarespace.page-id}">
-      
     <header>
       <div class="grid_ mt-2 mb-10 md:mb-20">
         <squarespace:navigation navigationId="mainNav" template="navigation" />
       </div>
     </header>
-
-    <script>console.log('hi', {website|json}, {collection|json});</script>
