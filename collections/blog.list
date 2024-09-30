@@ -1,14 +1,16 @@
 
 <ul class="flex flex-col gap-2 mx-2">
-  <li><a href="">All</a></li>
+  <li class="{.section active}active{.end}">
+    <a href="">All</a>
+  </li>
   {.repeated section categories}
-    <li>
-      <a class="{.section categoryFilter}active{.end}" href="{collection.fullUrl}?category={@|url-encode}">{@}</a>
+    <li class="{.section categoryFilter}active{.end}">
+      <a href="{collection.fullUrl}?category={@|url-encode}">{@}</a>
     </li>
   {.end}
 </ul>
 
-{section|json}
+{@|json}
 
 <script>console.log({@|json});</script>
 
