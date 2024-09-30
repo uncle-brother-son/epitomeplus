@@ -1,8 +1,4 @@
-<p>Outside</p>
-
 {.section item}
-
-<p>Inside</p>
 
   <!--WRAPPER-->
   <article id="post-{id}" class="col-span-full" data-item-id="{id}">
