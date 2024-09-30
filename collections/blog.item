@@ -32,25 +32,6 @@
     <!--BLOG INJECTION-->
     {postItemInjectCode}
 
-
-    <!--SHARE AND LIKE-->
-    {@|like-button}
-    {@|social-button}
-
-
-    <!--LOCATION-->
-    {.section location}
-      {.section addressTitle}
-        {addressTitle}
-        {addressLine1}
-        {addressLine2}
-        {addressCountry}
-      {.end}
-    {.end}
-
-    <!--COMMENTS-->
-    {@|comments}
-
   </article>
 
 {.end}
@@ -58,21 +39,23 @@
 
 <!--PAGINATION-->
 {.section pagination}
-  <nav class="blog-item-pagination">
+  <div class="col-start-1 col-end-4 md:col-end-6">
+    <nav class="blog-item-pagination">
 
-    <!--NEWER PAGE-->
-    {.section prevItem}
-      <a href="{fullUrl}">Newer</a>
-    {.or}
-      <a class="disabled">Newer</a>
-    {.end}
+      <!--NEWER PAGE-->
+      {.section prevItem}
+        <a href="{fullUrl}">Newer</a>
+      {.or}
+        <a class="disabled">Newer</a>
+      {.end}
 
-    <!--OLDER PAGE-->
-    {.section nextItem}
-      <a href="{fullUrl}">Older</a>
-    {.or}
-      <a class="disabled">Older</a>
-    {.end}
+      <!--OLDER PAGE-->
+      {.section nextItem}
+        <a href="{fullUrl}">Older</a>
+      {.or}
+        <a class="disabled">Older</a>
+      {.end}
 
-  </nav>
+    </nav>
+  </div>
 {.end}
