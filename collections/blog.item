@@ -30,6 +30,10 @@
       [copy-2]
     </div>
 
+    <div class="col-start-1 col-end-4 md:col-end-6">
+      {body}
+    </div>
+
 
     <!--BLOG INJECTION-->
     {postItemInjectCode}
