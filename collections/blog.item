@@ -39,8 +39,8 @@
 
 <!--PAGINATION-->
 {.section pagination}
-  <div class="col-start-1 col-end-4 md:col-end-6">
-    <nav class="blog-item-pagination">
+  <div class="grid_">
+    <nav class="col-start-1 col-end-4 md:col-end-6">
 
       <!--NEWER PAGE-->
       {.section prevItem}
