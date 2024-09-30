@@ -22,20 +22,13 @@
       </a>
     {.end}
     <!-- post title -->
-    <h1 class="title" data-content-field="title">
+    <h2 class="title" data-content-field="title">
       {.passthrough?}
         <a href="{sourceUrl}" target="_blank">{title}</a>
       {.or}
         <a href="{fullUrl}">{title}</a>
       {.end}
-    </h1>
-    <!-- excerpt or body -->
-    {.if excerpt}
-      {excerpt}
-      <a class="link" href="{fullUrl}">Read More</a>
-    {.or}
-      {body}
-    {.end}
+    </h2>
   </article>
 
 {.or}
