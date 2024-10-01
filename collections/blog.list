@@ -4,7 +4,6 @@
 {.end}
 
 {.section collection}
-<script>console.log({@|json});</script>
   <ul class="flex flex-row gap-2 mx-2 mb-10">
     <li class="{.section active}active{.end}">
       <a href="{fullUrl}">All</a>
@@ -17,7 +16,7 @@
   </ul>
 {.end}
 
-
+<script>console.log({@|json});</script>
 
 
 
