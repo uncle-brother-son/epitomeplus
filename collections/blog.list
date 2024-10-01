@@ -20,12 +20,13 @@
   {.repeated section items}
     <li>
       <article id="post-{id}" class="blog-list-item {@|item-classes}" data-item-id="{id}">
-        <a href="{fullUrl}" class="block">
-          <img {@|image-meta} />
+        <img {@|image-meta} />
+        <a href="{fullUrl}">
+          <h2 class="title" data-content-field="title">{title}</h2>
+          {.repeated section categories}
+            {@}{.alternates with} &
+          {.end}
         </a>
-        <h2 class="title" data-content-field="title">
-          <a href="{fullUrl}">{title}</a>
-        </h2>
       </article>
     </li>
   {.or}
