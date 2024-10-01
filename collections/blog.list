@@ -12,7 +12,7 @@
   </ul>
 {.end}
 
-<script>console.log(hi, {@|json});</script>
+<script>console.log('hi', {@|json});</script>
 
 
 <!-- item loop -->
