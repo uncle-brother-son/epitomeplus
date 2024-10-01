@@ -3,21 +3,19 @@
   <p class="filtered-by">Filtered by Category: {@|safe}</p>
 {.end}
 
-
-<ul class="flex flex-row gap-2 mx-2 mb-10">
-  <li class="{.section active}active{.end}">
-    <a href="{fullUrl}">All</a>
-  </li>
-  <script>console.log({@|json});</script>
-  {.section collection}
-  <script>console.log({@|json});</script>
+{.section collection}
+<script>console.log({@|json});</script>
+  <ul class="flex flex-row gap-2 mx-2 mb-10">
+    <li class="{.section active}active{.end}">
+      <a href="{fullUrl}">All</a>
+    </li>
     {.repeated section categories}
       <li class="">
         <a href="{collection.fullUrl}?category={@|url-encode}">{@}</a>
       </li>
     {.end}
-  {.end}
-</ul>
+  </ul>
+{.end}
 
 
 
