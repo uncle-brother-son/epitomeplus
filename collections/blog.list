@@ -1,4 +1,8 @@
 
+{.section categoryFilter}
+  <p class="filtered-by">Filtered by Category: {@|safe}</p>
+{.end}
+
 {.section collection}
   <ul class="flex flex-row gap-2 mx-2 mb-10">
     <li class="{.section active}active{.end}">
