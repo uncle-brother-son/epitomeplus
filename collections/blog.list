@@ -2,8 +2,6 @@
   <p class="filtered-by">Filtered by Category: {@|safe}</p>
 {.end}
 
-{categoryFilter}
-
 {.section collection}
   <ul class="flex flex-row gap-2 mx-2 mb-10">
     <li class="{.section active}active{.end}">
@@ -11,7 +9,7 @@
     </li>
     {.repeated section categories}
       {.var @thisCat categoryFilter}
-      <li class="{.if @thisCat}active{.end}">
+      <li class="{.if @thisCat == @}active{.end}">
         <a href="{collection.fullUrl}?category={@|url-encode}">{@}</a>
       </li>
     {.end}
