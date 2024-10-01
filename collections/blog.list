@@ -9,7 +9,7 @@
     </li>
     {.repeated section categories}
       {.var @thisCat categoryFilter}
-      <li class="{.if @thisCat == @}active{.end}">
+      <li class="{.if @thisCat = @|safe}active{.end}">
         <a href="{collection.fullUrl}?category={@|url-encode}">{@}</a>
       </li>
     {.end}
