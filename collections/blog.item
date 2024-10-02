@@ -3,6 +3,8 @@
   <!--WRAPPER-->
   <article id="post-{id}" class="grid_" data-item-id="{id}">
 
+  <script>console.log({@|json});</script>
+
     <!--POST TILE-->
     <div class="col-start-1 col-end-4 md:col-end-6 mb-3 md:mb-5">
       <h1 class="text-22 font-bold" data-content-field="title">
