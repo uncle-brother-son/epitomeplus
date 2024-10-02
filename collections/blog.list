@@ -8,7 +8,7 @@
       <a href="{fullUrl}">All</a>
     </li>
     {.repeated section categories}
-      <li class="{.equal? categoryFilter "Still"}active{.end}">
+      <li class="{.equal? categoryFilter @}active{.end}">
         <a href="{collection.fullUrl}?category={@|url-encode}">{@}</a>
       </li>
     {.end}
