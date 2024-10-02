@@ -26,13 +26,17 @@
       {.end}
     </div>
 
-    <div class="col-start-1 col-end-4 md:col-start-5 md:col-end-6 mb-10 md:mb-5">
+    <div class="col-start-1 col-end-4 md:col-start-5 md:col-end-6 mb-10 md:mb-10">
       {customContent.credits}
     </div>
 
-    <div class="col-start-1 col-end-4 md:col-end-6">
-      {body}
+    {.section gallery}
+    <div class="col-start-1 col-end-4 md:col-end-6 mb-10">
+      {.repeat item}
+        {@}
+      {.end}
     </div>
+    {.end}
 
 
     <!--BLOG INJECTION-->
