@@ -32,11 +32,13 @@
 
     {.section customContent}
      <script>console.log({@|json});</script>
-    <div class="col-start-1 col-end-4 md:col-end-6 mb-10">
+    <ul class="col-start-1 col-end-4 md:col-end-6 mb-10 grid grid-cols-2 md:grid-cols-4 gap-1">
       {.repeated section gallery}
-        <img {@|image-meta} />
+        <li>
+          <img {@|image-meta} />
+        </li>
       {.end}
-    </div>
+    </ul>
     {.end}
 
 
