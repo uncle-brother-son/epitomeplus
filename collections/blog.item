@@ -17,7 +17,7 @@
     </div>
 
     <div class="col-start-1 col-end-4 md:col-end-3 mb-3 md:mb-10">
-      {customContent.description}
+      {customContent.description.html}
     </div>
 
     <div class="col-start-1 col-end-4 md:col-start-4 md:col-end-5 mb-3 md:mb-10">
@@ -27,7 +27,7 @@
     </div>
 
     <div class="col-start-1 col-end-4 md:col-start-5 md:col-end-6 mb-10 md:mb-10">
-      {customContent.credits}
+      {customContent.credits.html}
     </div>
 
     {.section customContent}
