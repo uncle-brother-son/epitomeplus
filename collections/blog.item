@@ -20,7 +20,7 @@
       {customContent.description}
     </div>
 
-    <div class="col-start-1 col-end-4 col-start-4 md:col-end-5 mb-3 md:mb-10">
+    <div class="col-start-1 col-end-4 md:col-start-4 md:col-end-5 mb-3 md:mb-10">
       {.repeated section categories}
         <a class="category" href="{collection.fullUrl}?category={@|url-encode}">{@}</a>{.alternates with} &
       {.end}
