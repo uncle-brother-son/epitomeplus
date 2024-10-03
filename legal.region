@@ -1,5 +1,4 @@
-
-{.section squarespace}
+{.section item}
   <script>console.log({@|json});</script>
 
   <main role="main" data-content-field="main-content">
