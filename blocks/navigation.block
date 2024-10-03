@@ -18,10 +18,10 @@
     {.repeated section items}
       <li class="text-right grow hidden md:block">
         {.section active}
-        <script>console.log({@|json});</script>
-          <h1 class="text-blue/100">collection.{navigationTitle}</h1>
-        {.end}
+          <h1 class="text-blue/100">{collection.navigationTitle}</h1>
+        {.or}
           <a href="{fullUrl}">{collection.navigationTitle}</a>
+        {.end}
       </li>
     {.end}
     <li class="text-right grow md:hidden">Menu</li>
