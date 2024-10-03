@@ -1,6 +1,6 @@
 
 {.section squarespace}
-  <script>console.log({content|json});</script>
+  <script>console.log({@|json});</script>
 
   <main role="main" data-content-field="main-content">
     <h1>{page-title}</h1>
