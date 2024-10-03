@@ -18,6 +18,7 @@
     {.repeated section items}
       <li class="text-right grow hidden md:block">
         {.section active}
+        <script>console.log({@|json});</script>
           {.section collection}
             <h1 class="text-blue/100">{navigationTitle}</h1>
           {.end}
