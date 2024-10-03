@@ -19,7 +19,7 @@
       <li class="text-right grow hidden md:block">
         {.section active}
           {.section collection}
-            <h1 class="text-blue/100">{title}</h1>
+            <h1 class="text-blue/100">{navigationTitle}</h1>
           {.end}
         {.or}
           {.section collection}
