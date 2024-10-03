@@ -1,6 +1,6 @@
-<script>console.log("hi", {squarespace|json});</script>
+<script>console.log("hi", {website|json});</script>
 
 <main role="main" data-content-field="main-content">
-  <h1></h1>
+  <h1>{title}</h1>
   {squarespace.main-content}
 </main>
