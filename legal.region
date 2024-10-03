@@ -1,5 +1,4 @@
 <main role="main" data-content-field="main-content">
-  <script>console.log("hi", {website|json});</script>
   <h1></h1>
   {squarespace.main-content}
 </main>
