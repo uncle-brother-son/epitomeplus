@@ -22,7 +22,7 @@
         </li>
       {.or}
         <li class="text-right grow hidden md:block">
-          <a href="{fullUrl}">{collection.navigationTitle}</a>
+          <a href="{collection.fullUrl}">{collection.navigationTitle}</a>
         </li>
       {.end}
      
