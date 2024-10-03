@@ -1,6 +1,10 @@
-<script>console.log("hi", {website|json});</script>
 
-<main role="main" data-content-field="main-content">
-  <h1>{title}</h1>
-  {squarespace.main-content}
-</main>
+{.section squarespace}
+  <script>console.log("hi", {@|json});</script>
+
+  <main role="main" data-content-field="main-content">
+    <h1>{title}</h1>
+    {main-content}
+  </main>
+
+{.end}
