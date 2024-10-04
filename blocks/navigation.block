@@ -13,7 +13,7 @@
     </svg>
   </a>
 </div>
-<nav :class="showNav ? 'mx-2 groe content-center' : 'col-start-3 col-end-4 md:col-start-3 md:col-end-6'">
+<nav :class="showNav ? 'mx-2 grow content-center' : 'col-start-3 col-end-4 md:col-start-3 md:col-end-6'">
   <ul :class="isMobile ? 'w-full flex flex-col gap-2' : 'w-full flex flex-row gap-4 text-right'">
     {.repeated section items}
       {.section active}
