@@ -1,5 +1,5 @@
 <div class="flex flex-row gap-2 md:gap-4 mx-2 mb-2 text-12">
-  <div class="grow"><a href="/">&copy; <span id="year"></span> {website.siteTitle}</a></div>
+  <div class="grow"><a href="/">&copy; <span class="year"></span> {website.siteTitle}</a></div>
   <ul class="flex flex-row gap-2 md:gap-3">
     {.repeated section items}
       <li class="{.section active}active{.end} text-right">
@@ -18,5 +18,5 @@
 
 <script>
   const d = new Date();
-  document.getElementsByClassName("year").innerHTML = d.getFullYear();
+  document.querySelectorAll(".year").innerHTML = d.getFullYear();
 </script> 
