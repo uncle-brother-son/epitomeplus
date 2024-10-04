@@ -9,7 +9,7 @@
     id="{squarespace.page-id}"
     x-data="setData"
     @resize.window="isMobile = (window.innerWidth < 768) ? true : false"
-    :class="{ '!overflow-hidden' : showMenu }"
+    :class="{ '!overflow-hidden' : showNav }"
     @keydown.escape.window="showNav=false"
     x-cloak
     >
