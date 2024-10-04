@@ -21,12 +21,12 @@
           <h1 class="text-blue/100">{collection.navigationTitle}</h1>
         </li>
       {.or}
-        <li class="text-right grow hidden md:block">
+        <li class="text-right grow" x-show="!isMobile">
           <a href="{collection.fullUrl}">{collection.navigationTitle}</a>
         </li>
       {.end}
      
     {.end}
-    <li class="text-right grow md:hidden">Menu</li>
+    <li class="text-right grow" x-show="isMobile">Menu</li>
   </ul>
 </nav>
