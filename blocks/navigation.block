@@ -32,4 +32,6 @@
   </ul>
   <div x-show="showNav" class="absolute top-2 right-2"><button @click="showNav = false">Close</button></div>
 </nav>
-<div class="mx-2 mb-2 mt-10"><a href="/">&copy; <span id="year"></span> {website.siteTitle}</a></div>
+<div class="mx-2 mb-2 mt-10" x-show="showNav">
+  <a href="/">&copy; <span id="year"></span> {website.siteTitle}</a>
+</div>
