@@ -18,5 +18,5 @@
 
 <script>
   const d = new Date();
-  document.querySelectorAll(".year").innerHTML = d.getFullYear();
+  document.querySelectorAll('.year').innerHTML = d.getFullYear();
 </script> 
