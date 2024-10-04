@@ -18,10 +18,10 @@
     {.repeated section items}
       {.section active}
         <li class="text-right grow md:block" x-show="!showNav">
-          <h1 class="text-blue/100">{collection.navigationTitle}</h1>
+          <a href="{collection.fullUrl}"><h1 class="text-blue/100">{collection.navigationTitle}</h1></a>
         </li>
       {.or}
-        <li class="text-right grow" >
+        <li class="text-right grow" x-show="showNav">
           <a href="{collection.fullUrl}">{collection.navigationTitle}</a>
         </li>
       {.end}
