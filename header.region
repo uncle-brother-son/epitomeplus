@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     {squarespace-headers}
   </head>
-  <body id="{squarespace.page-id}">
+  <body 
+    id="{squarespace.page-id}"
+    x-data="setData"
+    @resize.window="isMobile = (window.innerWidth < 768) ? true : false"
+    :class="{ '!overflow-hidden' : showMenu }"
+    @keydown.escape.window="showNav=false"
+    x-cloak
+    >
     <header>
       <div class="grid_ mt-2 mb-10 md:mb-20">
         <squarespace:navigation navigationId="mainNav" template="navigation" />
