@@ -21,7 +21,7 @@
           <h1 class="text-blue/100">{collection.navigationTitle}</h1>
         </li>
       {.or}
-        <li class="text-right grow" x-show="!isMobile && !showNav">
+        <li class="text-right grow" x-show="!isMobile && showNav">
           <a href="{collection.fullUrl}">{collection.navigationTitle}</a>
         </li>
       {.end}
