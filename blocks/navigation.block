@@ -21,12 +21,12 @@
           <a href="{collection.fullUrl}"><h1 class="text-blue/100">{collection.navigationTitle}</h1></a>
         </li>
       {.or}
-        <li :class="showNav ? 'text-right grow' : 'grow' x-show="showNav">
+        <li :class="showNav ? 'text-right grow' : 'grow'" x-show="showNav">
           <a href="{collection.fullUrl}">{collection.navigationTitle}</a>
         </li>
       {.end}
     {.end}
-    <li :class="showNav ? 'text-right grow' : 'grow' x-show="isMobile && !showNav">
+    <li :class="showNav ? 'text-right grow' : 'grow'" x-show="isMobile && !showNav">
       <button @click="showNav = true">Menu</button>
     </li>
   </ul>
