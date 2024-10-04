@@ -13,8 +13,8 @@
     </svg>
   </a>
 </div>
-<nav :class="showNav ? 'mx-2 self-stretch content-center' : 'col-start-3 col-end-4 md:col-start-3 md:col-end-6'">
-  <ul :class="isMobile ? 'w-full flex flex-col gap-3' : 'w-full flex flex-row gap-4 text-right'">
+<nav :class="showNav ? 'mx-2 groe content-center' : 'col-start-3 col-end-4 md:col-start-3 md:col-end-6'">
+  <ul :class="isMobile ? 'w-full flex flex-col gap-2' : 'w-full flex flex-row gap-4 text-right'">
     {.repeated section items}
       {.section active}
         <li class="grow md:block" x-show="!showNav">
@@ -27,8 +27,8 @@
       {.end}
      
     {.end}
-    <li class="grow" x-show="isMobile">
-      <button @click="showNav = true" x-show="!showNav">Menu</button>
+    <li class="grow" x-show="isMobile && !showNav">
+      <button @click="showNav = true">Menu</button>
     </li>
   </ul>
   <div x-show="showNav" class="absolute top-2 right-2"><button @click="showNav = false">Close</button></div>
