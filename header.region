@@ -14,7 +14,7 @@
     x-cloak
     >
     <header>
-      <div :class="showNav ? 'absolute bg-blue/100 inset-0 z-10 flex flex-col' : 'grid_ mt-2 mb-10 md:mb-20'">
+      <div :class="showNav ? 'absolute bg-white/90 inset-0 z-10 flex flex-col' : 'grid_ mt-2 mb-10 md:mb-20'">
         <squarespace:navigation navigationId="mainNav" template="navigation" />
       </div>
     </header>
