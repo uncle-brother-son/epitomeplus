@@ -29,7 +29,7 @@
     {.end}
     <li class="text-right grow" x-show="isMobile">
       <button @click="showNav = true" x-show="!showNav">Menu</button>
-      <button @click="showNav = false" x-show="showNav">Close</button>
     </li>
   </ul>
+  <div x-show="showNav" class="absolute top-2 right-2"><button @click="showNav = false">Close</button></div>
 </nav>
