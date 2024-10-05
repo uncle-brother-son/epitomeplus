@@ -35,8 +35,3 @@
 <div class="mx-2 mb-2 mt-10" x-show="showNav">
   <a href="/">&copy; <span class="year"></span> {website.siteTitle}</a>
 </div>
-
-
-
-
-<script>console.log("hi", {@|json});</script>
