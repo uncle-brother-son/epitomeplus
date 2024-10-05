@@ -36,3 +36,5 @@
   <a href="/">&copy; <span class="year"></span> {website.siteTitle}</a>
 </div>
 <script>console.log("navigation", {@|json});</script>
+
+<p>[{@isItem}]</p>
