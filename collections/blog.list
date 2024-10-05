@@ -1,5 +1,12 @@
 <squarespace:query collection="{.section collection}{urlId}{.end}" featured="true" limit="5">
-  <p>[{title}]</p>
+  <div class="featured-wrapper">
+    {.repeated section items}
+    <div class="featured-post">
+      {.main-image?}<img {@|image-meta} />{.end}
+      <h2>{title}</h2>
+    </div>
+    {.end}
+  </div>
 </squarespace:query>
 
 
