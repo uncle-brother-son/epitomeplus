@@ -36,6 +36,5 @@
   <a href="/">&copy; <span class="year"></span> {website.siteTitle}</a>
 </div>
 
-{.section collection}
-  <script>console.log("hi", {@|json});</script>
-{.end}
+
+<script>console.log("hi", {collection|json});</script>
