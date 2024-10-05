@@ -18,17 +18,19 @@
       <article class="relative" id="post-{id}" data-item-id="{id}" @mouseover="show = true" @mouseleave="show = false">
         <img {@|image-meta} />
         <a href="{fullUrl}" 
-          class="md:bg-blue/100 md:text-white/100 md:hover:text-white/100 md:absolute md:inset-0 flex flex-col gap-1 justify-center pt-1 md:p-1 after:absolute after:inset-0 after:z-10" 
+          class="after:absolute after:inset-0 after:z-10" 
           x-show="show"
           x-transition:enter.opacity.duration.320ms
           x-transition:leave.opacity.duration.320ms
           >
-          <h2 data-content-field="title">{title}</h2>
-          <span>
-            {.repeated section categories}
-              {@}{.alternates with} &
-            {.end}
-          </span>
+          <div class="md:bg-blue/100 md:text-white/100 md:hover:text-white/100 md:absolute md:inset-0 flex flex-col gap-1 justify-center pt-1 md:p-1">
+            <h2 data-content-field="title">{title}</h2>
+            <span>
+              {.repeated section categories}
+                {@}{.alternates with} &
+              {.end}
+            </span>
+          </div>
         </a>
       </article>
     </li>
