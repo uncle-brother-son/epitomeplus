@@ -18,7 +18,7 @@
       <article class="relative" id="post-{id}" data-item-id="{id}" @mouseover="show = true" @mouseleave="show = false">
         <img {@|image-meta} />
         <a href="{fullUrl}" 
-          class="bg-blue/100 text-white/100 hover:text-white/100 absolute inset-0 flex flex-col gap-1 p-1" 
+          class="bg-blue/100 text-white/100 hover:text-white/100 absolute inset-0 flex flex-col gap-1 content-center p-1" 
           x-show="show"
           x-transition:enter.opacity.duration.320ms
           x-transition:leave.opacity.duration.320ms
