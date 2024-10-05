@@ -1,3 +1,8 @@
+<squarespace:query collection="{.section collection}{urlId}{.end}" featured="true" limit="5">
+  <p>[{title}]</p>
+</squarespace:query>
+
+
 {.section collection}
   <ul class="flex flex-row gap-2 mx-2 mb-10">
     <li class="{.if categoryFilter}{.or}active{.end}">

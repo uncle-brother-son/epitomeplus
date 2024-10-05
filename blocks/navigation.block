@@ -37,6 +37,3 @@
 </div>
 <script>console.log("navigation", {@|json});</script>
 
-<squarespace:query collection="{.section item}{urlId}{.end}" featured="true" limit="5">
-  <p>[{title}]</p>
-</squarespace:query>
