@@ -13,7 +13,6 @@
     @keydown.escape.window="showNav=false"
     x-cloak
     >
-    <script>console.log({@|json});</script>
     <header>
       <div :class="showNav ? 'absolute bg-white/100 inset-0 z-10 flex flex-col' : 'flex mx-2 md:grid_ mt-2 mb-20'">
         <squarespace:navigation navigationId="mainNav" template="navigation" />
