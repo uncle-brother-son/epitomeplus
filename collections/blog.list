@@ -1,15 +1,3 @@
-<squarespace:query collection="{.section collection}{urlId}{.end}" featured="true" limit="5">
-  <div class="featured-wrapper">
-    {.repeated section items}
-    <div class="featured-post">
-      {.main-image?}<img {@|image-meta} />{.end}
-      <h2>{title}</h2>
-    </div>
-    {.end}
-  </div>
-</squarespace:query>
-
-
 {.section collection}
   <ul class="flex flex-row gap-2 mx-2 mb-10">
     <li class="{.if categoryFilter}{.or}active{.end}">
