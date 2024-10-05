@@ -38,4 +38,4 @@
 
 {.section collection}
   <script>console.log({@|json});</script>
-{,end}
+{.end}
