@@ -1,4 +1,4 @@
-<div class="grid_ gap-y-3 my-20">
+<div class="grid_ gap-y-3 my-20 md:my-30">
 
   <ul class="col-start-1 col-end-4 md:col-start-2 md:col-end-4">
     {.repeated section items}
