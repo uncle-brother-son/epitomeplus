@@ -12,7 +12,7 @@
 {.end}
 
 <!-- item loop -->
-<ul class="grid grid-cols-2 md:grid-cols-3 gap-1 mx-2">
+<ul class="grid grid-cols-1 md:grid-cols-3 gap-1 mx-2">
   {.repeated section items}
     <li x-data="{show : !false}">
       <article class="relative" id="post-{id}" data-item-id="{id}" @mouseover="show = true" @mouseleave="show = false">
