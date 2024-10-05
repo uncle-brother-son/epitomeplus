@@ -37,5 +37,5 @@
 </div>
 
 {.section collection}
-  <script>console.log({@|json});</script>
+  <script>console.log("hi", {@|json});</script>
 {.end}
