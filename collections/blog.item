@@ -1,5 +1,7 @@
 {.section item}
 
+<script>console.log({@|json});</script>
+
   <article id="post-{id}" class="grid_" data-item-id="{id}">
 
     <!--POST TILE-->
