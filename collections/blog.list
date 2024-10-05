@@ -19,7 +19,7 @@
         <img {@|image-meta} />
         <a href="{fullUrl}" 
           class="after:absolute after:inset-0 after:z-10" 
-          x-show="show"
+          x-show="show || isMobile"
           x-transition:enter.opacity.duration.320ms
           x-transition:leave.opacity.duration.320ms
           >
