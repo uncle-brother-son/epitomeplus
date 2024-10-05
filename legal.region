@@ -1,4 +1,4 @@
-<main class="grid_" role="main" data-content-field="main-content">
+<main class="grid_ info" role="main" data-content-field="main-content">
   <h1 class="col-start-1 col-end-4 md:col-start-3 md:col-end-5 text-22 font-medium mb-3 md:mb-5">{collection.title}</h1>
   <div class="col-start-1 col-end-4 md:col-start-3 md:col-end-5">{squarespace.main-content}</div>
 </main>
