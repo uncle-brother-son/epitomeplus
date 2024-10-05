@@ -24,7 +24,6 @@
         <li :class="showNav ? 'grow text-18' : 'grow text-right'" x-show="!isMobile || showNav">
           <a href="{collection.fullUrl}">{collection.navigationTitle}</a>
         </li>
-        <li x-show="isMobile"></li>
       {.end}
     {.end}
     <li x-show="isMobile && !showNav">
@@ -37,4 +36,6 @@
   <a href="/">&copy; <span class="year"></span> {website.siteTitle}</a>
 </div>
 
-<script>console.log({@|json});</script>
+{.section collection}
+  <script>console.log({@|json});</script>
+{,end}
