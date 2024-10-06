@@ -29,6 +29,7 @@
     </div>
 
     {.section customContent}
+    {.section gallery}
     <script>console.log({@|json});</script>
       <ul class="col-start-1 col-end-4 md:col-end-6 mb-10 grid grid-cols-2 md:grid-cols-4 gap-1">
         {.repeated section gallery}
@@ -37,6 +38,7 @@
           </li>
         {.end}
       </ul>
+    {.end}
     {.end}
 
 
