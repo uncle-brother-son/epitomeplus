@@ -42,6 +42,10 @@
       </ul>
     {.end}
 
+    <div class="col-start-1 col-end-4 md:col-end-6 mb-10">
+      {body}
+    </div>
+
     <!--BLOG INJECTION-->
     {postItemInjectCode}
 
