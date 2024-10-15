@@ -18,7 +18,7 @@
     {.repeated section items}
       {.section active}
         <li :class="showNav ? 'grow text-18 text-left' : 'grow text-right'">
-          <a href="{collection.fullUrl}"><h1 class="text-blue/100">{collection.navigationTitle}</h1></a>
+          <a href="{collection.fullUrl}"><h1 class="text-blue/100 font-bold">{collection.navigationTitle}</h1></a>
         </li>
       {.or}
         <li :class="showNav ? 'grow text-18' : 'grow text-right'" x-show="!isMobile || showNav">
