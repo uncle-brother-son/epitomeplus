@@ -1,5 +1,5 @@
 {.section collection}
-  <ul class="flex flex-row gap-2 mx-2 mb-10">
+  <ul class="flex flex-row gap-2 mx-2 mb-10" x-intersect="$el.classList.add('scrollfadein', 'ease-epitome')">
     <li class="{.if categoryFilter}{.or}active{.end}">
       <a href="{fullUrl}">All</a>
     </li>
@@ -8,7 +8,7 @@
         <a href="{collection.fullUrl}?category={@|url-encode}">{@}</a>
       </li>
     {.end}
-  </ul>
+  </ul> ?
 {.end}
 
 <!-- item loop -->

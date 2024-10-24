@@ -3,7 +3,7 @@
       <noscript><div class="text-16">This website requires JavaScript to work</div></noscript>
     </div>
 
-    <footer x-intersect="$el.classList.add('scrollfadein', 'ease-epitome')">
+    <footer>
       <squarespace:navigation navigationId="mainNav" template="footer" />
       <squarespace:navigation navigationId="footerNav" template="sub-footer" />
     </footer>
