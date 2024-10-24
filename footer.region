@@ -1,5 +1,5 @@
     <div class="page-loader flex flex-col gap-3 fixed justify-center items-center inset-0 bg-white/100 z-[1000] transition-opacity duration-320 ease-sysum">
-      <div class="w-8 h-8 bg-blue/100">&nbsp;</div>
+      <div class="w-4 h-4 bg-blue/100">&nbsp;</div>
       <noscript><div class="text-16">This website requires JavaScript to work</div></noscript>
     </div>
 
