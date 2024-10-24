@@ -1,6 +1,6 @@
 <div class="grid_ gap-y-3 my-20">
 
-  <ul class="col-start-1 col-end-4 md:col-start-2 md:col-end-4 font-bold">
+  <ul class="col-start-1 col-end-4 md:col-start-2 md:col-end-4 font-medium">
     {.repeated section items}
       <li class="{.section active}active{.end} mb-1">
         {.section collection}
