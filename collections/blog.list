@@ -8,7 +8,7 @@
         <a href="{collection.fullUrl}?category={@|url-encode}">{@}</a>
       </li>
     {.end}
-  </ul> ?
+  </ul>
 {.end}
 
 <!-- item loop -->
