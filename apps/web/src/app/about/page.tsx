@@ -1,6 +1,8 @@
 import { getAbout } from "../queries/getAbout";
 import Image from "next/image";
 import { PortableText } from "next-sanity";
+import FadeReveal from "../components/fadeReveal";
+import ScrollReveal from "../components/scrollReveal";
 
 export default async function AboutPage() {
   const data = await getAbout();
@@ -15,7 +17,7 @@ export default async function AboutPage() {
     <main>
       <div className="grid10_ gap-y-3 mb-10 md:mb-20">
 
-        <div className="col-start-1 col-end-4 md:col-start-1 md:col-end-6">
+        <ScrollReveal className="col-start-1 col-end-4 md:col-start-1 md:col-end-6">
           {mediaType === "image" && image?.asset?.url && (
             <Image
               src={image.asset.url}
@@ -39,9 +41,9 @@ export default async function AboutPage() {
               className="w-full h-auto"
             />
           )}
-        </div>
+        </ScrollReveal>
 
-        <div className="col-start-2 col-end-4 md:col-start-7 md:col-end-10">
+        <FadeReveal className="col-start-2 col-end-4 md:col-start-7 md:col-end-10">
           <div className="sticky top-10">
             {intro?.length > 0 && (
               <PortableText value={intro} />
@@ -61,7 +63,7 @@ export default async function AboutPage() {
               </ul>
             )}
           </div>
-        </div>
+        </FadeReveal>
       
       </div>
     </main>

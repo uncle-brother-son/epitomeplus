@@ -56,19 +56,13 @@
   }
   .fadein { animation: fadein 800ms; }
   @keyframes scrollin {
-    0% { transform: translateY(1rem); }
+    0% { transform: translateY(0.4rem); }
     100% { transform: translateY(0); }
   }
   .scrollin { animation: scrollin 800ms; }
-  @keyframes scrollleft {
-    0% { transform: translateX(1rem); }
-    100% { transform: translateX(0); }
-  }
-  .scrollfadein { animation: scrollfadein 800ms; }
   @media (prefers-reduced-motion) {
     .fadein,
     .scrollin,
-    .scrollfadein,
     .close span {
         animation: none;
     }

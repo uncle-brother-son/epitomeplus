@@ -5,6 +5,8 @@ import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import Carousel from "../../components/carousel";
 import VideoGrid from "../../components/videoGrid";
+import FadeReveal from "../../components/fadeReveal";
+import ScrollReveal from "../../components/scrollReveal";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -38,36 +40,40 @@ export default async function WorkPostPage({ params }: PageProps) {
   return (
     <main>
         <article className="grid5_">
-        <header className="col-start-1 col-end-4 md:col-end-6 mb-3 md:mb-5">
+        <FadeReveal className="col-start-1 col-end-4 md:col-end-6 mb-3 md:mb-5">
             <h1 className="text-22 font-medium">{brand}<span className="font-normal ml-2">{campaign}</span></h1> 
-        </header>
+        </FadeReveal>
 
         {intro?.length ? (
-            <section className="col-start-1 col-end-4 md:col-start-1 md:col-end-3 mb-3 md:mb-10">
+            <FadeReveal className="col-start-1 col-end-4 md:col-start-1 md:col-end-3 mb-3 md:mb-10">
             <PortableText value={intro} />
-            </section>
+            </FadeReveal>
         ) : null}
 
         {category && (
-            <section className="col-start-1 col-end-4 md:col-start-4 md:col-end-5 mb-3 md:mb-10">
+            <FadeReveal className="col-start-1 col-end-4 md:col-start-4 md:col-end-5 mb-3 md:mb-10">
                 <Link href={`/${category}`}>{category === 'motion' ? 'Motion' : 'Stills'}</Link>
-            </section>
+            </FadeReveal>
         )}
 
         {services?.length ? (
-            <section className="col-start-1 col-end-4 md:col-start-5 md:col-end-6 mb-10 md:mb-10">
+            <FadeReveal className="col-start-1 col-end-4 md:col-start-5 md:col-end-6 mb-10 md:mb-10">
             <PortableText value={services} />
-            </section>
+            </FadeReveal>
         ) : null}
 
         {(images?.length || videos?.length) && (
             <section className="col-start-1 col-end-4 md:col-end-6 mb-10 ">
               {/* Carousel layout */}
               {layout === 'carousel' && galleryType === 'image' && images && (
-                <Carousel images={images} type="image" brand={brand} campaign={campaign} />
+                <ScrollReveal>
+                  <Carousel images={images} type="image" brand={brand} campaign={campaign} />
+                </ScrollReveal>
               )}
               {layout === 'carousel' && galleryType === 'video' && videos && (
-                <Carousel videos={videos} type="video" brand={brand} campaign={campaign} />
+                <ScrollReveal>
+                  <Carousel videos={videos} type="video" brand={brand} campaign={campaign} />
+                </ScrollReveal>
               )}
               
               {/* Grid layout */}
@@ -76,16 +82,17 @@ export default async function WorkPostPage({ params }: PageProps) {
                   {galleryType === 'image' && images && columns && (
                     <div className={`grid gap-1 ${columns === 1 ? 'grid-cols-1 md:grid-cols-1' : columns === 2 ? 'grid-cols-2 md:grid-cols-2' : columns === 3 ? 'grid-cols-2 md:grid-cols-3' : 'grid-cols-2 md:grid-cols-4'}`}>
                       {images.map((img, idx) => (
-                        <Image
-                          key={idx}
-                          src={img.asset.url}
-                          alt={`${brand} ${campaign} Gallery Image ${idx + 1}`}
-                          width={500}
-                          height={500}
-                          className="w-full object-cover rounded"
-                          sizes={`(max-width: 900px) ${columns === 1 ? '100vw' : '50vw'}, ${columns === 1 ? '100vw' : columns === 2 ? '50vw' : columns === 3 ? '33vw' : '25vw'}`}
-                          loading={idx < (columns || 4) ? "eager" : "lazy"}
-                        />
+                        <ScrollReveal key={idx}>
+                          <Image
+                            src={img.asset.url}
+                            alt={`${brand} ${campaign} Gallery Image ${idx + 1}`}
+                            width={500}
+                            height={500}
+                            className="w-full object-cover rounded"
+                            sizes={`(max-width: 900px) ${columns === 1 ? '100vw' : '50vw'}, ${columns === 1 ? '100vw' : columns === 2 ? '50vw' : columns === 3 ? '33vw' : '25vw'}`}
+                            loading={idx < (columns || 4) ? "eager" : "lazy"}
+                          />
+                        </ScrollReveal>
                       ))}
                     </div>
                   )}

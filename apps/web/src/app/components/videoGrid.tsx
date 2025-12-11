@@ -1,5 +1,7 @@
 'use client';
 
+import ScrollReveal from './scrollReveal';
+
 interface VideoGridProps {
   videos: Array<
     | { file: { asset: { url: string } }; caption?: string }
@@ -40,7 +42,7 @@ export default function VideoGrid({ videos, gridColumns }: VideoGridProps) {
         if (!videoUrl) return null;
         
         return (
-          <div key={idx}>
+          <ScrollReveal key={idx}>
             <video
               src={videoUrl}
               controls
@@ -53,7 +55,7 @@ export default function VideoGrid({ videos, gridColumns }: VideoGridProps) {
             {caption && (
               <p className="text-sm mt-1">{caption}</p>
             )}
-          </div>
+          </ScrollReveal>
         );
       })}
     </div>

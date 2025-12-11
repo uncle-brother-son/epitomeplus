@@ -2,6 +2,7 @@ import { getHomePage } from "./queries/getHomePage";
 import { getLatestWork, WorkType } from "./queries/getProjects";
 import Image from "next/image";
 import Link from "next/link";
+import ScrollReveal from "./components/scrollReveal";
 
 export default async function Page() {
   const homePageData = await getHomePage();
@@ -30,7 +31,7 @@ export default async function Page() {
         const tileClass = tileClasses[index] || "homeTile-1";
         
         return (
-          <div key={_id} className={`${tileClass} flex flex-col gap-1 relative`}>
+          <ScrollReveal key={`${_id}-${index}`} className={`${tileClass} flex flex-col gap-1 relative`}>
             {mediaUrl && (
               thumbnailGroup.thumbnail === "video" ? (
                 <video
@@ -55,7 +56,7 @@ export default async function Page() {
               <span className="font-medium">{brand}</span>
               <span className="font-normal ml-1">{campaign}</span>
             </Link>
-          </div>
+          </ScrollReveal>
         );
       })}
     </main>
