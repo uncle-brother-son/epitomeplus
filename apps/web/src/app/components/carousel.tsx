@@ -81,6 +81,7 @@ export default function Carousel({ images, videos, type, brand, campaign }: Caro
                 controls
                 controlsList="nodownload noremoteplayback"
                 preload="metadata"
+                playsInline
                 className="h-full w-auto"
               />
               {caption && (

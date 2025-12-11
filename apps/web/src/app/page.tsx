@@ -31,27 +31,27 @@ export default async function Page() {
         
         return (
           <div key={_id} className={`${tileClass} flex flex-col gap-1 relative`}>
+            {mediaUrl && (
+              thumbnailGroup.thumbnail === "video" ? (
+                <video
+                  src={mediaUrl}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              ) : (
+                <Image
+                  src={mediaUrl}
+                  alt={`${brand} ${campaign}`}
+                  width={800}
+                  height={600}
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  loading={index < 2 ? "eager" : "lazy"}
+                />
+              )
+            )}
             <Link href={category ? `/${category}/${slug.current}` : '#'}>
-              {mediaUrl && (
-                thumbnailGroup.thumbnail === "video" ? (
-                  <video
-                    src={mediaUrl}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                ) : (
-                  <Image
-                    src={mediaUrl}
-                    alt={`${brand} ${campaign}`}
-                    width={800}
-                    height={600}
-                    sizes="(max-width: 900px) 100vw, 50vw"
-                    loading={index < 2 ? "eager" : "lazy"}
-                  />
-                )
-              )}
               <span className="font-medium">{brand}</span>
               <span className="font-normal ml-1">{campaign}</span>
             </Link>

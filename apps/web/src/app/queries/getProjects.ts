@@ -114,6 +114,7 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
       services,
       layout,
       gridColumns,
+      gridColumnsMotion,
       images[]{ asset->{url} },
       videos[]{ file{ asset->{url, mimeType} }, caption, asset->{url, mimeType} },
       "next": *[
