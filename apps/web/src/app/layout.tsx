@@ -1,0 +1,47 @@
+import { Metadata } from "next";
+import type { ReactNode } from "react";
+import { client } from "./lib/sanityClient";
+import { getSitedata } from "./queries/getSitedata";
+import { getNavigation } from "./queries/getNavigation";
+import { getAllInfoPages } from "./queries/getInfo";
+import Header from "./components/header";
+import Footer from "./components/footer";
+import { PageTransition } from "./components/loadingIndicator";
+import "../styles/globals.css";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const sitedata = await getSitedata();
+  
+  return {
+    title: sitedata.title,
+    description: sitedata.description,
+    openGraph: sitedata.ogImage?.asset?.url ? {
+      images: [sitedata.ogImage.asset.url],
+    } : undefined,
+    icons: sitedata.favicon?.asset?.url ? {
+      icon: sitedata.favicon.asset.url,
+      shortcut: sitedata.favicon.asset.url,
+    } : undefined,
+  };
+}
+
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const navigation = await getNavigation();
+  const sitedata = await getSitedata();
+  const infoPages = await getAllInfoPages();
+  const footer = await client.fetch(
+    `*[_type == "setFooter"][0]{ address, addressLink, phone, email, instagram }`
+  );
+
+  return (
+    <html lang="en">
+      <body>
+        <Header nav={navigation?.navList} />
+        <PageTransition>
+          {children}
+        </PageTransition>
+        <Footer footer={footer} nav={navigation?.navList} siteTitle={sitedata.title} infoPages={infoPages} />
+      </body>
+    </html>
+  );
+}
