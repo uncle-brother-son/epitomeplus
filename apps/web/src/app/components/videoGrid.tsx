@@ -20,9 +20,9 @@ export default function VideoGrid({ videos, gridColumns }: VideoGridProps) {
     switch(gridColumns) {
       case 1: return 'grid grid-cols-1 md:grid-cols-1';
       case 2: return 'grid grid-cols-1 md:grid-cols-2';
-      case 3: return 'grid grid-cols-2 md:grid-cols-3';
-      case 4: return 'grid grid-cols-2 md:grid-cols-4';
-      default: return 'grid grid-cols-2 md:grid-cols-4';
+      case 3: return 'grid grid-cols-1 md:grid-cols-3';
+      case 4: return 'grid grid-cols-1 md:grid-cols-4';
+      default: return 'grid grid-cols-1 md:grid-cols-4';
     }
   };
 

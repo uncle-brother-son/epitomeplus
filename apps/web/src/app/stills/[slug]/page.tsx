@@ -74,7 +74,7 @@ export default async function WorkPostPage({ params }: PageProps) {
               {layout === 'grid' && (
                 <>
                   {galleryType === 'image' && images && columns && (
-                    <div className={`grid gap-1 ${columns === 1 ? 'grid-cols-1 md:grid-cols-1' : columns === 2 ? 'grid-cols-1 md:grid-cols-2' : columns === 3 ? 'grid-cols-2 md:grid-cols-3' : 'grid-cols-2 md:grid-cols-4'}`}>
+                    <div className={`grid gap-1 ${columns === 1 ? 'grid-cols-1 md:grid-cols-1' : columns === 2 ? 'grid-cols-2 md:grid-cols-2' : columns === 3 ? 'grid-cols-2 md:grid-cols-3' : 'grid-cols-2 md:grid-cols-4'}`}>
                       {images.map((img, idx) => (
                         <Image
                           key={idx}
