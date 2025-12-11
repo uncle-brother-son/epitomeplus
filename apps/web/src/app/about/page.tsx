@@ -34,6 +34,7 @@ export default async function AboutPage() {
               controls
               controlsList="nodownload noremoteplayback"
               playsInline
+              preload="auto"
               poster={videoCover?.asset?.url}
               className="w-full h-auto"
             />
