@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Roboto } from "next/font/google";
 import { client } from "./lib/sanityClient";
 import { getSitedata } from "./queries/getSitedata";
 import { getNavigation } from "./queries/getNavigation";
@@ -8,6 +9,12 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import { PageTransition } from "./components/loadingIndicator";
 import "../styles/globals.css";
+
+const roboto = Roboto({
+  weight: ['400', '500'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const sitedata = await getSitedata();
@@ -35,7 +42,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang="en">
-      <body>
+      <body className={roboto.className}>
         <Header nav={navigation?.navList} />
         <PageTransition>
           {children}
