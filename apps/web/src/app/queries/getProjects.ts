@@ -7,6 +7,7 @@ export type WorkType = {
   slug: { current: string };
   brand: string;
   campaign: string;
+  published?: boolean;
   category?: "stills" | "motion";
   thumbnailGroup: {
     thumbnail: "image" | "video";
@@ -42,7 +43,7 @@ export type WorkType = {
  */
 export async function getAllWorkByCategory(category: string): Promise<WorkType[]> {
   const query = `
-    *[_type == "workType" && category == $category] | order(_createdAt desc){
+    *[_type == "workType" && category == $category && published == true] | order(_createdAt desc){
       _id,
       slug,
       brand,
@@ -70,7 +71,7 @@ export async function getAllWorkByCategory(category: string): Promise<WorkType[]
  */
 export async function getLatestWork(limit: number = 6): Promise<WorkType[]> {
   const query = `
-    *[_type == "workType"] | order(_createdAt desc)[0...$limit]{
+    *[_type == "workType" && published == true] | order(_createdAt desc)[0...$limit]{
       _id,
       slug,
       brand,
@@ -119,6 +120,7 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
       "next": *[
         _type == "workType" &&
         category == ^.category &&
+        published == true &&
         _createdAt > ^._createdAt
       ] | order(_createdAt asc)[0]{
         slug,
@@ -128,6 +130,7 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
       "prev": *[
         _type == "workType" &&
         category == ^.category &&
+        published == true &&
         _createdAt < ^._createdAt
       ] | order(_createdAt desc)[0]{
         slug,
