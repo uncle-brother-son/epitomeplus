@@ -33,7 +33,6 @@ export default async function AboutPage() {
               src={video.asset.url}
               controls
               controlsList="nodownload noremoteplayback"
-              preload="metadata"
               playsInline
               poster={videoCover?.asset?.url}
               className="w-full h-auto"

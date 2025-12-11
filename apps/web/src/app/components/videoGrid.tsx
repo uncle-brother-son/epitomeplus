@@ -45,7 +45,6 @@ export default function VideoGrid({ videos, gridColumns }: VideoGridProps) {
               src={videoUrl}
               controls
               controlsList="nodownload noremoteplayback"
-              preload="metadata"
               playsInline
               className="w-full rounded"
               onPlay={handlePlay}
