@@ -7,14 +7,6 @@ export const workType = defineType({
   fields: [
     
     defineField({
-      name: 'published',
-      title: 'Published',
-      type: 'boolean',
-      initialValue: true,
-      description: 'Toggle to show/hide this project on the website',
-    }),
-
-    defineField({
       name: 'brand',
       title: 'Brand',
       type: 'string',
