@@ -47,7 +47,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
 
       {/* Page content wrapper */}
       <div 
-        className={`transition-opacity duration-640 ease-epitome ${
+        className={`transition-opacity duration-640 ease-epitome grow ${
           isTransitioning 
             ? 'opacity-0' 
             : 'opacity-100'
