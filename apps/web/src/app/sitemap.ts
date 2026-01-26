@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { client } from './lib/sanityClient'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://epitomeplus.com'
+  const baseUrl = 'https://www.epitomeplus.co.uk'
 
   // Fetch all projects
   const projects = await client.fetch<Array<{ 

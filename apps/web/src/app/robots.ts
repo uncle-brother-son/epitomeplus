@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://epitomeplus.com/sitemap.xml',
+    sitemap: 'https://www.epitomeplus.co.uk/sitemap.xml',
   }
 }
