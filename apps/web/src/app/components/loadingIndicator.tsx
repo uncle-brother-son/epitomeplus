@@ -44,6 +44,11 @@ export function PageTransition({ children }: { children: ReactNode }) {
       const link = target.closest("a");
       
       if (link && link.href && !link.target && link.href.startsWith(window.location.origin)) {
+        // Allow default behavior for modifier keys (Cmd/Ctrl click for new tab, etc.)
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+          return;
+        }
+        
         const linkUrl = new URL(link.href);
         const currentUrl = new URL(window.location.href);
         
