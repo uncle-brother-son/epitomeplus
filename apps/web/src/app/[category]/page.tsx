@@ -4,6 +4,8 @@ import ProjectCard from "../components/projectCard";
 import ScrollReveal from "../components/scrollReveal";
 import FadeReveal from "../components/fadeReveal";
 import { notFound } from "next/navigation";
+import { getCategoryMetadata } from "../queries/getCategoryMetadata";
+import type { Metadata } from "next";
 
 type Props = {
   params: Promise<{ category: string }>;
@@ -14,6 +16,58 @@ export function generateStaticParams() {
     { category: 'motion' },
     { category: 'stills' }
   ];
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { category } = await params;
+  
+  if (category !== 'motion' && category !== 'stills') {
+    return {};
+  }
+
+  const metadata = await getCategoryMetadata();
+  
+  const title = category === 'motion' 
+    ? (metadata?.motionTitle || 'Motion Projects')
+    : (metadata?.stillsTitle || 'Stills Projects');
+    
+  const description = category === 'motion'
+    ? (metadata?.motionDescription || 'Browse our motion projects')
+    : (metadata?.stillsDescription || 'Browse our stills projects');
+    
+  const ogImage = category === 'motion'
+    ? metadata?.motionOgImage?.asset?.url
+    : metadata?.stillsOgImage?.asset?.url;
+    
+  const url = `https://epitomeplus.com/${category}`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'website',
+      ...(ogImage && {
+        images: [{
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        }],
+      }),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      ...(ogImage && { images: [ogImage] }),
+    },
+    alternates: {
+      canonical: url,
+    },
+  };
 }
 
 export default async function CategoryPage({ params }: Props) {
@@ -28,7 +82,7 @@ export default async function CategoryPage({ params }: Props) {
   const title = category === 'motion' ? 'Motion Projects' : 'Stills Projects';
 
   return (
-    <main>
+    <main id="main-content">
       <FadeReveal className="flex flex-row gap-2 mx-2 mb-10">
         <h1>{title}</h1>
       </FadeReveal>

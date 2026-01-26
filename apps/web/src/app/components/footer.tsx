@@ -45,22 +45,29 @@ export default function Footer({ nav = [], footer, siteTitle, infoPages = [] }: 
           </ul>
 
           <div className="col-start-1 col-end-3 md:col-start-4 md:col-end-5 ease-epitome">
-            <Link href={footer.addressLink} target="_blank">
-              <PortableText value={footer.address} />
+            <Link href={footer.addressLink} target="_blank" rel="noopener noreferrer" aria-label="View address on map">
+              <PortableText 
+                value={footer.address}
+                components={{
+                  block: {
+                    normal: ({children}) => <span>{children}<br /></span>,
+                  },
+                }}
+              />
             </Link>
           </div>
 
           <div className="col-start-1 col-end-3 md:col-start-5 md:col-end-6 ease-epitome">
               
               {footer.phone && (
-                <div className="w-full"><Link href={`mailto:${footer.phone}`} target="_blank">{footer.phone}</Link></div>
+                <div className="w-full"><Link href={`tel:${footer.phone}`} target="_blank" rel="noopener noreferrer">{footer.phone}</Link></div>
               )}
               {footer.email && (
-                <div className="w-full"><Link href={`mailto:${footer.email}`} target="_blank">{footer.email}</Link></div>
+                <div className="w-full"><Link href={`mailto:${footer.email}`} target="_blank" rel="noopener noreferrer">{footer.email}</Link></div>
               )}
               
               {footer.instagram && (
-                <div className="w-full mt-1"><Link href={`https://www.instagram.com/${footer.instagram}`} target="_blank">{footer.instagram}</Link></div>
+                <div className="w-full mt-1"><Link href={`https://www.instagram.com/${footer.instagram}`} target="_blank" rel="noopener noreferrer" aria-label={`Follow us on Instagram @${footer.instagram}`}>{footer.instagram}</Link></div>
               )}
               
           </div>

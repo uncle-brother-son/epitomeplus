@@ -7,11 +7,63 @@ import Carousel from "../../components/carousel";
 import VideoGrid from "../../components/videoGrid";
 import FadeReveal from "../../components/fadeReveal";
 import ScrollReveal from "../../components/scrollReveal";
+import { BreadcrumbSchema } from "../../components/structuredData";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 type PageProps = { 
   params: Promise<{ category: string; slug: string }> 
 };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { category, slug } = await params;
+  
+  if (category !== 'motion' && category !== 'stills') {
+    return {};
+  }
+
+  const work = await getWorkBySlug(slug);
+  
+  if (!work) {
+    return {};
+  }
+
+  const title = `${work.brand} ${work.campaign}`;
+  const description = work.metaDescription || `View ${work.brand} ${work.campaign} project`;
+  const url = `https://epitomeplus.com/${category}/${slug}`;
+  const ogImage = work.ogImage?.asset?.url || 
+    (work.thumbnailGroup?.thumbnail === 'image' 
+      ? work.thumbnailGroup?.thumbnailImage?.asset?.url 
+      : work.thumbnailGroup?.videoCover?.asset?.url);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'website',
+      ...(ogImage && {
+        images: [{
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        }],
+      }),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      ...(ogImage && { images: [ogImage] }),
+    },
+    alternates: {
+      canonical: url,
+    },
+  };
+}
 
 export default async function WorkPostPage({ params }: PageProps) {
   const { category, slug } = await params;
@@ -42,8 +94,15 @@ export default async function WorkPostPage({ params }: PageProps) {
   // Use appropriate gridColumns based on category (with fallback to gridColumns for backwards compatibility)
   const columns = category === 'motion' ? (gridColumnsMotion || gridColumns) : gridColumns;
 
+  const breadcrumbItems = [
+    { name: 'Home', url: 'https://epitomeplus.com' },
+    { name: category === 'motion' ? 'Motion' : 'Stills', url: `https://epitomeplus.com/${category}` },
+    { name: `${brand} ${campaign}`, url: `https://epitomeplus.com/${category}/${slug}` },
+  ];
+
   return (
-    <main>
+    <main id="main-content">
+        <BreadcrumbSchema items={breadcrumbItems} />
         <article className="grid5_">
             <FadeReveal className="col-start-1 col-end-4 md:col-end-6 mb-3 md:mb-5">
                 <h1 className="text-22 font-medium">{brand}<span className="font-normal ml-2">{campaign}</span></h1> 

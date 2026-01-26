@@ -76,8 +76,12 @@ export function PageTransition({ children }: { children: ReactNode }) {
         className={`fixed inset-0 flex items-center justify-center  transition-opacity duration-640 ease-epitome pointer-events-none ${
           isTransitioning ? 'opacity-100' : 'opacity-0'
         }`}
+        role="status"
+        aria-live="polite"
+        aria-label="Loading page content"
       >
         <div className="w-3 h-3 bg-blue/100 animate-spin-slow" />
+        <span className="sr-only">Loading...</span>
       </div>
       {children}
     </TransitionContext.Provider>

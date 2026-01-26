@@ -12,6 +12,14 @@ export const infoPage = defineType({
       validation: (Rule) => Rule.required()
     }),
     defineField({
+      name: 'metaDescription',
+      title: 'Meta Description',
+      type: 'text',
+      rows: 3,
+      validation: (Rule) => Rule.max(160).warning('Meta descriptions should be under 160 characters'),
+      description: 'SEO description for this page (max 160 characters)',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',

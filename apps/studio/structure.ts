@@ -54,6 +54,14 @@ export const myStructure: StructureResolver = (S) =>
                     .documentId('setSitedata')
                 ),
               S.listItem()
+                .title('Category Metadata')
+                .icon(CodeBlockIcon)
+                .child(
+                  S.document()
+                    .schemaType('setCategoryMetadata')
+                    .documentId('setCategoryMetadata')
+                ),
+              S.listItem()
                 .title('Navigation')
                 .icon(MenuIcon)
                 .child(

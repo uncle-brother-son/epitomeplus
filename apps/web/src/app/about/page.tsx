@@ -3,6 +3,48 @@ import Image from "next/image";
 import { PortableText } from "next-sanity";
 import FadeReveal from "../components/fadeReveal";
 import ScrollReveal from "../components/scrollReveal";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await getAbout();
+  
+  if (!data) {
+    return {};
+  }
+
+  const title = data.title;
+  const description = data.metaDescription || 'Learn more about our work and approach';
+  const url = 'https://epitomeplus.com/about';
+  const ogImage = data.ogImage?.asset?.url;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'website',
+      ...(ogImage && {
+        images: [{
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        }],
+      }),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      ...(ogImage && { images: [ogImage] }),
+    },
+    alternates: {
+      canonical: url,
+    },
+  };
+}
 
 export default async function AboutPage() {
   const data = await getAbout();
@@ -14,7 +56,8 @@ export default async function AboutPage() {
   const { title, mediaType, image, video, videoCover, intro, contactList } = data;
 
   return (
-    <main>
+    <main id="main-content">
+      <h1 className="sr-only">{title}</h1>
       <div className="grid10_ gap-y-3 mb-10 md:mb-20">
 
         <ScrollReveal className="col-start-1 col-end-4 md:col-start-1 md:col-end-6">
@@ -54,7 +97,7 @@ export default async function AboutPage() {
                   <li key={idx} className="mb-2">
                     {item.contact}<br/>
                     {item.email && (
-                      <a href={`mailto:${item.email}`} target="_blank">
+                      <a href={`mailto:${item.email}`} target="_blank" rel="noopener noreferrer">
                         {item.email}
                       </a>
                     )}

@@ -10,6 +10,7 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
   const [showNav, setShowNav] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const scrollPosRef = useRef(0);
 
   // Mobile detection
@@ -22,6 +23,45 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Focus trap when menu is open
+  useEffect(() => {
+    if (!showNav || !menuRef.current) return;
+
+    const menuElement = menuRef.current;
+    const focusableElements = menuElement.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled])'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      if (e.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
+    menuElement.addEventListener('keydown', handleTabKey);
+    
+    // Focus first element when menu opens
+    firstElement?.focus();
+
+    return () => {
+      menuElement.removeEventListener('keydown', handleTabKey);
+    };
+  }, [showNav]);
 
   // Scroll direction detection
   useEffect(() => {
@@ -64,9 +104,14 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
 
   return (
     <header ref={headerRef} id="header" className="menu sticky top-0 z-50 transition-all duration-320 ease-epitome">
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-2 focus:py-1 focus:bg-blue/100 focus:text-white/100"
+      >
+        Skip to main content
+      </a>
       <div className={showNav ? 'fixed bg-white inset-0 flex flex-col' : 'flex px-2 md:px-0 pt-2 md:grid5_'}>
-        
-        <div className={showNav ? 'mx-2 mt-2' : 'relative md:col-start-1 md:col-end-3'}>
+        <div className={showNav ? 'mx-2 mt-2' : 'relative md:col-start-1 md:col-end-3 flex'}>
           <Link href="/" aria-label="Epitome+">
             <svg
               className="fill-black hover:fill-blue transition duration-320 h-3"
@@ -88,39 +133,62 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
         </div>
 
         <nav className={showNav ? 'mx-2 grow content-center font-medium' : 'grow md:col-start-3 md:col-end-6 font-medium'}>
-          <ul className={showNav ? 'w-full flex flex-col gap-1' : 'w-full flex flex-row md:gap-4'}>
-            {nav.map((item) => {
-              const isCurrent = pathname.startsWith(item.link);
-              return (
-                <li
-                  key={item._key}
-                  className={`${showNav ? 'grow text-18' : 'grow text-right text-16'} ${isCurrent ? "active" : ""}`}
-                  style={{ display: !isMobile || showNav ? 'block' : 'none' }}
-                >
-                  <Link href={item.link}>{item.label}</Link>
+          {!showNav && (
+            <ul className="w-full flex flex-row-reverse md:flex-row md:gap-4">
+              {isMobile && (
+                <li className="grow text-right md:order-last">
+                  <button 
+                    onClick={() => setShowNav(true)}
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                  >
+                    Menu
+                  </button>
                 </li>
-              );
-            })}
-
-            {isMobile && !showNav && (
-              <li className="grow text-right">
-                <button onClick={() => setShowNav(true)}>Menu</button>
-              </li>
-            )}
-          </ul>
+              )}
+              
+              {nav.map((item) => {
+                const isCurrent = pathname.startsWith(item.link);
+                return (
+                  <li
+                    key={item._key}
+                    className={`grow text-right text-16 ${isCurrent ? "active" : ""}`}
+                    style={{ display: !isMobile ? 'block' : 'none' }}
+                  >
+                    <Link href={item.link}>{item.label}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
 
           {showNav && (
-            <div className="absolute top-2 right-2">
-              <button onClick={() => setShowNav(false)}>Close</button>
+            <div ref={menuRef} className="absolute inset-0 flex flex-col">
+              <div className="absolute top-2 right-2">
+                <button 
+                  onClick={() => setShowNav(false)}
+                  aria-label="Close navigation menu"
+                  aria-expanded="true"
+                >
+                  Close
+                </button>
+              </div>
+              <ul className="mx-2 grow justify-center md:justify-start font-medium w-full flex flex-col gap-1">
+                {nav.map((item) => {
+                  const isCurrent = pathname.startsWith(item.link);
+                  return (
+                    <li key={item._key} className={`md:grow text-18 ${isCurrent ? "active" : ""}`}>
+                      <Link href={item.link}>{item.label}</Link>
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="mx-2 mb-2 mt-10 text-12">
+                <Link href="/">© {new Date().getFullYear()} Epitome+</Link>
+              </div>
             </div>
           )}
         </nav>
-
-        {showNav && (
-          <div className="mx-2 mb-2 mt-10 text-12">
-            <Link href="/">© {new Date().getFullYear()} Epitome+</Link>
-          </div>
-        )}
       </div>
     </header>
   );

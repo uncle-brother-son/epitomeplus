@@ -5,11 +5,12 @@ export type MetadataData = {
   description: string;
   ogImage?: { asset: { url: string } };
   favicon?: { asset: { url: string } };
+  googleAnalyticsId?: string;
 };
 
 export async function getSitedata(): Promise<MetadataData> {
   const data = await client.fetch<MetadataData>(
-    `*[_type == "setSitedata"][0]{ title, description, ogImage{ asset->{ url } }, favicon{ asset->{ url } } }`
+    `*[_type == "setSitedata"][0]{ title, description, ogImage{ asset->{ url } }, favicon{ asset->{ url } }, googleAnalyticsId }`
   );
 
   if (!data) {

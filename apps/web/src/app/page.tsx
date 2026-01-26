@@ -1,11 +1,51 @@
 import { getHomePage } from "./queries/getHomePage";
 import { getLatestWork, WorkType } from "./queries/getProjects";
+import { getSitedata } from "./queries/getSitedata";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "./components/scrollReveal";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const sitedata = await getSitedata();
+  
+  const title = sitedata?.title || 'Epitome Plus';
+  const description = sitedata?.description || 'Creative production and photography';
+  const url = 'https://epitomeplus.com';
+  const ogImage = sitedata?.ogImage?.asset?.url;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'website',
+      ...(ogImage && {
+        images: [{
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        }],
+      }),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      ...(ogImage && { images: [ogImage] }),
+    },
+    alternates: {
+      canonical: url,
+    },
+  };
+}
 
 export default async function Page() {
   const homePageData = await getHomePage();
+  const sitedata = await getSitedata();
   // Use featured projects from homepage, or fallback to latest 6 posts
   const workItems: WorkType[] = homePageData?.featuredProjects && homePageData.featuredProjects.length > 0 
     ? homePageData.featuredProjects 
@@ -21,7 +61,8 @@ export default async function Page() {
   ];
 
   return (
-    <main className="grid5_ gap-y-10 info" role="main">
+    <main id="main-content" className="grid5_ gap-y-10 info" role="main">
+      <h1 className="sr-only">{sitedata.title}</h1>
       {workItems.map((work, index) => {
         const { _id, slug, brand, campaign, category, thumbnailGroup } = work;
         const mediaUrl =

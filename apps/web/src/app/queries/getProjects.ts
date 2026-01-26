@@ -7,6 +7,8 @@ export type WorkType = {
   slug: { current: string };
   brand: string;
   campaign: string;
+  metaDescription?: string;
+  ogImage?: { asset: { url: string } };
   category?: "stills" | "motion";
   thumbnailGroup: {
     thumbnail: "image" | "video";
@@ -47,6 +49,7 @@ export async function getAllWorkByCategory(category: string): Promise<WorkType[]
       slug,
       brand,
       campaign,
+      metaDescription,
       category,
       thumbnailGroup{
         thumbnail,
@@ -75,6 +78,7 @@ export async function getLatestWork(limit: number = 6): Promise<WorkType[]> {
       slug,
       brand,
       campaign,
+      metaDescription,
       category,
       thumbnailGroup{
         thumbnail,
@@ -103,6 +107,8 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
       slug,
       brand,
       campaign,
+      metaDescription,
+      ogImage{ asset->{ url } },
       category,
       thumbnailGroup{
         thumbnail,

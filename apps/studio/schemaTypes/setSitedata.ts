@@ -26,6 +26,13 @@ export const setSitedata = defineType({
       title: 'Favicon', 
       type: 'file' 
     }),
+    defineField({
+      name: 'googleAnalyticsId',
+      title: 'Google Analytics ID',
+      type: 'string',
+      description: 'Google Analytics 4 Measurement ID (e.g., G-XXXXXXXXXX)',
+      validation: (Rule) => Rule.regex(/^G-[A-Z0-9]+$/).warning('Should be in format G-XXXXXXXXXX'),
+    }),
   ],
   preview: {
     select: { title: 'title' },

@@ -18,6 +18,7 @@ export async function getHomePage(): Promise<HomePageType | null> {
         slug,
         brand,
         campaign,
+        metaDescription,
         category,
         thumbnailGroup{
           thumbnail,

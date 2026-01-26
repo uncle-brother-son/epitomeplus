@@ -4,6 +4,7 @@ import type { PortableTextBlock } from "@portabletext/types";
 export type InfoPageType = {
   _id: string;
   title: string;
+  metaDescription?: string;
   slug: { current: string };
   description?: PortableTextBlock[];
 };
@@ -13,6 +14,7 @@ export async function getInfoBySlug(slug: string): Promise<InfoPageType | null> 
     *[_type == "infoPage" && slug.current == $slug][0]{
       _id,
       title,
+      metaDescription,
       slug,
       description
     }
@@ -25,6 +27,7 @@ export async function getAllInfoPages(): Promise<InfoPageType[]> {
     *[_type == "infoPage"] | order(title asc){
       _id,
       title,
+      metaDescription,
       slug,
       description
     }

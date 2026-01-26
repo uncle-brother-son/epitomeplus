@@ -8,6 +8,22 @@ export const aboutPage = defineType({
     defineField({ name: 'title', title: 'Page Title', type: 'string' }),
 
     defineField({
+      name: 'metaDescription',
+      title: 'Meta Description (SEO)',
+      type: 'text',
+      description: 'Brief description for search engines (150-160 characters recommended)',
+      rows: 3,
+      validation: (rule) => rule.max(160).warning('Keep under 160 characters for optimal SEO'),
+    }),
+
+    defineField({
+      name: 'ogImage',
+      title: 'Social Share Image',
+      type: 'image',
+      description: 'Image for social media previews. Recommended: 1200x630px',
+    }),
+
+    defineField({
       name: 'mediaType',
       title: 'Media Type',
       type: 'string',

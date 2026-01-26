@@ -9,6 +9,8 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import FadeReveal from "./components/fadeReveal";
 import { PageTransition } from "./components/loadingIndicator";
+import { OrganizationSchema, WebSiteSchema } from "./components/structuredData";
+import { GoogleAnalytics } from "./components/googleAnalytics";
 import "../styles/globals.css";
 
 const roboto = Roboto({
@@ -42,8 +44,15 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   );
 
   return (
-    <html lang="en">
-      <body className={roboto.className}>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <OrganizationSchema sitedata={sitedata} />
+        <WebSiteSchema sitedata={sitedata} />
+        {sitedata.googleAnalyticsId && (
+          <GoogleAnalytics gaId={sitedata.googleAnalyticsId} />
+        )}
+      </head>
+      <body className={roboto.className} suppressHydrationWarning>
         <Header nav={navigation?.navList} />
         <PageTransition>
           {children}

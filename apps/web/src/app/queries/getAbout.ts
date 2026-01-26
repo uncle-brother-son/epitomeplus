@@ -3,6 +3,8 @@ import type { PortableTextBlock } from '@portabletext/types';
 
 export type AboutPageData = {
   title: string;
+  metaDescription?: string;
+  ogImage?: { asset: { url: string } };
   mediaType?: 'image' | 'video';
   image?: { asset: { url: string } };
   video?: { asset: { url: string; mimeType?: string } };
@@ -14,6 +16,8 @@ export type AboutPageData = {
 export const ABOUT_QUERY = `
 *[_type == "aboutPage"][0]{
   title,
+  metaDescription,
+  ogImage{ asset->{ url } },
   mediaType,
   image{ asset->{url} },
   video{ asset->{url, mimeType} },

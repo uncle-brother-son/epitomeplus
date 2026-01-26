@@ -1,0 +1,76 @@
+import { MetadataRoute } from 'next'
+import { client } from './lib/sanityClient'
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = 'https://epitomeplus.com'
+
+  // Fetch all projects
+  const projects = await client.fetch<Array<{ 
+    slug: string; 
+    category: 'motion' | 'stills';
+    _updatedAt: string;
+  }>>(`
+    *[_type == "workType"]{
+      "slug": slug.current,
+      category,
+      _updatedAt
+    }
+  `)
+
+  // Fetch info pages
+  const infoPages = await client.fetch<Array<{
+    slug: string;
+    _updatedAt: string;
+  }>>(`
+    *[_type == "infoPage"]{
+      "slug": slug.current,
+      _updatedAt
+    }
+  `)
+
+  // Static pages
+  const staticPages: MetadataRoute.Sitemap = [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 1,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/motion`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/stills`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+  ]
+
+  // Project pages
+  const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
+    url: `${baseUrl}/${project.category}/${project.slug}`,
+    lastModified: new Date(project._updatedAt),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  // Info pages
+  const infoPageEntries: MetadataRoute.Sitemap = infoPages.map((page) => ({
+    url: `${baseUrl}/info/${page.slug}`,
+    lastModified: new Date(page._updatedAt),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  return [...staticPages, ...projectPages, ...infoPageEntries]
+}
