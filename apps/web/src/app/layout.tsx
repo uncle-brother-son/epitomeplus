@@ -7,6 +7,7 @@ import { getNavigation } from "./queries/getNavigation";
 import { getAllInfoPages } from "./queries/getInfo";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import FadeReveal from "./components/fadeReveal";
 import { PageTransition } from "./components/loadingIndicator";
 import "../styles/globals.css";
 
@@ -46,8 +47,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <Header nav={navigation?.navList} />
         <PageTransition>
           {children}
+          <Footer footer={footer} nav={navigation?.navList} siteTitle={sitedata.title} infoPages={infoPages} />
         </PageTransition>
-        <Footer footer={footer} nav={navigation?.navList} siteTitle={sitedata.title} infoPages={infoPages} />
       </body>
     </html>
   );

@@ -1,16 +1,40 @@
 "use client";
-import { usePathname } from "next/navigation";
-import { useEffect, useState, useTransition, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { createContext, useContext, useEffect, useMemo, useState, useTransition, type ReactNode } from "react";
+
+const TransitionContext = createContext({ isTransitioning: false });
+
+export function usePageTransition() {
+  return useContext(TransitionContext);
+}
 
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [, startTransition] = useTransition();
+  const contextValue = useMemo(() => ({ isTransitioning }), [isTransitioning]);
 
   useEffect(() => {
-    // Reset transition when pathname changes (new page loaded)
-    startTransition(() => {
-      setIsTransitioning(false);
+    // Scroll to top when pathname changes
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Wait for all images to load before hiding the loader
+    const images = Array.from(document.querySelectorAll('img'));
+    
+    const imagePromises = images.map((img) => {
+      if (img.complete) return Promise.resolve();
+      return new Promise<void>((resolve) => {
+        img.addEventListener('load', () => resolve());
+        img.addEventListener('error', () => resolve()); // Resolve even on error
+      });
+    });
+    
+    // Wait for images to load
+    Promise.all(imagePromises).then(() => {
+      startTransition(() => {
+        setIsTransitioning(false);
+      });
     });
   }, [pathname]);
 
@@ -25,36 +49,32 @@ export function PageTransition({ children }: { children: ReactNode }) {
         
         // Only trigger transition if navigating to a different page
         if (linkUrl.pathname !== currentUrl.pathname) {
-          setIsTransitioning(true);
+          e.preventDefault(); // Stop Next.js Link navigation
+          setIsTransitioning(true); // Trigger exit animations
+          
+          // Wait for exit animations to complete (640ms) then navigate
+          setTimeout(() => {
+            router.push(linkUrl.pathname + linkUrl.search + linkUrl.hash);
+          }, 640);
         }
       }
     };
 
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, []);
+    document.addEventListener("click", handleClick, { capture: true }); // Use capture phase
+    return () => document.removeEventListener("click", handleClick, { capture: true });
+  }, [router]);
 
   return (
-    <>
+    <TransitionContext.Provider value={contextValue}>
       {/* Blue square loader - visible during transition */}
       <div 
-        className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-640 ease-epitome pointer-events-none ${
+        className={`fixed inset-0 flex items-center justify-center  transition-opacity duration-640 ease-epitome pointer-events-none ${
           isTransitioning ? 'opacity-100' : 'opacity-0'
         }`}
       >
         <div className="w-3 h-3 bg-blue/100 animate-spin-slow" />
       </div>
-
-      {/* Page content wrapper */}
-      <div 
-        className={`transition-opacity duration-640 ease-epitome grow ${
-          isTransitioning 
-            ? 'opacity-0' 
-            : 'opacity-100'
-        }`}
-      >
-        {children}
-      </div>
-    </>
+      {children}
+    </TransitionContext.Provider>
   );
 }

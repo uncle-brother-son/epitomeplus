@@ -1,4 +1,4 @@
-// src/app/stills/[slug]/page.tsx
+// src/app/[category]/[slug]/page.tsx
 import { getWorkBySlug, type WorkType } from "../../queries/getProjects";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,22 +7,27 @@ import Carousel from "../../components/carousel";
 import VideoGrid from "../../components/videoGrid";
 import FadeReveal from "../../components/fadeReveal";
 import ScrollReveal from "../../components/scrollReveal";
+import { notFound } from "next/navigation";
 
-type PageProps = { params: Promise<{ slug: string }> };
+type PageProps = { 
+  params: Promise<{ category: string; slug: string }> 
+};
 
 export default async function WorkPostPage({ params }: PageProps) {
-  const { slug } = await params; // ✅ await the params Promise
-  console.log("Resolved slug:", slug);
+  const { category, slug } = await params;
+  
+  // Validate category
+  if (category !== 'motion' && category !== 'stills') {
+    notFound();
+  }
 
   const work: WorkType | null = await getWorkBySlug(slug);
-  console.log("Fetched work:", work);
 
   if (!work) return <div>Post not found</div>;
 
   const {
     brand,
     campaign,
-    category,
     intro,
     services,
     layout,
@@ -108,10 +113,10 @@ export default async function WorkPostPage({ params }: PageProps) {
         <section className="grid5_ mb-10">
             <div className="col-start-1 col-end-4 md:col-end-6 flex gap-4 justify-center">
                 {work.prev ? (
-                    <Link href={`/stills/${work.prev.slug.current}`}>Previous Project</Link>
+                    <Link href={`/${category}/${work.prev.slug.current}`}>Previous Project</Link>
                 ) : null}
                 {work.next ? (
-                    <Link href={`/stills/${work.next.slug.current}`}>Next Project</Link>
+                    <Link href={`/${category}/${work.next.slug.current}`}>Next Project</Link>
                 ) : null}
             </div>
         </section>
