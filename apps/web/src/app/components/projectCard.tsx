@@ -53,7 +53,8 @@ export default function ProjectCard({
               width={1000}
               height={1000}
               className="absolute inset-0 w-full h-full object-cover"
-              sizes="(max-width: 900px) 50vw, (max-width: 1200px) 33vw, 25vw"
+              sizes="(max-width: 640px) 50vw, (max-width: 900px) 50vw, (max-width: 1200px) 33vw, 25vw"
+              quality={80}
               loading={loading}
             />
           </div>

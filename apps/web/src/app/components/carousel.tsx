@@ -6,12 +6,22 @@ import Image from 'next/image';
 interface CarouselProps {
   images?: { asset: { url: string } }[];
   videos?: Array<
-    | { file: { asset: { url: string } }; caption?: string }
-    | { asset: { url: string } }
+    | { _type: 'videoFile'; file: { asset: { url: string } }; caption?: string }
+    | { _type: 'externalVideo'; url: string; caption?: string }
   >;
   type: 'image' | 'video';
   brand?: string;
   campaign?: string;
+}
+
+function getVimeoEmbedUrl(url: string): string | null {
+  const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+  return vimeoMatch ? `https://player.vimeo.com/video/${vimeoMatch[1]}` : null;
+}
+
+function getYouTubeEmbedUrl(url: string): string | null {
+  const youtubeMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?]+)/);
+  return youtubeMatch ? `https://www.youtube.com/embed/${youtubeMatch[1]}` : null;
 }
 
 export default function Carousel({ images, videos, type, brand, campaign }: CarouselProps) {
@@ -61,34 +71,58 @@ export default function Carousel({ images, videos, type, brand, campaign }: Caro
           </li>
         ))}
         {type === 'video' && videos?.map((video, idx) => {
-          const videoUrl = 'file' in video && video.file?.asset?.url 
-            ? video.file.asset.url 
-            : 'asset' in video && video.asset?.url 
-            ? video.asset.url 
-            : null;
-          const caption = 'caption' in video ? video.caption : undefined;
+          const caption = video.caption;
           
-          if (!videoUrl) return null;
+          // External video (Vimeo/YouTube)
+          if (video._type === 'externalVideo') {
+            const embedUrl = getVimeoEmbedUrl(video.url) || getYouTubeEmbedUrl(video.url);
+            if (!embedUrl) return null;
+            
+            return (
+              <li
+                key={idx}
+                className="carouselItem absolute inset-0 flex justify-center flex-col"
+                style={{ opacity: idx === currentSlide ? 1 : 0, pointerEvents: idx === currentSlide ? 'auto' : 'none' }}
+              >
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <iframe
+                    src={embedUrl}
+                    className="w-full h-full max-w-full max-h-full"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+                {caption && (
+                  <p className="text-center text-sm mt-2">{caption}</p>
+                )}
+              </li>
+            );
+          }
           
-          return (
-            <li
-              key={idx}
-              className="carouselItem absolute inset-0 flex justify-center flex-col"
-              style={{ opacity: idx === currentSlide ? 1 : 0, pointerEvents: idx === currentSlide ? 'auto' : 'none' }}
-            >
-              <video
-                src={videoUrl}
-                controls
-                controlsList="nodownload noremoteplayback"
-                playsInline
-                preload="auto"
-                className="h-full w-auto"
-              />
-              {caption && (
-                <p className="text-center text-sm mt-2">{caption}</p>
-              )}
-            </li>
-          );
+          // Video file upload
+          if (video._type === 'videoFile' && video.file?.asset?.url) {
+            return (
+              <li
+                key={idx}
+                className="carouselItem absolute inset-0 flex justify-center flex-col"
+                style={{ opacity: idx === currentSlide ? 1 : 0, pointerEvents: idx === currentSlide ? 'auto' : 'none' }}
+              >
+                <video
+                  src={video.file.asset.url}
+                  controls
+                  controlsList="nodownload noremoteplayback"
+                  playsInline
+                  preload="auto"
+                  className="h-full w-auto"
+                />
+                {caption && (
+                  <p className="text-center text-sm mt-2">{caption}</p>
+                )}
+              </li>
+            );
+          }
+          
+          return null;
         })}
       </ul>
       

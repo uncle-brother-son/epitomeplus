@@ -5,5 +5,5 @@ import { client } from "../app/lib/sanityClient";
 const builder = imageUrlBuilder(client);
 
 export function urlFor(source: SanityImageSource) {
-  return builder.image(source);
+  return builder.image(source).width(2000).fit('max');
 }

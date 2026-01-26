@@ -47,7 +47,8 @@ export default async function Page() {
                   alt={`${brand} ${campaign}`}
                   width={800}
                   height={600}
-                  sizes="(max-width: 900px) 100vw, 50vw"
+                  sizes="(max-width: 640px) 50vw, (max-width: 900px) 50vw, 33vw"
+                  quality={80}
                   loading={index < 2 ? "eager" : "lazy"}
                 />
               )

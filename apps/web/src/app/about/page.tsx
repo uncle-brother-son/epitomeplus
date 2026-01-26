@@ -25,7 +25,7 @@ export default async function AboutPage() {
               width={1600}
               height={900}
               className="w-full h-auto"
-              sizes="(max-width: 900px) 100vw, 60vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 900px) 80vw, 60vw"
               loading="eager"
             />
           )}

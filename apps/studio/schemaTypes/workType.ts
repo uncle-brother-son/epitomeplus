@@ -175,7 +175,8 @@ export const workType = defineType({
       of: [
         { 
           type: 'object',
-          name: 'videoWithCaption',
+          name: 'videoFile',
+          title: 'Video File (mp4)',
           fields: [
             {
               name: 'file',
@@ -199,17 +200,41 @@ export const workType = defineType({
             },
             prepare({ caption, file }) {
               return {
-                title: caption || file || 'Video',
+                title: caption || file || 'Video File',
               };
             },
           },
         },
-        // Keep old format for backwards compatibility during migration
         { 
-          type: 'file',
-          options: {
-            accept: 'video/mp4,video/quicktime,video/x-msvideo,video/webm'
-          }
+          type: 'object',
+          name: 'externalVideo',
+          title: 'External Video (Vimeo/YouTube)',
+          fields: [
+            {
+              name: 'url',
+              title: 'Video URL',
+              type: 'url',
+              validation: (rule) => rule.required().uri({
+                scheme: ['http', 'https'],
+              }),
+            },
+            {
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+            }
+          ],
+          preview: {
+            select: {
+              caption: 'caption',
+              url: 'url'
+            },
+            prepare({ caption, url }) {
+              return {
+                title: caption || url || 'External Video',
+              };
+            },
+          },
         }
       ],
       hidden: ({ document }) => document?.category !== 'motion',
