@@ -7,6 +7,8 @@ import { notFound } from "next/navigation";
 import { getCategoryMetadata } from "../queries/getCategoryMetadata";
 import type { Metadata } from "next";
 
+export const runtime = 'edge';
+
 type Props = {
   params: Promise<{ category: string }>;
 };

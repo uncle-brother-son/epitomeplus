@@ -1,13 +1,12 @@
 # Cloudflare Pages Deployment Guide
 
-## IMPORTANT: Build Settings in Cloudflare Dashboard
+## Cloudflare Dashboard Settings
 
-Go to your Cloudflare Pages project → Settings → Builds & deployments
+Go to: Workers & Pages → Your Project → Settings → Builds & deployments
 
 ### Build Configuration
 
-**Framework preset:**
-- Select: **None** 
+**Framework preset:** None
 
 **Build command:**
 ```
@@ -19,26 +18,21 @@ cd apps/web && npx @cloudflare/next-on-pages
 apps/web/.vercel/output/static
 ```
 
-**Root directory:** 
-```
-/
-```
+**Root directory:** `/`
 
-**❌ IMPORTANT: Leave "Build command" EMPTY or remove any "npx wrangler deploy" command**
-- Cloudflare Pages auto-deploys after build
-- Do NOT use `wrangler deploy` - that's for Workers, not Pages
+**Deploy command:** **(LEAVE EMPTY - DELETE IF PRESENT)**
 
 ### Environment Variables
 
-Add these in Settings → Environment Variables → Production:
+Settings → Environment Variables → Production:
 - `SANITY_STUDIO_API_PROJECT_ID` = `e3cginxl`
 - `SANITY_STUDIO_DATASET` = `production`
 - `NEXT_PUBLIC_SANITY_PROJECT_ID` = `e3cginxl`
 - `NEXT_PUBLIC_SANITY_DATASET` = `production`
 - `NODE_VERSION` = `22.16.0`
 
-## How it Works
-1. GitHub pushes trigger auto-deployment
-2. Cloudflare runs the build command
-3. Output is automatically deployed from the build directory
-4. Using `@cloudflare/next-on-pages` for full Next.js SSR support on Cloudflare's edge network
+## What This Does
+- Uses `@cloudflare/next-on-pages` (standard for Next.js on Cloudflare)
+- Full SSR support on Cloudflare's edge network
+- Dynamic routes, API routes, server components all work
+- The `.vercel/output/static` path is just the build tool's output format (still deploying to Cloudflare, not Vercel)

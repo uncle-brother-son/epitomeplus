@@ -4,6 +4,8 @@ import { PortableText } from "next-sanity";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
+export const runtime = 'edge';
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
