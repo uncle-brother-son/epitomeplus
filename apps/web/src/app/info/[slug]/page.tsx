@@ -10,13 +10,6 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
-  const pages = await getAllInfoPages();
-  return pages.map((page) => ({
-    slug: page.slug.current,
-  }));
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const data = await getInfoBySlug(slug);

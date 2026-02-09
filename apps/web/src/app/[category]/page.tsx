@@ -13,13 +13,6 @@ type Props = {
   params: Promise<{ category: string }>;
 };
 
-export function generateStaticParams() {
-  return [
-    { category: 'motion' },
-    { category: 'stills' }
-  ];
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
   
