@@ -1,0 +1,7 @@
+name = "epitomeplus"
+compatibility_date = "2026-02-09"
+pages_build_output_dir = ".vercel/output/static"
+
+[env.production]
+vars = { NODE_ENV = "production" }
+
