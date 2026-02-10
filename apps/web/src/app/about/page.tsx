@@ -5,8 +5,6 @@ import FadeReveal from "../components/fadeReveal";
 import ScrollReveal from "../components/scrollReveal";
 import type { Metadata } from "next";
 
-export const runtime = 'edge';
-
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getAbout();
   
@@ -66,7 +64,7 @@ export default async function AboutPage() {
           {mediaType === "image" && image?.asset?.url && (
             <Image
               src={image.asset.url}
-              alt={title}
+              alt={title || "About Image"}
               width={1600}
               height={900}
               className="w-full h-auto"

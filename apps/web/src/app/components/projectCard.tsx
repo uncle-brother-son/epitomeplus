@@ -42,7 +42,7 @@ export default function ProjectCard({
               muted
               loop
               playsInline
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover rounded"
             />
           </div>
         ) : (
@@ -52,7 +52,7 @@ export default function ProjectCard({
               alt={`${brand} ${campaign}`}
               width={1000}
               height={1000}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover rounded"
               sizes="(max-width: 640px) 50vw, (max-width: 900px) 50vw, (max-width: 1200px) 33vw, 25vw"
               quality={80}
               loading={loading}

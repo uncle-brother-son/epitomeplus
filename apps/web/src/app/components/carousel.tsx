@@ -65,7 +65,7 @@ export default function Carousel({ images, videos, type, brand, campaign }: Caro
               height={1500}
               priority={idx === 0}
               quality={90}
-              className="h-full w-auto object-contain"
+              className="h-full w-auto object-contain rounded"
               sizes="100vw"
             />
           </li>
