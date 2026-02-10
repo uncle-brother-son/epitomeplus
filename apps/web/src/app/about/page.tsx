@@ -66,7 +66,7 @@ export default async function AboutPage() {
           {mediaType === "image" && image?.asset?.url && (
             <Image
               src={image.asset.url}
-              alt={title || "About Image"}
+              alt={title}
               width={1600}
               height={900}
               className="w-full h-auto"
