@@ -118,7 +118,7 @@ export default async function WorkPostPage({ params }: PageProps) {
 
             {category && (
                 <FadeReveal className="col-start-1 col-end-4 md:col-start-4 md:col-end-5 mb-3 md:mb-10">
-                    <Link href={`/${category}`}>{category === 'motion' ? 'Motion' : 'Stills'}</Link>
+                    <Link href={`/${category}`} prefetch={false}>{category === 'motion' ? 'Motion' : 'Stills'}</Link>
                 </FadeReveal>
             )}
 
@@ -176,10 +176,10 @@ export default async function WorkPostPage({ params }: PageProps) {
                 <section className="grid5_ mb-10">
                     <div className="col-start-1 col-end-4 md:col-end-6 flex gap-4 justify-center">
                         {work.prev ? (
-                            <Link href={`/${category}/${work.prev.slug.current}`}>Previous Project</Link>
+                            <Link href={`/${category}/${work.prev.slug.current}`} prefetch={false}>Previous Project</Link>
                         ) : null}
                         {work.next ? (
-                            <Link href={`/${category}/${work.next.slug.current}`}>Next Project</Link>
+                            <Link href={`/${category}/${work.next.slug.current}`} prefetch={false}>Next Project</Link>
                         ) : null}
                     </div>
                 </section>
@@ -189,7 +189,7 @@ export default async function WorkPostPage({ params }: PageProps) {
                 {category && (
                     <section className="grid5_">
                         <div className="col-start-1 col-end-4 md:col-end-6 flex gap-4 justify-center">
-                            <Link href={`/${category}`}>All {category === 'motion' ? 'Motion' : 'Stills'} Projects</Link>
+                            <Link href={`/${category}`} prefetch={false}>All {category === 'motion' ? 'Motion' : 'Stills'} Projects</Link>
                         </div>
                     </section>
                 )}

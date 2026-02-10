@@ -38,7 +38,7 @@ export default function Footer({ nav = [], footer, siteTitle, infoPages = [] }: 
                 const isCurrent = pathname.startsWith(item.link);
                 return (
                   <li key={item._key} className={`mb-1 ${isCurrent ? "active" : ""}`}>
-                    <Link href={item.link}>{item.label}</Link>
+                    <Link href={item.link} prefetch={false}>{item.label}</Link>
                   </li>
                 );
               })}
@@ -75,14 +75,14 @@ export default function Footer({ nav = [], footer, siteTitle, infoPages = [] }: 
 
         <div className="flex flex-col md:flex-row gap-3 mx-2 mb-2 text-12 ease-epitome">
           <div className="grow">
-            <Link href="/">© {new Date().getFullYear()} {siteTitle}</Link>
+            <Link href="/" prefetch={false}>© {new Date().getFullYear()} {siteTitle}</Link>
           </div>
           <ul className="flex flex-row justify-between md:gap-3">
             {infoPages.map((page) => {
               const isCurrentPage = pathname === `/info/${page.slug.current}`;
               return (
                 <li key={page._id} className={`text-right ${isCurrentPage ? "active" : ""}`}>
-                  <Link href={`/info/${page.slug.current}`}>{page.title}</Link>
+                  <Link href={`/info/${page.slug.current}`} prefetch={false}>{page.title}</Link>
                 </li>
               );
             })}

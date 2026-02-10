@@ -83,6 +83,7 @@ export default async function Page() {
                   muted
                   loop
                   playsInline
+                  className="rounded"
                 />
               ) : (
                 <Image
@@ -93,10 +94,11 @@ export default async function Page() {
                   sizes="(max-width: 640px) 50vw, (max-width: 900px) 50vw, 33vw"
                   quality={80}
                   loading={index < 2 ? "eager" : "lazy"}
+                  className="rounded"
                 />
               )
             )}
-            <Link href={category ? `/${category}/${slug.current}` : '#'}>
+            <Link href={category ? `/${category}/${slug.current}` : '#'} prefetch={false}>
               <span className="font-medium">{brand}</span>
               <span className="font-normal ml-1">{campaign}</span>
             </Link>

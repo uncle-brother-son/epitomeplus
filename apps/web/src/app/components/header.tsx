@@ -112,7 +112,7 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
       </a>
       <div className={showNav ? 'fixed bg-white inset-0 flex flex-col' : 'flex px-2 md:px-0 pt-2 md:grid5_'}>
         <div className={showNav ? 'mx-2 mt-2' : 'relative md:col-start-1 md:col-end-3 flex'}>
-          <Link href="/" aria-label="Epitome+">
+          <Link href="/" aria-label="Epitome+" prefetch={false}>
             <svg
               className="fill-black hover:fill-blue transition duration-320 h-3"
               viewBox="0 0 210 32"
@@ -155,7 +155,7 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
                     className={`grow text-right text-16 ${isCurrent ? "active" : ""}`}
                     style={{ display: !isMobile ? 'block' : 'none' }}
                   >
-                    <Link href={item.link}>{item.label}</Link>
+                    <Link href={item.link} prefetch={false}>{item.label}</Link>
                   </li>
                 );
               })}
@@ -178,13 +178,13 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
                   const isCurrent = pathname.startsWith(item.link);
                   return (
                     <li key={item._key} className={`md:grow text-18 ${isCurrent ? "active" : ""}`}>
-                      <Link href={item.link}>{item.label}</Link>
+                      <Link href={item.link} prefetch={false}>{item.label}</Link>
                     </li>
                   );
                 })}
               </ul>
               <div className="mx-2 mb-2 mt-10 text-12">
-                <Link href="/">© {new Date().getFullYear()} Epitome+</Link>
+                <Link href="/" prefetch={false}>© {new Date().getFullYear()} Epitome+</Link>
               </div>
             </div>
           )}

@@ -62,6 +62,7 @@ export default function ProjectCard({
         <Link
           href={category ? `/${category}/${slug}` : '#'}
           className="after:absolute after:inset-0 after:z-10 md:absolute md:inset-0 md:z-10"
+          prefetch={false}
         >
           <div
             className={`md:bg-blue/80 md:backdrop-blur-md md:text-white/100 md:hover:text-white/100 md:absolute md:inset-0 flex flex-col gap-1 justify-center pt-1 md:p-1 transition-opacity duration-320 ease-epitome ${
