@@ -13,10 +13,9 @@ const tailwindConfig = {
         xl: '1920px',
       },
       colors: {
-        'black': '#333333',
-        'off_white': '#E6E3DD',
-        'white': '#F6F5F3',
-        'blue': '#436899',
+        'black': '#030304',
+        'neutral': '#E6E6E0',
+        'blue': '#2C597A',
         'transparent': 'transparent'
       },
       borderRadius: {

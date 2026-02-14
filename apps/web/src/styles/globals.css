@@ -6,9 +6,9 @@
 @layer components {
 
   /* Global styles */
-  * { @apply focus-visible:outline-0 focus-visible:text-white/100 focus-visible:rounded; }
-  html { @apply scroll-smooth scroll-pt-14 bg-white/100; }
-  body { @apply flex flex-col min-h-screen bg-white/100 text-black/100 text-16 md:text-14 font-roboto selection:bg-blue/100 selection:text-white/100 antialiased cursor-crosshair; }
+  * { @apply focus-visible:outline-0 focus-visible:text-neutral/100 focus-visible:rounded; }
+  html { @apply scroll-smooth scroll-pt-14 bg-neutral/100; }
+  body { @apply flex flex-col min-h-screen bg-neutral/100 text-black/100 text-16 md:text-14 font-roboto selection:bg-blue/100 selection:text-neutral/100 antialiased cursor-crosshair; }
   main { @apply grow mt-15 md:mt-20; }
   p { @apply mb-1; }
   p:last-child { @apply mb-0; }
@@ -16,7 +16,7 @@
   h2, .h2 { @apply text-16 md:text-14; }
   .info h2 { @apply text-18 font-medium mt-3 mb-1; }
   .info ol { @apply ml-2 list-decimal mb-1; }
-  button, a, .selector, .radio, .tabfocus { @apply focus-visible:outline-blue focus-visible:bg-blue/100 focus-visible:text-white/100; }
+  button, a, .selector, .radio, .tabfocus { @apply focus-visible:outline-blue focus-visible:bg-blue/100 focus-visible:text-neutral/100; }
   a:focus-visible img, button:focus-visible img { @apply opacity-0; }
   a:focus-visible img:nth-of-type(1), button:focus-visible img:nth-of-type(1) { @apply opacity-10; }
   .text-label { @apply text-12 font-roboto uppercase text-black/100 mb-1; }

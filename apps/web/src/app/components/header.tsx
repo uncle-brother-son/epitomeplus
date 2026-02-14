@@ -106,11 +106,11 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
     <header ref={headerRef} id="header" className="menu sticky top-0 z-50 transition-all duration-320 ease-epitome">
       <a 
         href="#main-content" 
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-2 focus:py-1 focus:bg-blue/100 focus:text-white/100"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-2 focus:py-1 focus:bg-blue/100 focus:text-neutral/100"
       >
         Skip to main content
       </a>
-      <div className={showNav ? 'fixed bg-white inset-0 flex flex-col' : 'flex px-2 md:px-0 pt-2 md:grid5_'}>
+      <div className={showNav ? 'fixed bg-neutral inset-0 flex flex-col' : 'flex px-2 md:px-0 pt-2 md:grid5_'}>
         <div className={showNav ? 'mx-2 mt-2' : 'relative md:col-start-1 md:col-end-3 flex'}>
           <Link href="/" aria-label="Epitome+" prefetch={false}>
             <svg

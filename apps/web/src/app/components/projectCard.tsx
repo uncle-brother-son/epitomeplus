@@ -65,7 +65,7 @@ export default function ProjectCard({
           prefetch={false}
         >
           <div
-            className={`md:bg-blue/80 md:backdrop-blur-md md:text-white/100 md:hover:text-white/100 md:absolute md:inset-0 flex flex-col gap-1 justify-center pt-1 md:p-1 transition-opacity duration-320 ease-epitome ${
+            className={`md:bg-blue/80 md:backdrop-blur-md md:text-neutral/100 md:hover:text-neutral/100 md:absolute md:inset-0 flex flex-col gap-1 justify-center pt-1 md:p-1 transition-opacity duration-320 ease-epitome ${
               showOverlay ? 'md:opacity-100' : 'md:opacity-0'
             }`}
           >
