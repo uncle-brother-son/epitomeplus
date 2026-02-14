@@ -91,7 +91,7 @@ export default async function Page() {
                   alt={`${brand} ${campaign}`}
                   width={800}
                   height={600}
-                  sizes="(max-width: 640px) 50vw, (max-width: 900px) 50vw, 33vw"
+                  sizes="100vw, (min-width: 768px) 40vw"
                   quality={80}
                   loading={index < 2 ? "eager" : "lazy"}
                   className="rounded"

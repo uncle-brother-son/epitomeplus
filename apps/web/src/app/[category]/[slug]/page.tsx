@@ -155,7 +155,7 @@ export default async function WorkPostPage({ params }: PageProps) {
                                 width={500}
                                 height={500}
                                 className="w-full object-cover rounded"
-                                sizes={`(max-width: 640px) ${columns === 1 ? '100vw' : columns === 2 ? '50vw' : '33vw'}, (max-width: 900px) ${columns === 1 ? '100vw' : '50vw'}, ${columns === 1 ? '100vw' : columns === 2 ? '50vw' : columns === 3 ? '33vw' : '25vw'}`}
+                                sizes={columns === 1 ? '100vw' : columns === 2 ? '(max-width: 767px) 50vw, 50vw' : columns === 3 ? '(max-width: 767px) 50vw, 33vw' : '(max-width: 767px) 50vw, 25vw'}
                                 quality={100}
                                 loading={idx < (columns || 4) ? "eager" : "lazy"}
                             />
