@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'export',
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -10,7 +12,6 @@ const nextConfig: NextConfig = {
         pathname: '/images/**',
       },
     ],
-    minimumCacheTTL: 7776000, // 90 days - reduces bandwidth by caching optimized images
   },
 };
 

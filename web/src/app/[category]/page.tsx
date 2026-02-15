@@ -7,7 +7,15 @@ import { notFound } from "next/navigation";
 import { getCategoryMetadata } from "../queries/getCategoryMetadata";
 import type { Metadata } from "next";
 
-export const runtime = 'edge';
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return [
+    { category: 'motion' },
+    { category: 'stills' },
+  ];
+}
 
 type Props = {
   params: Promise<{ category: string }>;

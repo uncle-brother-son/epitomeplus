@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { client } from './lib/sanityClient'
+import { client } from '@/lib/sanity/client'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.epitomeplus.co.uk'

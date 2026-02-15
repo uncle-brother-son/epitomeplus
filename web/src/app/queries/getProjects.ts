@@ -1,5 +1,5 @@
 // src/queries/getWork.ts
-import { client } from "../lib/sanityClient";
+import { client } from "@/lib/sanity/client";
 import type { PortableTextBlock } from "@portabletext/types";
 
 export type WorkType = {
@@ -95,6 +95,19 @@ export async function getLatestWork(limit: number = 6): Promise<WorkType[]> {
     }
   `;
   return client.fetch<WorkType[]>(query, { limit: limit - 1 });
+}
+
+/**
+ * Fetch all project slugs for static generation
+ */
+export async function getAllWorkPaths(): Promise<Array<{ slug: string; category: string }>> {
+  const query = `
+    *[_type == "workType"]{
+      "slug": slug.current,
+      category
+    }
+  `;
+  return client.fetch<Array<{ slug: string; category: string }>>(query);
 }
 
 /**

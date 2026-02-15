@@ -1,4 +1,4 @@
-import { client } from '../lib/sanityClient';
+import { client } from '@/lib/sanity/client';
 import type { PortableTextBlock } from '@portabletext/types';
 
 export type AboutPageData = {

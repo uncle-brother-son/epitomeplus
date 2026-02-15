@@ -1,10 +1,19 @@
 import { getInfoBySlug, getAllInfoPages } from "../../queries/getInfo";
 import { getSitedata } from "../../queries/getSitedata";
-import { PortableText } from "next-sanity";
+import { PortableText } from "@portabletext/react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-export const runtime = 'edge';
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const pages = await getAllInfoPages();
+  
+  return pages.map((page) => ({
+    slug: page.slug?.current || page.slug,
+  })).filter(p => p.slug);
+}
 
 type PageProps = {
   params: Promise<{ slug: string }>;

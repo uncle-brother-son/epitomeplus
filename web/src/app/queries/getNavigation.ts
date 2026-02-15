@@ -1,4 +1,4 @@
-import { client } from "../lib/sanityClient";
+import { client } from "@/lib/sanity/client";
 
 export type NavItem = {
   _key: string;

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Roboto } from "next/font/google";
-import { client } from "./lib/sanityClient";
+import { client } from "@/lib/sanity/client";
 import { getSitedata } from "./queries/getSitedata";
 import { getNavigation } from "./queries/getNavigation";
 import { getAllInfoPages } from "./queries/getInfo";

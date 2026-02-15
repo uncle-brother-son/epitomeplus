@@ -6,7 +6,7 @@ import Link from "next/link";
 import ScrollReveal from "./components/scrollReveal";
 import type { Metadata } from "next";
 
-export const runtime = 'edge';
+export const dynamic = 'force-static';
 
 export async function generateMetadata(): Promise<Metadata> {
   const sitedata = await getSitedata();

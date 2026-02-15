@@ -1,5 +1,5 @@
 // src/app/[category]/[slug]/page.tsx
-import { getWorkBySlug, type WorkType } from "../../queries/getProjects";
+import { getWorkBySlug, getAllWorkPaths, type WorkType } from "../../queries/getProjects";
 import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
@@ -11,7 +11,17 @@ import { BreadcrumbSchema } from "../../components/structuredData";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-export const runtime = 'edge';
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const paths = await getAllWorkPaths();
+  
+  return paths.map((item) => ({
+    category: item.category,
+    slug: item.slug,
+  }));
+}
 
 type PageProps = { 
   params: Promise<{ category: string; slug: string }> 

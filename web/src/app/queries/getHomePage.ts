@@ -1,5 +1,5 @@
 // src/queries/getHomePage.ts
-import { client } from "../lib/sanityClient";
+import { client } from "@/lib/sanity/client";
 import type { WorkType } from "./getProjects";
 
 export type HomePageType = {
