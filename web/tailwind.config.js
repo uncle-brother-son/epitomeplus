@@ -14,7 +14,7 @@ const tailwindConfig = {
       },
       colors: {
         'black': '#030304',
-        'neutral': '#F6F1E7',
+        'neutral': '#F5F2EB',
         'blue': '#2C597A',
         'transparent': 'transparent'
       },
