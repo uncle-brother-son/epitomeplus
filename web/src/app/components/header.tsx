@@ -114,7 +114,7 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
         <div className={showNav ? 'mx-2 mt-2' : 'relative md:col-start-1 md:col-end-3 flex'}>
           <Link href="/" aria-label="Epitome+" prefetch={false}>
             <svg
-              className="fill-black hover:fill-blue transition duration-320 h-3"
+              className="fill-black hover:fill-blue transition duration-320 h-4"
               viewBox="0 0 210 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +152,7 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
                 return (
                   <li
                     key={item._key}
-                    className={`grow text-right text-16 ${isCurrent ? "active" : ""}`}
+                    className={`grow text-right text-18 ${isCurrent ? "active" : ""}`}
                     style={{ display: !isMobile ? 'block' : 'none' }}
                   >
                     <Link href={item.link} prefetch={false}>{item.label}</Link>
