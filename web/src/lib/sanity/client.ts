@@ -1,8 +1,9 @@
 import { createClient } from "@sanity/client";
 
 export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!, // your project ID
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
-  apiVersion: "2025-11-29", // today's date
-  useCdn: true, // Use CDN for better performance and static export compatibility
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-01-01",
+  useCdn: false, // Disable CDN for instant content updates
+  perspective: 'published', // Only show published content
 });

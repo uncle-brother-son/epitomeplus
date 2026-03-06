@@ -4,6 +4,9 @@ import { PortableText } from "@portabletext/react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function generateStaticParams() {
   const pages = await getAllInfoPages();
   
