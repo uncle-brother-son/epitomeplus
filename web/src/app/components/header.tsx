@@ -104,14 +104,9 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
 
   return (
     <header ref={headerRef} id="header" className="menu sticky top-0 z-50 transition-all duration-320 ease-epitome">
-      <a 
-        href="#main-content" 
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-2 focus:py-1 focus:bg-blue/100 focus:text-neutral/100"
-      >
-        Skip to main content
-      </a>
-      <div className={showNav ? 'fixed bg-neutral inset-0 flex flex-col' : 'flex px-2 md:px-0 pt-2 md:grid5_'}>
-        <div className={showNav ? 'mx-2 mt-2' : 'relative md:col-start-1 md:col-end-3 flex'}>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-60 focus:px-2 focus:py-1 focus:bg-blue focus:text-neutral">Skip to main content</a>
+      <div className={showNav ? 'fixed bg-neutral inset-0 flex flex-col' : 'mx-2 mt-2 grid10_'}>
+        <div className={showNav ? 'mx-2 mt-2' : 'relative col-start-1 col-span-2 md:col-start-1 md:col-span-4 flex'}>
           <Link href="/" aria-label="Epitome+" prefetch={false}>
             <svg
               className="fill-black hover:fill-blue transition duration-320 h-4"
@@ -132,11 +127,11 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
           </Link>
         </div>
 
-        <nav className={showNav ? 'mx-2 grow content-center font-medium' : 'grow md:col-start-3 md:col-end-6 font-medium'}>
+        <nav className={showNav ? 'mx-2 grow content-center font-medium' : 'grow col-start-3 col-span-1 md:col-start-5 md:col-span-6 font-medium'}>
           {!showNav && (
-            <ul className="w-full flex flex-row-reverse md:flex-row md:gap-4">
+            <ul className="w-full flex flex-row md:gap-4">
               {isMobile && (
-                <li className="grow text-right md:order-last">
+                <li className="text-right">
                   <button 
                     onClick={() => setShowNav(true)}
                     aria-label="Open navigation menu"
@@ -152,7 +147,7 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
                 return (
                   <li
                     key={item._key}
-                    className={`grow text-right text-18 ${isCurrent ? "active" : ""}`}
+                    className={`grow basis-1/3 text-right text-lg ${isCurrent ? "active" : ""}`}
                     style={{ display: !isMobile ? 'block' : 'none' }}
                   >
                     <Link href={item.link} prefetch={false}>{item.label}</Link>
@@ -177,13 +172,13 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
                 {nav.map((item) => {
                   const isCurrent = pathname.startsWith(item.link);
                   return (
-                    <li key={item._key} className={`md:grow text-18 ${isCurrent ? "active" : ""}`}>
+                    <li key={item._key} className={`md:grow text-lg ${isCurrent ? "active" : ""}`}>
                       <Link href={item.link} prefetch={false}>{item.label}</Link>
                     </li>
                   );
                 })}
               </ul>
-              <div className="mx-2 mb-2 mt-10 text-12">
+              <div className="mx-2 mb-2 mt-10 text-xs">
                 <Link href="/" prefetch={false}>© {new Date().getFullYear()} Epitome+</Link>
               </div>
             </div>

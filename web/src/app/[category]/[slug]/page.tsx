@@ -117,7 +117,7 @@ export default async function WorkPostPage({ params }: PageProps) {
         <BreadcrumbSchema items={breadcrumbItems} />
         <article className="grid5_">
             <FadeReveal className="col-start-1 col-end-4 md:col-end-6 mb-3 md:mb-5">
-                <h1 className="text-22 font-medium">{brand}<span className="font-normal ml-2">{campaign}</span></h1> 
+                <h1 className="text-xl font-medium">{brand}<span className="font-normal ml-2">{campaign}</span></h1> 
             </FadeReveal>
 
             {intro?.length ? (

@@ -73,7 +73,7 @@ export default function Footer({ nav = [], footer, siteTitle, infoPages = [] }: 
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-3 mx-2 mb-2 text-12 ease-epitome">
+        <div className="flex flex-col md:flex-row gap-3 mx-2 mb-2 text-xs ease-epitome">
           <div className="grow">
             <Link href="/" prefetch={false}>© {new Date().getFullYear()} {siteTitle}</Link>
           </div>

@@ -73,13 +73,13 @@ export function PageTransition({ children }: { children: ReactNode }) {
     <TransitionContext.Provider value={contextValue}>
       {/* Blue square loader - visible during transition */}
       <div className={`fixed inset-0 flex items-center justify-center  transition-opacity duration-640 ease-epitome pointer-events-none ${ isTransitioning ? 'opacity-100' : 'opacity-0' }`} role="status" aria-live="polite" aria-label="Loading page content">
-        <div className="w-3 h-3 bg-blue/100 animate-spin-slow" />
+        <div className="w-3 h-3 bg-blue animate-spin-slow" />
         {/* 
-        <svg className="h-3 fill-blue/100 animate-spin-slow" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className="h-3 fill-blue animate-spin-slow" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M34 14.4978H28.4999V9.08138H23.9762V14.4978H18.4762V19.1628H23.9762V24.5792H28.4999V19.1628H34V14.4978Z" fill="#121214"/>
           <path d="M5.91237 23.8125V19.1627H14.6292V14.2804H5.91237V10.1875H16.5974V5H0V29H16.9436V23.8125H5.91237Z" fill="#121214"/>
         </svg> 
-        <svg className="h-3 fill-blue/100 animate-spin-slow" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className="h-3 fill-blue animate-spin-slow" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M34 11.8828H21.9539V0H12.0461V11.8828H0V22.1172H12.0461V34H21.9539V22.1172H34V11.8828Z"/>
         </svg>
         */}
