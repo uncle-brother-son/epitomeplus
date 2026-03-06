@@ -75,6 +75,7 @@ const tailwindConfig = {
         '30': '15rem',
         '35': '17.5rem',
         '40': '20rem',
+        '45': '22.5rem',
       },
       cursor: {
         auto: 'auto',
