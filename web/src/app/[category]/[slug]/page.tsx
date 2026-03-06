@@ -11,9 +11,6 @@ import { BreadcrumbSchema } from "../../components/structuredData";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-export const dynamic = 'force-static';
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
   const paths = await getAllWorkPaths();
   

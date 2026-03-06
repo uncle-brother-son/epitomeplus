@@ -7,9 +7,6 @@ import { notFound } from "next/navigation";
 import { getCategoryMetadata } from "../queries/getCategoryMetadata";
 import type { Metadata } from "next";
 
-export const dynamic = 'force-static';
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
   return [
     { category: 'motion' },

@@ -106,7 +106,7 @@ const tailwindConfig = {
           '14': 'repeat(14, minmax(0, 1fr))',
         },
         animation: {
-          'spin-slow': 'spin 2s linear infinite',
+          'spin-slow': 'spin 4s linear infinite',
         },
         transitionTimingFunction: {
           epitome: 'cubic-bezier(0.295, 0.850, 0.440, 1.000)',
