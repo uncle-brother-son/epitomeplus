@@ -53,7 +53,6 @@ pnpm-debug.log*
 .wrangler
 .open-next
 .dev.vars
-wrangler.toml
 
 # TypeScript
 *.tsbuildinfo
