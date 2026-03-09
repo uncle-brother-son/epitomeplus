@@ -75,7 +75,7 @@ export default function Footer({ nav = [], footer, siteTitle, infoPages = [] }: 
 
         <div className="flex flex-col md:flex-row gap-3 mx-2 mb-2 text-xs ease-epitome">
           <div className="grow">
-            <Link href="/" prefetch={false}>© {new Date().getFullYear()} {siteTitle}</Link>
+            <Link href="/" prefetch={false}>&#169; {new Date().getFullYear()} {siteTitle}</Link>
           </div>
           <ul className="flex flex-row justify-between md:gap-3">
             {infoPages.map((page) => {

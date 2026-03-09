@@ -127,21 +127,17 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
           </Link>
         </div>
 
-        <nav className={showNav ? 'mx-2 grow content-center font-medium' : 'grow col-start-3 col-span-1 md:col-start-5 md:col-span-6 font-medium'}>
+        <nav className={showNav ? 'mx-2 grow content-center font-medium flex flex-col' : 'grow col-start-3 col-span-1 md:col-start-5 md:col-span-6 font-medium'}>
+          {isMobile && !showNav && (
+            <div className="text-right">
+              <button onClick={() => setShowNav(true)} aria-label="Open navigation menu" aria-expanded="false">
+                Menu
+              </button>
+            </div>
+          )}
+          
           {!showNav && (
             <ul className="w-full flex flex-row md:gap-4">
-              {isMobile && (
-                <li className="text-right">
-                  <button 
-                    onClick={() => setShowNav(true)}
-                    aria-label="Open navigation menu"
-                    aria-expanded="false"
-                  >
-                    Menu
-                  </button>
-                </li>
-              )}
-              
               {nav.map((item) => {
                 const isCurrent = pathname.startsWith(item.link);
                 return (
@@ -158,30 +154,32 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
           )}
 
           {showNav && (
-            <div ref={menuRef} className="absolute inset-0 flex flex-col">
-              <div className="absolute top-2 right-2">
-                <button 
-                  onClick={() => setShowNav(false)}
-                  aria-label="Close navigation menu"
-                  aria-expanded="true"
-                >
-                  Close
-                </button>
+            <>
+              <div ref={menuRef} className="grow flex flex-col">
+                <div className="absolute top-2 right-2">
+                  <button 
+                    onClick={() => setShowNav(false)}
+                    aria-label="Close navigation menu"
+                    aria-expanded="true"
+                  >
+                    Close
+                  </button>
+                </div>
+                <ul className="mx-2 grow justify-center md:justify-start font-medium w-full flex flex-col gap-1">
+                  {nav.map((item) => {
+                    const isCurrent = pathname.startsWith(item.link);
+                    return (
+                      <li key={item._key} className={`md:grow text-lg ${isCurrent ? "active" : ""}`}>
+                        <Link href={item.link} prefetch={false}>{item.label}</Link>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
-              <ul className="mx-2 grow justify-center md:justify-start font-medium w-full flex flex-col gap-1">
-                {nav.map((item) => {
-                  const isCurrent = pathname.startsWith(item.link);
-                  return (
-                    <li key={item._key} className={`md:grow text-lg ${isCurrent ? "active" : ""}`}>
-                      <Link href={item.link} prefetch={false}>{item.label}</Link>
-                    </li>
-                  );
-                })}
-              </ul>
-              <div className="mx-2 mb-2 mt-10 text-xs">
-                <Link href="/" prefetch={false}>© {new Date().getFullYear()} Epitome+</Link>
+              <div className="mb-2 text-xs">
+                <Link href="/" prefetch={false}>&#169; {new Date().getFullYear()} Epitome+</Link>
               </div>
-            </div>
+            </>
           )}
         </nav>
       </div>
