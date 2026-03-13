@@ -14,6 +14,7 @@ export type WorkType = {
     thumbnail: "image" | "video";
     thumbnailImage?: { asset: { url: string } };
     thumbnailVideo?: { asset: { url: string } };
+    thumbnailVideoHomepage?: { asset: { url: string } };
     videoCover?: { asset: { url: string } };
   };
   intro?: PortableTextBlock[];
@@ -55,6 +56,7 @@ export async function getAllWorkByCategory(category: string): Promise<WorkType[]
         thumbnail,
         thumbnailImage{asset->{url}},
         thumbnailVideo{asset->{url}},
+        thumbnailVideoHomepage{asset->{url}},
         videoCover{asset->{url}}
       },
       intro,
@@ -84,6 +86,7 @@ export async function getLatestWork(limit: number = 6): Promise<WorkType[]> {
         thumbnail,
         thumbnailImage{asset->{url}},
         thumbnailVideo{asset->{url}},
+        thumbnailVideoHomepage{asset->{url}},
         videoCover{asset->{url}}
       },
       intro,

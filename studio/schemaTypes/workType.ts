@@ -75,6 +75,13 @@ export const workType = defineType({
           hidden: ({ parent }) => parent?.thumbnail !== 'video',
         },
         {
+          name: 'thumbnailVideoHomepage',
+          title: 'Video (For Homepage Only)',
+          type: 'file',
+          options: { accept: 'video/*' },
+          hidden: ({ parent }) => parent?.thumbnail !== 'video',
+        },
+        {
           name: 'videoCover',
           title: 'Video Cover Image',
           type: 'image',

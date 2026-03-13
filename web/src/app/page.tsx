@@ -87,9 +87,9 @@ export default async function Page() {
             key={`${_id}-${index}`} 
             className={`${tileClass} flex flex-col gap-1 relative`}
           >
-            {thumbnailGroup.thumbnail === "video" && thumbnailGroup.thumbnailVideo?.asset.url ? (
+            {thumbnailGroup.thumbnail === "video" && (thumbnailGroup.thumbnailVideoHomepage?.asset.url || thumbnailGroup.thumbnailVideo?.asset.url) ? (
                 <video
-                  src={thumbnailGroup.thumbnailVideo.asset.url}
+                  src={thumbnailGroup.thumbnailVideoHomepage?.asset.url || thumbnailGroup.thumbnailVideo?.asset.url}
                   autoPlay
                   muted
                   loop
