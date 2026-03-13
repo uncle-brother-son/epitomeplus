@@ -1,5 +1,5 @@
 import {StructureResolver} from 'sanity/structure'
-import {HomeIcon, DocumentsIcon, BlockContentIcon, BillIcon, CogIcon, CodeBlockIcon, MenuIcon} from '@sanity/icons'
+import {HomeIcon, DocumentsIcon, BlockContentIcon, UlistIcon, CogIcon, CodeBlockIcon, MenuIcon} from '@sanity/icons'
 
 
 
@@ -31,7 +31,7 @@ export const myStructure: StructureResolver = (S) =>
         ),
       S.listItem()
         .title('Info')
-        .icon(BillIcon)
+        .icon(UlistIcon)
         .schemaType('infoPage')
         .child(S.documentTypeList('infoPage')
         ),

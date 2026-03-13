@@ -130,6 +130,7 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
         thumbnail,
         thumbnailImage{asset->{url}},
         thumbnailVideo{asset->{url}},
+        thumbnailVideoHomepage{asset->{url}},
         videoCover{asset->{url}}
       },
       intro,

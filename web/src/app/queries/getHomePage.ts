@@ -24,6 +24,7 @@ export async function getHomePage(): Promise<HomePageType | null> {
           thumbnail,
           thumbnailImage{asset->{url}},
           thumbnailVideo{asset->{url}},
+          thumbnailVideoHomepage{asset->{url}},
           videoCover{asset->{url}}
         }
       }
