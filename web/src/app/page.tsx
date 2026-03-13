@@ -3,7 +3,7 @@ import { getLatestWork, WorkType } from "./queries/getProjects";
 import { getSitedata } from "./queries/getSitedata";
 import Image from "next/image";
 import Link from "next/link";
-import ParallaxReveal from "./components/parallaxReveal";
+import ScrollReveal from "./components/scrollReveal";
 import { urlFor } from "@/lib/sanity/image";
 import type { Metadata } from "next";
 
@@ -75,23 +75,17 @@ export default async function Page() {
     "homeTile-6"
   ];
 
-  // Parallax speed multipliers for depth effect
-  // < 1.0 = slower (background), > 1.0 = faster (foreground)
-  const parallaxSpeeds = [0.85, 1.10, 0.95, 1.15, 0.90, 1.05];
-
   return (
     <main id="main-content" className="grid5_ gap-y-10 info" role="main">
       <h1 className="sr-only">{sitedata.title}</h1>
       {workItems.map((work, index) => {
         const { _id, slug, brand, campaign, category, thumbnailGroup } = work;
         const tileClass = tileClasses[index] || "homeTile-1";
-        const parallaxSpeed = parallaxSpeeds[index] || 1.0;
         
         return (
-          <ParallaxReveal 
+          <ScrollReveal 
             key={`${_id}-${index}`} 
             className={`${tileClass} flex flex-col gap-1 relative`}
-            speed={parallaxSpeed}
           >
             {thumbnailGroup.thumbnail === "video" && thumbnailGroup.thumbnailVideo?.asset.url ? (
                 <video
@@ -120,7 +114,7 @@ export default async function Page() {
               <span className="font-medium">{brand}</span>
               <span className="font-normal ml-1">{campaign}</span>
             </Link>
-          </ParallaxReveal>
+          </ScrollReveal>
         );
       })}
     </main>
