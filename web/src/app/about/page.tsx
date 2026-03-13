@@ -1,8 +1,10 @@
 import { getAbout } from "../queries/getAbout";
+import { getSitedata } from "../queries/getSitedata";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import FadeReveal from "../components/fadeReveal";
 import ScrollReveal from "../components/scrollReveal";
+import { urlFor } from "@/lib/sanity/image";
 import type { Metadata } from "next";
 
 export const dynamic = 'force-dynamic';
@@ -10,19 +12,31 @@ export const revalidate = 0;
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getAbout();
+  const sitedata = await getSitedata();
   
   if (!data) {
     return {};
   }
 
-  const title = data.title;
-  const description = data.metaDescription || 'Learn more about our work and approach';
-  const url = 'https://epitomeplus.com/about';
+  const title = `${data.title} | ${sitedata?.title}`;
+  const description = data.metaDescription;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}/about`;
   const ogImage = data.ogImage?.asset?.url;
 
   return {
     title,
     description,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title,
       description,
@@ -64,25 +78,27 @@ export default async function AboutPage() {
       <div className="grid10_ gap-y-3 mb-10 md:mb-20">
 
         <ScrollReveal className="col-start-1 col-end-4 md:col-start-1 md:col-end-6">
-          {mediaType === "image" && image?.asset?.url && (
+          {mediaType === "image" && image && (
             <Image
-              src={image.asset.url}
+              src={urlFor(image).width(1600).quality(75).url()}
               alt={title || "About Image"}
               width={1600}
               height={900}
               className="w-full h-auto"
-              sizes="100vw, (min-width: 768px) 50vw"
+              sizes="(max-width: 767px) 100vw, 50vw"
               loading="eager"
+              placeholder="empty"
             />
           )}
 
           {mediaType === "video" && video?.asset?.url && (
             <video
               src={video.asset.url}
+              title="About Video"
               controls
               controlsList="nodownload noremoteplayback"
               playsInline
-              preload="auto"
+              preload="metadata"
               poster={videoCover?.asset?.url}
               className="w-full h-auto"
             />

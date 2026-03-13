@@ -1,5 +1,6 @@
 // src/app/[category]/page.tsx
 import { getAllWorkByCategory, WorkType } from "../queries/getProjects";
+import { getSitedata } from "../queries/getSitedata";
 import ProjectCard from "../components/projectCard";
 import ScrollReveal from "../components/scrollReveal";
 import FadeReveal from "../components/fadeReveal";
@@ -29,24 +30,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const metadata = await getCategoryMetadata();
+  const sitedata = await getSitedata();
   
-  const title = category === 'motion' 
-    ? (metadata?.motionTitle || 'Motion Projects')
-    : (metadata?.stillsTitle || 'Stills Projects');
+  const pageTitle = category === 'motion' 
+    ? (metadata?.motionTitle)
+    : (metadata?.stillsTitle);
+  
+  const title = `${pageTitle} | ${sitedata?.title}`;
     
   const description = category === 'motion'
-    ? (metadata?.motionDescription || 'Browse our motion projects')
-    : (metadata?.stillsDescription || 'Browse our stills projects');
+    ? (metadata?.motionDescription)
+    : (metadata?.stillsDescription);
     
   const ogImage = category === 'motion'
-    ? metadata?.motionOgImage?.asset?.url
-    : metadata?.stillsOgImage?.asset?.url;
+    ? (metadata?.motionOgImage?.asset?.url || sitedata.ogImage?.asset?.url)
+    : (metadata?.stillsOgImage?.asset?.url || sitedata.ogImage?.asset?.url);
     
-  const url = `https://epitomeplus.com/${category}`;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}/${category}`;
 
   return {
     title,
     description,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title,
       description,

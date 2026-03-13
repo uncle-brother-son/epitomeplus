@@ -1,5 +1,6 @@
 // src/app/[category]/[slug]/page.tsx
 import { getWorkBySlug, getAllWorkPaths, type WorkType } from "../../queries/getProjects";
+import { getSitedata } from "../../queries/getSitedata";
 import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
@@ -7,6 +8,7 @@ import Carousel from "../../components/carousel";
 import VideoGrid from "../../components/videoGrid";
 import FadeReveal from "../../components/fadeReveal";
 import ScrollReveal from "../../components/scrollReveal";
+import { urlFor } from "@/lib/sanity/image";
 import { BreadcrumbSchema } from "../../components/structuredData";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -35,14 +37,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const work = await getWorkBySlug(slug);
+  const sitedata = await getSitedata();
   
   if (!work) {
     return {};
   }
 
-  const title = `${work.brand} ${work.campaign}`;
-  const description = work.metaDescription || `View ${work.brand} ${work.campaign} project`;
-  const url = `https://epitomeplus.com/${category}/${slug}`;
+  const title = `${work.brand} - ${work.campaign} | ${sitedata?.title}`;
+  const description = work.metaDescription;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}/${category}/${slug}`;
   const ogImage = work.ogImage?.asset?.url || 
     (work.thumbnailGroup?.thumbnail === 'image' 
       ? work.thumbnailGroup?.thumbnailImage?.asset?.url 
@@ -51,11 +54,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title,
       description,
       url,
-      type: 'website',
+      type: 'article',
       ...(ogImage && {
         images: [{
           url: ogImage,
@@ -106,10 +120,11 @@ export default async function WorkPostPage({ params }: PageProps) {
   // Use appropriate gridColumns based on category (with fallback to gridColumns for backwards compatibility)
   const columns = category === 'motion' ? (gridColumnsMotion || gridColumns) : gridColumns;
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.epitomeplus.co.uk';
   const breadcrumbItems = [
-    { name: 'Home', url: 'https://epitomeplus.com' },
-    { name: category === 'motion' ? 'Motion' : 'Stills', url: `https://epitomeplus.com/${category}` },
-    { name: `${brand} ${campaign}`, url: `https://epitomeplus.com/${category}/${slug}` },
+    { name: 'Home', url: baseUrl },
+    { name: category === 'motion' ? 'Motion' : 'Stills', url: `${baseUrl}/${category}` },
+    { name: `${brand} ${campaign}`, url: `${baseUrl}/${category}/${slug}` },
   ];
 
   return (
@@ -128,7 +143,7 @@ export default async function WorkPostPage({ params }: PageProps) {
 
             {category && (
                 <FadeReveal className="col-start-1 col-end-4 md:col-start-4 md:col-end-5 mb-3 md:mb-10">
-                    <Link href={`/${category}`} prefetch={false}>{category === 'motion' ? 'Motion' : 'Stills'}</Link>
+                    <Link href={`/${category}`}>{category === 'motion' ? 'Motion' : 'Stills'}</Link>
                 </FadeReveal>
             )}
 
@@ -160,21 +175,21 @@ export default async function WorkPostPage({ params }: PageProps) {
                         {images.map((img, idx) => (
                             <ScrollReveal key={idx}>
                             <Image
-                                src={img.asset.url}
+                                src={urlFor(img).width(800).quality(75).url()}
                                 alt={`${brand} ${campaign} Gallery Image ${idx + 1}`}
                                 width={500}
                                 height={500}
                                 className="w-full object-cover rounded"
                                 sizes={columns === 1 ? '100vw' : columns === 2 ? '(max-width: 767px) 50vw, 50vw' : columns === 3 ? '(max-width: 767px) 50vw, 33vw' : '(max-width: 767px) 50vw, 25vw'}
-                                quality={100}
                                 loading={idx < (columns || 4) ? "eager" : "lazy"}
+                                placeholder="empty"
                             />
                             </ScrollReveal>
                         ))}
                         </div>
                     )}
                     {galleryType === 'video' && videos && columns && (
-                        <VideoGrid videos={videos} gridColumns={columns} />
+                        <VideoGrid videos={videos} gridColumns={columns} brand={brand} campaign={campaign} />
                     )}
                     </>
                 )}
@@ -186,10 +201,10 @@ export default async function WorkPostPage({ params }: PageProps) {
                 <section className="grid5_ mb-10">
                     <div className="col-start-1 col-end-4 md:col-end-6 flex gap-4 justify-center">
                         {work.prev ? (
-                            <Link href={`/${category}/${work.prev.slug.current}`} prefetch={false}>Previous Project</Link>
+                            <Link href={`/${category}/${work.prev.slug.current}`}>Previous Project</Link>
                         ) : null}
                         {work.next ? (
-                            <Link href={`/${category}/${work.next.slug.current}`} prefetch={false}>Next Project</Link>
+                            <Link href={`/${category}/${work.next.slug.current}`}>Next Project</Link>
                         ) : null}
                     </div>
                 </section>

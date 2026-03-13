@@ -3,7 +3,8 @@ import { getLatestWork, WorkType } from "./queries/getProjects";
 import { getSitedata } from "./queries/getSitedata";
 import Image from "next/image";
 import Link from "next/link";
-import ScrollReveal from "./components/scrollReveal";
+import ParallaxReveal from "./components/parallaxReveal";
+import { urlFor } from "@/lib/sanity/image";
 import type { Metadata } from "next";
 
 export const dynamic = 'force-dynamic';
@@ -12,14 +13,25 @@ export const revalidate = 0;
 export async function generateMetadata(): Promise<Metadata> {
   const sitedata = await getSitedata();
   
-  const title = sitedata?.title || 'Epitome Plus';
-  const description = sitedata?.description || 'Creative production and photography';
-  const url = 'https://epitomeplus.com';
+  const title = sitedata?.title;
+  const description = sitedata?.description;
+  const url = process.env.NEXT_PUBLIC_SITE_URL;
   const ogImage = sitedata?.ogImage?.asset?.url;
 
   return {
     title,
     description,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title,
       description,
@@ -63,47 +75,52 @@ export default async function Page() {
     "homeTile-6"
   ];
 
+  // Parallax speed multipliers for depth effect
+  // < 1.0 = slower (background), > 1.0 = faster (foreground)
+  const parallaxSpeeds = [0.85, 1.10, 0.95, 1.15, 0.90, 1.05];
+
   return (
     <main id="main-content" className="grid5_ gap-y-10 info" role="main">
       <h1 className="sr-only">{sitedata.title}</h1>
       {workItems.map((work, index) => {
         const { _id, slug, brand, campaign, category, thumbnailGroup } = work;
-        const mediaUrl =
-          thumbnailGroup.thumbnail === "image"
-            ? thumbnailGroup.thumbnailImage?.asset.url
-            : thumbnailGroup.thumbnailVideo?.asset.url;
         const tileClass = tileClasses[index] || "homeTile-1";
+        const parallaxSpeed = parallaxSpeeds[index] || 1.0;
         
         return (
-          <ScrollReveal key={`${_id}-${index}`} className={`${tileClass} flex flex-col gap-1 relative`}>
-            {mediaUrl && (
-              thumbnailGroup.thumbnail === "video" ? (
+          <ParallaxReveal 
+            key={`${_id}-${index}`} 
+            className={`${tileClass} flex flex-col gap-1 relative`}
+            speed={parallaxSpeed}
+          >
+            {thumbnailGroup.thumbnail === "video" && thumbnailGroup.thumbnailVideo?.asset.url ? (
                 <video
-                  src={mediaUrl}
+                  src={thumbnailGroup.thumbnailVideo.asset.url}
                   autoPlay
                   muted
                   loop
                   playsInline
+                  preload="metadata"
                   className="rounded"
                 />
-              ) : (
+              ) : thumbnailGroup.thumbnailImage && (
                 <Image
-                  src={mediaUrl}
+                  src={urlFor(thumbnailGroup.thumbnailImage).width(1000).quality(75).url()}
                   alt={`${brand} ${campaign}`}
                   width={800}
                   height={600}
-                  sizes="100vw, (min-width: 768px) 40vw"
-                  quality={80}
+                  sizes="(max-width: 767px) 100vw, 40vw"
                   loading={index < 2 ? "eager" : "lazy"}
+                  placeholder="empty"
                   className="rounded"
                 />
               )
-            )}
-            <Link href={category ? `/${category}/${slug.current}` : '#'} prefetch={false}>
+            }
+            <Link href={category ? `/${category}/${slug.current}` : '#'}>
               <span className="font-medium">{brand}</span>
               <span className="font-normal ml-1">{campaign}</span>
             </Link>
-          </ScrollReveal>
+          </ParallaxReveal>
         );
       })}
     </main>

@@ -17,9 +17,9 @@ export const setSitedata = defineType({
     }),
     defineField({ 
       name: 'ogImage',
-      title: 'Open Graph Image', 
+      title: 'Social Share Image', 
       type: 'image',
-      description: 'Default social media share image for the site. Recommended size: 1200x630px'
+      description: 'Default image for social media previews. Recommended: 1200x630px'
     }),
     defineField({ 
       name: 'favicon',

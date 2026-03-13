@@ -140,7 +140,7 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
         _type == "workType" &&
         category == ^.category &&
         _createdAt > ^._createdAt
-      ] | order(_createdAt asc)[0]{
+      ] | order(_createdAt asc) [0] {
         slug,
         brand,
         campaign
@@ -149,7 +149,7 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
         _type == "workType" &&
         category == ^.category &&
         _createdAt < ^._createdAt
-      ] | order(_createdAt desc)[0]{
+      ] | order(_createdAt desc) [0] {
         slug,
         brand,
         campaign

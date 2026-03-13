@@ -19,23 +19,77 @@ export function PageTransition({ children }: { children: ReactNode }) {
     // Scroll to top when pathname changes
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
-    // Wait for all images to load before hiding the loader
-    const images = Array.from(document.querySelectorAll('img'));
-    
-    const imagePromises = images.map((img) => {
-      if (img.complete) return Promise.resolve();
-      return new Promise<void>((resolve) => {
-        img.addEventListener('load', () => resolve());
-        img.addEventListener('error', () => resolve()); // Resolve even on error
-      });
-    });
-    
-    // Wait for images to load
-    Promise.all(imagePromises).then(() => {
+    // Wait for main content and first image to load before hiding the loader
+    let observer: MutationObserver | null = null;
+    let checkTimeout: NodeJS.Timeout | null = null;
+
+    const checkConditions = () => {
+      const main = document.querySelector('main');
+      
+      // Condition 1: <main> element exists
+      if (!main) return false;
+      
+      // Condition 2: <main> has at least one child
+      if (main.children.length === 0) return false;
+      
+      // Condition 3: First <img> inside <main> has loaded (if images exist)
+      const firstImg = main.querySelector('img');
+      if (firstImg && !firstImg.complete) {
+        // Image exists but hasn't loaded yet - wait for it
+        firstImg.addEventListener('load', hideLoader, { once: true });
+        firstImg.addEventListener('error', hideLoader, { once: true });
+        return false;
+      }
+      
+      // All conditions met
+      return true;
+    };
+
+    const hideLoader = () => {
+      if (observer) {
+        observer.disconnect();
+        observer = null;
+      }
+      if (checkTimeout) {
+        clearTimeout(checkTimeout);
+        checkTimeout = null;
+      }
       startTransition(() => {
         setIsTransitioning(false);
       });
-    });
+    };
+
+    // Check conditions immediately
+    if (checkConditions()) {
+      hideLoader();
+    } else {
+      // Set up MutationObserver to watch for DOM changes
+      observer = new MutationObserver(() => {
+        if (checkConditions()) {
+          hideLoader();
+        }
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+
+      // Safety timeout: hide loader after 3 seconds regardless
+      checkTimeout = setTimeout(() => {
+        hideLoader();
+      }, 3000);
+    }
+
+    // Cleanup on unmount
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+      if (checkTimeout) {
+        clearTimeout(checkTimeout);
+      }
+    };
   }, [pathname]);
 
   useEffect(() => {

@@ -1,16 +1,16 @@
 import { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Roboto } from "next/font/google";
-import { client } from "@/lib/sanity/client";
 import { getSitedata } from "./queries/getSitedata";
 import { getNavigation } from "./queries/getNavigation";
 import { getAllInfoPages } from "./queries/getInfo";
+import { getFooter } from "./queries/getFooter";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import FadeReveal from "./components/fadeReveal";
 import { PageTransition } from "./components/loadingIndicator";
 import { OrganizationSchema, WebSiteSchema } from "./components/structuredData";
-import { GoogleAnalytics } from "./components/googleAnalytics";
+import { ConditionalAnalytics } from "./components/conditionalAnalytics";
+import { CookieConsent } from "./components/cookieConsent";
 import "../styles/globals.css";
 
 const roboto = Roboto({
@@ -36,28 +36,33 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const navigation = await getNavigation();
-  const sitedata = await getSitedata();
-  const infoPages = await getAllInfoPages();
-  const footer = await client.fetch(
-    `*[_type == "setFooter"][0]{ address, addressLink, phone, email, instagram }`
-  );
+  // Parallelize independent queries (sitedata cached from generateMetadata)
+  const [navigation, sitedata, infoPages, footer] = await Promise.all([
+    getNavigation(),
+    getSitedata(),
+    getAllInfoPages(),
+    getFooter(),
+  ]);
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <OrganizationSchema sitedata={sitedata} />
         <WebSiteSchema sitedata={sitedata} />
-        {sitedata.googleAnalyticsId && (
-          <GoogleAnalytics gaId={sitedata.googleAnalyticsId} />
-        )}
       </head>
       <body className={roboto.className} suppressHydrationWarning>
-        <Header nav={navigation?.navList} />
+        {sitedata.googleAnalyticsId && (
+          <ConditionalAnalytics gaId={sitedata.googleAnalyticsId} />
+        )}
+        <Header nav={navigation?.navList} siteTitle={sitedata.title} />
         <PageTransition>
           {children}
           <Footer footer={footer} nav={navigation?.navList} siteTitle={sitedata.title} infoPages={infoPages} />
         </PageTransition>
+        <CookieConsent />
       </body>
     </html>
   );

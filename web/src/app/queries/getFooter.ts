@@ -1,7 +1,8 @@
 import { client } from "@/lib/sanity/client";
+import type { PortableTextBlock } from '@portabletext/types';
 
 export type FooterData = {
-  address: string;
+  address: PortableTextBlock[];
   addressLink: string;
   phone: string;
   email: string;

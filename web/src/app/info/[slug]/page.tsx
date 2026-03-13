@@ -28,14 +28,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {};
   }
 
-  const title = data.title;
-  const description = data.metaDescription || `${data.title} - Epitome Plus`;
-  const url = `https://epitomeplus.com/info/${slug}`;
+  const title = `${data.title} | ${sitedata?.title}`;
+  const description = data.metaDescription;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}/info/${slug}`;
   const ogImage = sitedata?.ogImage?.asset?.url;
 
   return {
     title,
     description,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title,
       description,
@@ -77,8 +88,10 @@ export default async function InfoPage({ params }: PageProps) {
       <h1 className="col-start-1 col-end-4 md:col-start-3 md:col-end-5 text-xl font-medium mb-3 md:mb-5">
         {title}
       </h1>
-      <div className="col-start-1 col-end-4 md:col-start-3 md:col-end-5">
-        {description && <PortableText value={description} />}
+      <div className="col-start-1 col-end-4 md:col-start-3 md:col-end-5 rich">
+        {description && 
+          <PortableText value={description} />
+        }
       </div>
     </main>
   );

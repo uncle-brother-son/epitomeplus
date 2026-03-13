@@ -8,6 +8,8 @@ interface VideoGridProps {
     | { _type: 'externalVideo'; url: string; caption?: string }
   >;
   gridColumns: number;
+  brand?: string;
+  campaign?: string;
 }
 
 function getVimeoEmbedUrl(url: string): string | null {
@@ -20,7 +22,7 @@ function getYouTubeEmbedUrl(url: string): string | null {
   return youtubeMatch ? `https://www.youtube.com/embed/${youtubeMatch[1]}` : null;
 }
 
-export default function VideoGrid({ videos, gridColumns }: VideoGridProps) {
+export default function VideoGrid({ videos, gridColumns, brand, campaign }: VideoGridProps) {
   const handlePlay = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     const allVideos = document.querySelectorAll('video');
     allVideos.forEach(v => {
@@ -53,6 +55,7 @@ export default function VideoGrid({ videos, gridColumns }: VideoGridProps) {
               <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                 <iframe
                   src={embedUrl}
+                  title={`${brand && campaign ? `${brand} - ${campaign}` : brand || campaign || 'Video'} (${idx + 1})`}
                   className="absolute inset-0 w-full h-full rounded"
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
@@ -71,10 +74,11 @@ export default function VideoGrid({ videos, gridColumns }: VideoGridProps) {
             <ScrollReveal key={idx}>
               <video
                 src={video.file.asset.url}
+                title={`${brand && campaign ? `${brand} - ${campaign}` : brand || campaign || 'Video'} (${idx + 1})`}
                 controls
                 controlsList="nodownload noremoteplayback"
                 playsInline
-                preload="auto"
+                preload="metadata"
                 className="w-full rounded"
                 onPlay={handlePlay}
               />

@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { urlFor } from '@/lib/sanity/image';
 
 interface ProjectCardProps {
   id: string;
@@ -15,7 +16,7 @@ interface ProjectCardProps {
   loading?: 'eager' | 'lazy';
 }
 
-export default function ProjectCard({
+const ProjectCard = memo(function ProjectCard({
   id,
   slug,
   brand,
@@ -42,27 +43,27 @@ export default function ProjectCard({
               muted
               loop
               playsInline
+              preload="metadata"
               className="absolute inset-0 w-full h-full object-cover rounded"
             />
           </div>
         ) : (
           <div className="relative w-full" style={{ aspectRatio: '4/5' }}>
             <Image
-              src={mediaUrl}
+              src={urlFor(mediaUrl).width(800).quality(75).url()}
               alt={`${brand} ${campaign}`}
-              width={1000}
+              width={800}
               height={1000}
               className="absolute inset-0 w-full h-full object-cover rounded"
-              sizes="100vw, (min-width: 768px) 33vw"
-              quality={80}
+              sizes="(max-width: 767px) 100vw, 33vw"
               loading={loading}
+              placeholder="empty"
             />
           </div>
         )}
         <Link
           href={category ? `/${category}/${slug}` : '#'}
           className="after:absolute after:inset-0 after:z-10 md:absolute md:inset-0 md:z-10"
-          prefetch={false}
         >
           <div
             className={`md:bg-blue/80 md:backdrop-blur-md md:text-neutral md:hover:text-neutral md:absolute md:inset-0 flex flex-col gap-1 justify-center pt-1 md:p-1 transition-opacity duration-320 ease-epitome ${
@@ -78,4 +79,6 @@ export default function ProjectCard({
       </article>
     </li>
   );
-}
+});
+
+export default ProjectCard;

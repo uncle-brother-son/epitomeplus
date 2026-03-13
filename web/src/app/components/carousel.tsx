@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { urlFor } from '@/lib/sanity/image';
 
 interface CarouselProps {
   images?: { asset: { url: string } }[];
@@ -59,14 +60,15 @@ export default function Carousel({ images, videos, type, brand, campaign }: Caro
             style={{ opacity: idx === currentSlide ? 1 : 0, pointerEvents: idx === currentSlide ? 'auto' : 'none' }}
           >
             <Image
-              src={img.asset.url}
+              src={urlFor(img).width(1500).quality(75).url()}
               alt={`${brand} ${campaign} Gallery Image ${idx + 1}`}
               width={1500}
               height={1500}
               priority={idx === 0}
-              quality={90}
+              loading={idx < 3 ? 'eager' : 'lazy'}
+              placeholder="empty"
               className="h-full w-auto object-contain rounded"
-              sizes="100vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1500px"
             />
           </li>
         ))}
@@ -87,6 +89,7 @@ export default function Carousel({ images, videos, type, brand, campaign }: Caro
                 <div className="relative w-full h-full flex items-center justify-center">
                   <iframe
                     src={embedUrl}
+                    title={`${brand && campaign ? `${brand} - ${campaign}` : brand || campaign || 'Video'} (${idx + 1})`}
                     className="w-full h-full max-w-full max-h-full"
                     allow="autoplay; fullscreen; picture-in-picture"
                     allowFullScreen
@@ -109,10 +112,11 @@ export default function Carousel({ images, videos, type, brand, campaign }: Caro
               >
                 <video
                   src={video.file.asset.url}
+                  title={`${brand && campaign ? `${brand} - ${campaign}` : brand || campaign || 'Video'} (${idx + 1})`}
                   controls
                   controlsList="nodownload noremoteplayback"
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   className="h-full w-auto"
                 />
                 {caption && (
@@ -127,17 +131,17 @@ export default function Carousel({ images, videos, type, brand, campaign }: Caro
       </ul>
       
       <div className="w-full flex flex-row gap-4 justify-center items-center mt-3">
-        <button onClick={goToPrev} aria-label="Previous slide">
+        <button onClick={goToPrev} aria-label={`Previous slide (currently on slide ${currentSlide + 1} of ${slideCount})`}>
           <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 11.921H22V13.3741H4V11.921Z" fill="#333333" />
             <path d="M3.5422 11.619L7.78484 15.8616L6.75732 16.8892L2.51468 12.6465L3.5422 11.619Z" fill="#333333" />
             <path d="M2.51468 12.6465L6.75729 8.40384L7.78259 9.42915L3.53996 13.6718L2.51468 12.6465Z" fill="#333333" />
           </svg>
         </button>
-        <div>
-          <span>{currentSlide + 1}</span> / <span>{slideCount}</span>
+        <div aria-live="polite" aria-atomic="true" className="text-sm">
+          Slide {currentSlide + 1} of {slideCount}
         </div>
-        <button onClick={goToNext} aria-label="Next slide">
+        <button onClick={goToNext} aria-label={`Next slide (currently on slide ${currentSlide + 1} of ${slideCount})`}>
           <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 13.8573H2V12.4042H20V13.8573Z" fill="#333333" />
             <path d="M20.4578 14.1593L16.2152 9.91667L17.2427 8.88916L21.4853 13.1318L20.4578 14.1593Z" fill="#333333" />

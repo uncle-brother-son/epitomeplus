@@ -23,6 +23,7 @@ export const infoPage = defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
+      description: 'This will be used as the URL for this page',
       options: {
         source: 'title',
         maxLength: 96,

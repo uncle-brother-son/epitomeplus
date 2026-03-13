@@ -1,11 +1,12 @@
 "use client"; 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef, startTransition } from "react";
+import { useState, useEffect, useRef, startTransition, useMemo } from "react";
+import { debounce, throttle } from "../lib/utils";
 
 type NavItem = { _key: string; label: string; link: string };
 
-export default function Header({ nav = [] }: { nav?: NavItem[] }) {
+export default function Header({ nav = [], siteTitle }: { nav?: NavItem[]; siteTitle: string }) {
   const pathname = usePathname();
   const [showNav, setShowNav] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -19,9 +20,12 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
       setIsMobile(window.innerWidth < 900); // md breakpoint
     };
     
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    // Debounce resize to only update after resizing stops (150ms delay)
+    const debouncedCheckMobile = debounce(checkMobile, 150);
+    
+    checkMobile(); // Initial check
+    window.addEventListener('resize', debouncedCheckMobile);
+    return () => window.removeEventListener('resize', debouncedCheckMobile);
   }, []);
 
   // Focus trap when menu is open
@@ -91,8 +95,11 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
       scrollPosRef.current = currentScrollPos;
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Throttle scroll to max 60fps (every 16ms)
+    const throttledScroll = throttle(handleScroll, 16);
+
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    return () => window.removeEventListener('scroll', throttledScroll);
   }, []);
 
   // Close nav when route changes
@@ -107,14 +114,14 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-60 focus:px-2 focus:py-1 focus:bg-blue focus:text-neutral">Skip to main content</a>
       <div className={showNav ? 'fixed bg-neutral inset-0 flex flex-col' : 'mx-2 mt-2 grid10_'}>
         <div className={showNav ? 'mx-2 mt-2' : 'relative col-start-1 col-span-2 md:col-start-1 md:col-span-4 flex'}>
-          <Link href="/" aria-label="Epitome+" prefetch={false}>
+          <Link href="/" aria-label={siteTitle}>
             <svg
               className="fill-black hover:fill-blue transition duration-320 h-4"
               viewBox="0 0 210 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title>Epitome+</title>
+              <title>{siteTitle}</title>
               <path d="M209.458 12.72H202.415V5.62H196.623V12.72H189.58V18.835H196.623V25.935H202.415V18.835H209.458V12.72Z" />
               <path d="M124.908 0.269989H134.415L142.947 21.75L151.484 0.269989H160.992V31.73H153.421V13.77L146.289 31.73H139.615L132.483 13.77V31.73H124.912V0.269989H124.908Z" />
               <path d="M106.206 0C97.2156 0 91.1244 6.875 91.1244 16C91.1244 25.125 97.2156 32 106.206 32C115.195 32 121.282 25.125 121.282 16C121.282 6.875 115.19 0 106.206 0ZM106.206 25.2C101.594 25.2 98.6998 21.275 98.6998 16C98.6998 10.725 101.594 6.8 106.206 6.8C110.818 6.8 113.716 10.725 113.716 16C113.716 21.275 110.822 25.2 106.206 25.2Z" />
@@ -127,10 +134,10 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
           </Link>
         </div>
 
-        <nav className={showNav ? 'mx-2 grow content-center font-medium flex flex-col' : 'grow col-start-3 col-span-1 md:col-start-5 md:col-span-6 font-medium'}>
+        <nav id="navigation-menu" className={showNav ? 'mx-2 grow content-center font-medium flex flex-col' : 'grow col-start-3 col-span-1 md:col-start-5 md:col-span-6 font-medium'}>
           {isMobile && !showNav && (
             <div className="text-right">
-              <button onClick={() => setShowNav(true)} aria-label="Open navigation menu" aria-expanded="false">
+              <button onClick={() => setShowNav(true)} aria-label="Open navigation menu" aria-expanded={showNav} aria-controls="navigation-menu">
                 Menu
               </button>
             </div>
@@ -146,7 +153,7 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
                     className={`grow basis-1/3 text-right text-lg ${isCurrent ? "active" : ""}`}
                     style={{ display: !isMobile ? 'block' : 'none' }}
                   >
-                    <Link href={item.link} prefetch={false}>{item.label}</Link>
+                    <Link href={item.link}>{item.label}</Link>
                   </li>
                 );
               })}
@@ -160,7 +167,8 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
                   <button 
                     onClick={() => setShowNav(false)}
                     aria-label="Close navigation menu"
-                    aria-expanded="true"
+                    aria-expanded={showNav}
+                    aria-controls="navigation-menu"
                   >
                     Close
                   </button>
@@ -170,14 +178,14 @@ export default function Header({ nav = [] }: { nav?: NavItem[] }) {
                     const isCurrent = pathname.startsWith(item.link);
                     return (
                       <li key={item._key} className={`md:grow text-lg ${isCurrent ? "active" : ""}`}>
-                        <Link href={item.link} prefetch={false}>{item.label}</Link>
+                        <Link href={item.link}>{item.label}</Link>
                       </li>
                     );
                   })}
                 </ul>
               </div>
               <div className="mb-2 text-xs">
-                <Link href="/" prefetch={false}>&#169; {new Date().getFullYear()} Epitome+</Link>
+                <Link href="/" prefetch={false}>&#169; {new Date().getFullYear()} {siteTitle}</Link>
               </div>
             </>
           )}

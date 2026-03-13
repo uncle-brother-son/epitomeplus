@@ -37,6 +37,7 @@ export const workType = defineType({
     defineField({
       name: 'slug',
       type: 'slug',
+      description: 'This will be used as the URL for this project page',
       options: { source: (doc) => `${doc.brand}-${doc.campaign}` },
       validation: (rule) => rule.required(),
     }),

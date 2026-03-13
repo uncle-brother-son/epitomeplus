@@ -87,6 +87,13 @@
   .homeTile-6 { @apply col-start-1 col-end-4 md:col-start-4 md:col-end-6 mt-0 md:mt-[40vh] md:text-right; }
   [class^="homeTile-"] a { @apply after:absolute after:inset-0 after:z-10; }
 
+  /* Info page */
+  .rich ul, .terms ul { @apply ml-3.5 mb-1; }
+  .rich ul li, .terms ul li { @apply relative; }
+  .rich ul li::before, .terms ul li::before { @apply absolute top-0 -left-3.5; content: '—'; }
+  .rich p:last-child, .rich ul:last-child,
+  .rich p:has(+ :is(h1, h2, h3, h4, h5, h6)),
+  .rich ul:has(+ :is(h1, h2, h3, h4, h5, h6)) { @apply mb-0; }
 }
 
 @layer utilities {

@@ -1,4 +1,5 @@
 "use client"; 
+import { memo } from 'react';
 import Link from "next/link";
 import type { PortableTextBlock } from '@portabletext/types';
 import { PortableText } from "@portabletext/react";
@@ -23,7 +24,7 @@ type FooterProps = {
   infoPages?: InfoPage[];
 };
 
-export default function Footer({ nav = [], footer, siteTitle, infoPages = [] }: FooterProps) {
+const Footer = memo(function Footer({ nav = [], footer, siteTitle, infoPages = [] }: FooterProps) {
   const pathname = usePathname(); // current path
 
   if (!footer) return null;
@@ -32,7 +33,8 @@ export default function Footer({ nav = [], footer, siteTitle, infoPages = [] }: 
     <FadeReveal>
       <footer>
         <div className="grid5_ gap-y-3 my-20">
-          <ul className="col-start-1 col-end-4 md:col-start-2 md:col-end-4 font-medium ease-epitome">
+          <nav aria-label="Footer navigation" className="col-start-1 col-end-4 md:col-start-2 md:col-end-4">
+            <ul className="font-medium ease-epitome">
 
             {nav.map((item) => {
                 const isCurrent = pathname.startsWith(item.link);
@@ -43,8 +45,10 @@ export default function Footer({ nav = [], footer, siteTitle, infoPages = [] }: 
                 );
               })}
           </ul>
+          </nav>
 
-          <div className="col-start-1 col-end-3 md:col-start-4 md:col-end-5 ease-epitome">
+          <section aria-label="Contact information" className="contents">
+            <div className="col-start-1 col-end-3 md:col-start-4 md:col-end-5 ease-epitome">
             <Link href={footer.addressLink} target="_blank" rel="noopener noreferrer" aria-label="View address on map">
               <PortableText 
                 value={footer.address}
@@ -71,9 +75,10 @@ export default function Footer({ nav = [], footer, siteTitle, infoPages = [] }: 
               )}
               
           </div>
+          </section>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-3 mx-2 mb-2 text-xs ease-epitome">
+        <nav aria-label="Site information" className="flex flex-col md:flex-row gap-3 mx-2 mb-2 text-xs ease-epitome">
           <div className="grow">
             <Link href="/" prefetch={false}>&#169; {new Date().getFullYear()} {siteTitle}</Link>
           </div>
@@ -87,8 +92,10 @@ export default function Footer({ nav = [], footer, siteTitle, infoPages = [] }: 
               );
             })}
           </ul>
-        </div>
+        </nav>
       </footer>
     </FadeReveal>
   );
-}
+});
+
+export default Footer;
