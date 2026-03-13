@@ -1,7 +1,7 @@
 "use client"; 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef, startTransition, useMemo } from "react";
+import { useState, useEffect, useRef, startTransition } from "react";
 import { debounce, throttle } from "../lib/utils";
 
 type NavItem = { _key: string; label: string; link: string };
@@ -9,24 +9,25 @@ type NavItem = { _key: string; label: string; link: string };
 export default function Header({ nav = [], siteTitle }: { nav?: NavItem[]; siteTitle: string }) {
   const pathname = usePathname();
   const [showNav, setShowNav] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const scrollPosRef = useRef(0);
 
-  // Mobile detection
+  // Close mobile menu when resizing to desktop
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 900); // md breakpoint
+    if (!showNav) return; // Only listen when menu is open
+
+    const handleResize = () => {
+      if (window.innerWidth >= 900) { // md breakpoint
+        setShowNav(false);
+      }
     };
+
+    const debouncedResize = debounce(handleResize, 150);
     
-    // Debounce resize to only update after resizing stops (150ms delay)
-    const debouncedCheckMobile = debounce(checkMobile, 150);
-    
-    checkMobile(); // Initial check
-    window.addEventListener('resize', debouncedCheckMobile);
-    return () => window.removeEventListener('resize', debouncedCheckMobile);
-  }, []);
+    window.addEventListener('resize', debouncedResize);
+    return () => window.removeEventListener('resize', debouncedResize);
+  }, [showNav]);
 
   // Focus trap when menu is open
   useEffect(() => {
@@ -135,23 +136,24 @@ export default function Header({ nav = [], siteTitle }: { nav?: NavItem[]; siteT
         </div>
 
         <nav id="navigation-menu" className={showNav ? 'mx-2 grow content-center font-medium flex flex-col' : 'grow col-start-3 col-span-1 md:col-start-5 md:col-span-6 font-medium'}>
-          {isMobile && !showNav && (
-            <div className="text-right">
+          {/* Menu button - visible on mobile, hidden on desktop */}
+          {!showNav && (
+            <div className="text-right block md:hidden">
               <button onClick={() => setShowNav(true)} aria-label="Open navigation menu" aria-expanded={showNav} aria-controls="navigation-menu">
                 Menu
               </button>
             </div>
           )}
           
+          {/* Desktop nav - hidden on mobile, visible on desktop */}
           {!showNav && (
-            <ul className="w-full flex flex-row md:gap-4">
+            <ul className="w-full flex-row gap-4 hidden md:flex">
               {nav.map((item) => {
                 const isCurrent = pathname.startsWith(item.link);
                 return (
                   <li
                     key={item._key}
                     className={`grow basis-1/3 text-right text-lg ${isCurrent ? "active" : ""}`}
-                    style={{ display: !isMobile ? 'block' : 'none' }}
                   >
                     <Link href={item.link}>{item.label}</Link>
                   </li>

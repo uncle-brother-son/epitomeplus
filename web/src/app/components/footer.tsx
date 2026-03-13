@@ -33,10 +33,9 @@ const Footer = memo(function Footer({ nav = [], footer, siteTitle, infoPages = [
     <FadeReveal>
       <footer>
         <div className="grid5_ gap-y-3 my-20">
-          <nav aria-label="Footer navigation" className="col-start-1 col-end-4 md:col-start-2 md:col-end-4">
+          <nav aria-label="Footer navigation" className="col-start-1 col-end-4 md:col-start-1 md:col-end-4">
             <ul className="font-medium ease-epitome">
-
-            {nav.map((item) => {
+              {nav.map((item) => {
                 const isCurrent = pathname.startsWith(item.link);
                 return (
                   <li key={item._key} className={`mb-1 ${isCurrent ? "active" : ""}`}>
@@ -44,25 +43,24 @@ const Footer = memo(function Footer({ nav = [], footer, siteTitle, infoPages = [
                   </li>
                 );
               })}
-          </ul>
+            </ul>
           </nav>
 
           <section aria-label="Contact information" className="contents">
             <div className="col-start-1 col-end-3 md:col-start-4 md:col-end-5 ease-epitome">
-            <Link href={footer.addressLink} target="_blank" rel="noopener noreferrer" aria-label="View address on map">
-              <PortableText 
-                value={footer.address}
-                components={{
-                  block: {
-                    normal: ({children}) => <span>{children}<br /></span>,
-                  },
-                }}
-              />
-            </Link>
-          </div>
+              <Link href={footer.addressLink} target="_blank" rel="noopener noreferrer" aria-label="View address on map">
+                <PortableText 
+                  value={footer.address}
+                  components={{
+                    block: {
+                      normal: ({children}) => <span>{children}<br /></span>,
+                    },
+                  }}
+                />
+              </Link>
+            </div>
 
-          <div className="col-start-1 col-end-3 md:col-start-5 md:col-end-6 ease-epitome">
-              
+            <div className="col-start-1 col-end-3 md:col-start-5 md:col-end-6 ease-epitome">
               {footer.phone && (
                 <div className="w-full"><Link href={`tel:${footer.phone}`} target="_blank" rel="noopener noreferrer">{footer.phone}</Link></div>
               )}
@@ -73,16 +71,15 @@ const Footer = memo(function Footer({ nav = [], footer, siteTitle, infoPages = [
               {footer.instagram && (
                 <div className="w-full mt-1"><Link href={`https://www.instagram.com/${footer.instagram}`} target="_blank" rel="noopener noreferrer" aria-label={`Follow us on Instagram @${footer.instagram}`}>{footer.instagram}</Link></div>
               )}
-              
-          </div>
+            </div>
           </section>
         </div>
 
-        <nav aria-label="Site information" className="flex flex-col md:flex-row gap-3 mx-2 mb-2 text-xs ease-epitome">
-          <div className="grow">
+        <nav aria-label="Site information" className="grid5_ mx-2 mb-2 text-xs ease-epitome">
+          <div className="col-start-1 col-span-2 md:col-start-1 md:col-span-1">
             <Link href="/" prefetch={false}>&#169; {new Date().getFullYear()} {siteTitle}</Link>
           </div>
-          <ul className="flex flex-row justify-between md:gap-3">
+          <ul className="col-start-3 col-span-1 md:col-start-4 md:col-span-1 flex flex-row justify-between md:gap-3">
             {infoPages.map((page) => {
               const isCurrentPage = pathname === `/info/${page.slug.current}`;
               return (
