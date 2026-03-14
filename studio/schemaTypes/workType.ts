@@ -178,6 +178,22 @@ export const workType = defineType({
     }),
 
     defineField({
+      name: 'videoAspectRatio',
+      title: 'Video Aspect Ratio',
+      type: 'string',
+      options: {
+        list: [
+          { title: '16:9 - Widescreen', value: '16/9' },
+          { title: '4:5 - Portrait', value: '4/5' },
+          { title: '9:16 - Vertical', value: '9/16' },
+        ],
+        layout: 'dropdown',
+      },
+      initialValue: '16/9',
+      hidden: ({ document }) => document?.layout !== 'grid' || document?.category !== 'motion',
+    }),
+
+    defineField({
       name: 'images',
       title: 'Images',
       type: 'array',

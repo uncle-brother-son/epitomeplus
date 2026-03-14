@@ -110,6 +110,7 @@ export default async function WorkPostPage({ params }: PageProps) {
     layout,
     gridColumns,
     gridColumnsMotion,
+    videoAspectRatio,
     images,
     videos,
   } = work;
@@ -188,7 +189,13 @@ export default async function WorkPostPage({ params }: PageProps) {
                         </div>
                     )}
                     {galleryType === 'video' && videos && columns && (
-                        <VideoGrid videos={videos} gridColumns={columns} brand={brand} campaign={campaign} />
+                        <VideoGrid 
+                          videos={videos} 
+                          gridColumns={columns} 
+                          aspectRatio={videoAspectRatio} 
+                          brand={brand} 
+                          campaign={campaign} 
+                        />
                     )}
                     </>
                 )}

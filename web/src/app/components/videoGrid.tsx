@@ -8,6 +8,7 @@ interface VideoGridProps {
     | { _type: 'externalVideo'; url: string; caption?: string }
   >;
   gridColumns: number;
+  aspectRatio?: string;
   brand?: string;
   campaign?: string;
 }
@@ -22,7 +23,7 @@ function getYouTubeEmbedUrl(url: string): string | null {
   return youtubeMatch ? `https://www.youtube.com/embed/${youtubeMatch[1]}` : null;
 }
 
-export default function VideoGrid({ videos, gridColumns, brand, campaign }: VideoGridProps) {
+export default function VideoGrid({ videos, gridColumns, aspectRatio = '16/9', brand, campaign }: VideoGridProps) {
   const handlePlay = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     const allVideos = document.querySelectorAll('video');
     allVideos.forEach(v => {
@@ -52,7 +53,7 @@ export default function VideoGrid({ videos, gridColumns, brand, campaign }: Vide
           
           return (
             <ScrollReveal key={idx}>
-              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+              <div className="relative w-full" style={{ aspectRatio }}>
                 <iframe
                   src={embedUrl}
                   title={`${brand && campaign ? `${brand} - ${campaign}` : brand || campaign || 'Video'} (${idx + 1})`}
@@ -72,16 +73,18 @@ export default function VideoGrid({ videos, gridColumns, brand, campaign }: Vide
         if (video._type === 'videoFile' && video.file?.asset?.url) {
           return (
             <ScrollReveal key={idx}>
-              <video
-                src={video.file.asset.url}
-                title={`${brand && campaign ? `${brand} - ${campaign}` : brand || campaign || 'Video'} (${idx + 1})`}
-                controls
-                controlsList="nodownload noremoteplayback"
-                playsInline
-                preload="metadata"
-                className="w-full rounded"
-                onPlay={handlePlay}
-              />
+              <div className="relative w-full" style={{ aspectRatio }}>
+                <video
+                  src={video.file.asset.url}
+                  title={`${brand && campaign ? `${brand} - ${campaign}` : brand || campaign || 'Video'} (${idx + 1})`}
+                  controls
+                  controlsList="nodownload noremoteplayback"
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 w-full h-full object-cover rounded"
+                  onPlay={handlePlay}
+                />
+              </div>
               {caption && (
                 <p className="text-sm mt-1">{caption}</p>
               )}

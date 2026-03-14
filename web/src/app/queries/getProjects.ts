@@ -22,6 +22,7 @@ export type WorkType = {
   layout?: string;
   gridColumns?: number;
   gridColumnsMotion?: number;
+  videoAspectRatio?: string;
   images?: { asset: { url: string } }[];
   videos?: Array<
     | { _type: 'videoFile'; file: { asset: { url: string; mimeType?: string } }; caption?: string }
@@ -63,6 +64,8 @@ export async function getAllWorkByCategory(category: string): Promise<WorkType[]
       services,
       layout,
       gridColumns,
+      gridColumnsMotion,
+      videoAspectRatio,
       images[]{ asset->{url} },
       videos[]{ _type, file{ asset->{url, mimeType} }, url, caption }
     }
@@ -93,6 +96,8 @@ export async function getLatestWork(limit: number = 6): Promise<WorkType[]> {
       services,
       layout,
       gridColumns,
+      gridColumnsMotion,
+      videoAspectRatio,
       images[]{ asset->{url} },
       videos[]{ _type, file{ asset->{url, mimeType} }, url, caption }
     }
@@ -138,6 +143,7 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
       layout,
       gridColumns,
       gridColumnsMotion,
+      videoAspectRatio,
       images[]{ asset->{url} },
       videos[]{ _type, file{ asset->{url, mimeType} }, url, caption },
       "next": *[
