@@ -25,34 +25,45 @@ export async function POST(request: NextRequest) {
     
     console.log('Revalidating:', { documentType, slug });
 
+    // Track which paths were revalidated for cache warming
+    const pathsToWarm: string[] = [];
+
     // Revalidate based on document type
     switch (documentType) {
       case 'homePage':
         revalidatePath('/');
+        pathsToWarm.push('/');
         break;
         
       case 'workType':
         // Revalidate homepage (latest work)
         revalidatePath('/');
+        pathsToWarm.push('/');
         
         // Revalidate the specific project page
         if (slug && body.category) {
-          revalidatePath(`/${body.category}/${slug}`);
+          const projectPath = `/${body.category}/${slug}`;
+          revalidatePath(projectPath);
+          pathsToWarm.push(projectPath);
         }
         
         // Revalidate the category page
         if (body.category) {
           revalidatePath(`/${body.category}`);
+          pathsToWarm.push(`/${body.category}`);
         }
         break;
         
       case 'aboutPage':
         revalidatePath('/about');
+        pathsToWarm.push('/about');
         break;
         
       case 'infoPage':
         if (slug) {
-          revalidatePath(`/info/${slug}`);
+          const infoPath = `/info/${slug}`;
+          revalidatePath(infoPath);
+          pathsToWarm.push(infoPath);
         }
         break;
         
@@ -61,12 +72,26 @@ export async function POST(request: NextRequest) {
       case 'setSitedata':
         // These global settings affect all pages
         revalidatePath('/', 'layout');
+        pathsToWarm.push('/');
         break;
         
       default:
         // For unknown types, revalidate everything
         revalidatePath('/', 'layout');
+        pathsToWarm.push('/');
     }
+
+    // Warm the cache by fetching revalidated pages
+    const baseUrl = request.nextUrl.origin;
+    pathsToWarm.forEach(path => {
+      const warmUrl = `${baseUrl}${path}`;
+      // Fire and forget - don't wait for the response
+      fetch(warmUrl, { 
+        headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
+        cache: 'no-store' 
+      }).catch(err => console.error('Cache warming failed:', err));
+      console.log('Warming cache for:', warmUrl);
+    });
 
     return NextResponse.json({
       revalidated: true,
