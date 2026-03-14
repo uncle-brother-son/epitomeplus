@@ -21,8 +21,8 @@ id = "b3109658729547598686012ffd79adc4"
 # D1 database for revalidation tags
 [[d1_databases]]
 binding = "NEXT_TAG_CACHE_D1"
-database_name = "tag-cache"
-database_id = "96d3fff9-5549-47cf-b658-34e38e785cdd"
+database_name = "epitomeplus-tag-cache"
+database_id = "5cfede1e-cc13-417c-850a-e0007dc8264a"
 
 # Worker self-reference service
 [[services]]
