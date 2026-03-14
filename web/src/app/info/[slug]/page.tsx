@@ -84,9 +84,7 @@ export default async function InfoPage({ params }: PageProps) {
 
   return (
     <main id="main-content" className="grid5_ info" role="main">
-      <h1 className="col-start-1 col-end-4 md:col-start-3 md:col-end-5 text-xl font-medium mb-3 md:mb-5">
-        {title}
-      </h1>
+      <h1 className="col-start-1 col-end-4 md:col-start-3 md:col-end-5 text-xl font-medium mb-3 md:mb-5">{title}</h1>
       <div className="col-start-1 col-end-4 md:col-start-3 md:col-end-5 rich">
         {description && 
           <PortableText value={description} />
