@@ -16,7 +16,7 @@ binding = "ASSETS"
 # KV namespace for page cache
 [[kv_namespaces]]
 binding = "NEXT_INC_CACHE_KV"
-id = "b3109658729547598686012ffd79adc4"
+id = "8211784f76ac4f7da7ed25078a5bcae7"
 
 # D1 database for revalidation tags
 [[d1_databases]]
