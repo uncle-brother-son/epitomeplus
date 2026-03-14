@@ -1,9 +1,9 @@
-// default open-next.config.ts file created by @opennextjs/cloudflare
+// open-next.config.ts configured for ISR with KV + D1 caching
 import { defineCloudflareConfig } from "@opennextjs/cloudflare";
-// import r2IncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/r2-incremental-cache";
+import kvIncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/kv-incremental-cache";
+import d1NextTagCache from "@opennextjs/cloudflare/overrides/tag-cache/d1-tag-cache";
 
 export default defineCloudflareConfig({
-	// For best results consider enabling R2 caching
-	// See https://opennext.js.org/cloudflare/caching for more details
-	// incrementalCache: r2IncrementalCache
+	incrementalCache: kvIncrementalCache,
+	tagCache: d1NextTagCache,
 });

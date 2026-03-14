@@ -30,8 +30,5 @@ export async function getHomePage(): Promise<HomePageType | null> {
       }
     }
   `;
-  return client.fetch<HomePageType | null>(query, {}, { 
-    cache: 'no-store',
-    next: { revalidate: 0 } 
-  });
+  return client.fetch<HomePageType | null>(query);
 }

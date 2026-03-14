@@ -13,8 +13,7 @@ import { BreadcrumbSchema } from "../../components/structuredData";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = false;
 
 export async function generateStaticParams() {
   const paths = await getAllWorkPaths();

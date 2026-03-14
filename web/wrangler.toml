@@ -13,6 +13,17 @@ main = "./.open-next/worker.js"
 directory = "./.open-next/assets"
 binding = "ASSETS"
 
+# KV namespace for page cache
+[[kv_namespaces]]
+binding = "PAGE_CACHE"
+id = "b3109658729547598686012ffd79adc4"
+
+# D1 database for revalidation tags
+[[d1_databases]]
+binding = "TAG_CACHE"
+database_name = "tag-cache"
+database_id = "96d3fff9-5549-47cf-b658-34e38e785cdd"
+
 # Worker self-reference service
 [[services]]
 binding = "WORKER_SELF_REFERENCE"

@@ -8,8 +8,7 @@ import { notFound } from "next/navigation";
 import { getCategoryMetadata } from "../queries/getCategoryMetadata";
 import type { Metadata } from "next";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = false;
 
 export async function generateStaticParams() {
   return [

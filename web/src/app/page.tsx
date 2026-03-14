@@ -7,8 +7,7 @@ import ScrollReveal from "./components/scrollReveal";
 import { urlFor } from "@/lib/sanity/image";
 import type { Metadata } from "next";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = false;
 
 export async function generateMetadata(): Promise<Metadata> {
   const sitedata = await getSitedata();
