@@ -1,9 +1,10 @@
 import {StructureResolver} from 'sanity/structure'
 import {HomeIcon, DocumentsIcon, BlockContentIcon, UlistIcon, CogIcon, CodeBlockIcon, MenuIcon} from '@sanity/icons'
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
 
 
-export const myStructure: StructureResolver = (S) =>
+export const myStructure: StructureResolver = (S, context) =>
   S.list()
     .title('Content')
     .items([
@@ -15,12 +16,13 @@ export const myStructure: StructureResolver = (S) =>
             .schemaType('homePage')
             .documentId('homePage')
         ),
-      S.listItem()
-        .title('Projects')
-        .icon(DocumentsIcon)
-        .schemaType('workType')
-        .child(S.documentTypeList('workType')
-        ),
+      orderableDocumentListDeskItem({
+        type: 'workType',
+        title: 'Projects',
+        icon: DocumentsIcon,
+        S,
+        context
+      }),
       S.listItem()
         .title('About')
         .icon(BlockContentIcon)

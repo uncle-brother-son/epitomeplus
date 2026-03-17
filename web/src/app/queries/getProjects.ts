@@ -46,7 +46,7 @@ export type WorkType = {
  */
 export async function getAllWorkByCategory(category: string): Promise<WorkType[]> {
   const query = `
-    *[_type == "workType" && category == $category] | order(_createdAt desc){
+    *[_type == "workType" && category == $category] | order(orderRank){
       _id,
       slug,
       brand,
@@ -78,7 +78,7 @@ export async function getAllWorkByCategory(category: string): Promise<WorkType[]
  */
 export async function getLatestWork(limit: number = 6): Promise<WorkType[]> {
   const query = `
-    *[_type == "workType"] | order(_createdAt desc)[0...$limit]{
+    *[_type == "workType"] | order(orderRank)[0...$limit]{
       _id,
       slug,
       brand,
@@ -149,8 +149,8 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
       "next": *[
         _type == "workType" &&
         category == ^.category &&
-        _createdAt > ^._createdAt
-      ] | order(_createdAt asc) [0] {
+        orderRank > ^.orderRank
+      ] | order(orderRank) [0] {
         slug,
         brand,
         campaign
@@ -158,8 +158,8 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
       "prev": *[
         _type == "workType" &&
         category == ^.category &&
-        _createdAt < ^._createdAt
-      ] | order(_createdAt desc) [0] {
+        orderRank < ^.orderRank
+      ] | order(orderRank desc) [0] {
         slug,
         brand,
         campaign

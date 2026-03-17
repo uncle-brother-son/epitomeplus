@@ -112,7 +112,7 @@ export default function Header({ nav = [], siteTitle }: { nav?: NavItem[]; siteT
 
   return (
     <header ref={headerRef} id="header" className="menu sticky top-0 z-50 transition-all duration-320 ease-epitome">
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-60 focus:px-2 focus:py-1 focus:bg-blue focus:text-neutral">Skip to main content</a>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-16 focus:left-2 focus:z-60 focus:px-2 focus:py-1 focus:bg-blue focus:text-neutral">Skip to main content</a>
       <div className={showNav ? 'fixed bg-neutral inset-0 flex flex-col' : 'mx-2 mt-2 grid10_'}>
         <div className={showNav ? 'mx-2 mt-2' : 'relative col-start-1 col-span-2 md:col-start-1 md:col-span-4 flex'}>
           <Link href="/" aria-label={siteTitle}>

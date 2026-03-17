@@ -5,6 +5,12 @@ export const workType = defineType({
   title: 'Project',
   type: 'document',
   fields: [
+    defineField({
+      name: 'orderRank',
+      title: 'Order',
+      type: 'string',
+      hidden: true,
+    }),
     
     defineField({
       name: 'brand',
