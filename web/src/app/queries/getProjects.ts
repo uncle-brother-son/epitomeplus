@@ -66,8 +66,8 @@ export async function getAllWorkByCategory(category: string): Promise<WorkType[]
       gridColumns,
       gridColumnsMotion,
       videoAspectRatio,
-      images[]{ asset->{url} },
-      videos[]{ _type, file{ asset->{url, mimeType} }, url, caption }
+      images[defined(asset)]{ asset->{url} },
+      videos[_type == 'externalVideo' || defined(file.asset)]{ _type, file{ asset->{url, mimeType} }, url, caption }
     }
   `;
   return client.fetch<WorkType[]>(query, { category });
@@ -98,8 +98,8 @@ export async function getLatestWork(limit: number = 6): Promise<WorkType[]> {
       gridColumns,
       gridColumnsMotion,
       videoAspectRatio,
-      images[]{ asset->{url} },
-      videos[]{ _type, file{ asset->{url, mimeType} }, url, caption }
+      images[defined(asset)]{ asset->{url} },
+      videos[_type == 'externalVideo' || defined(file.asset)]{ _type, file{ asset->{url, mimeType} }, url, caption }
     }
   `;
   return client.fetch<WorkType[]>(query, { limit: limit - 1 });
@@ -144,8 +144,8 @@ export async function getWorkBySlug(slug: string): Promise<WorkType | null> {
       gridColumns,
       gridColumnsMotion,
       videoAspectRatio,
-      images[]{ asset->{url} },
-      videos[]{ _type, file{ asset->{url, mimeType} }, url, caption },
+      images[defined(asset)]{ asset->{url} },
+      videos[_type == 'externalVideo' || defined(file.asset)]{ _type, file{ asset->{url, mimeType} }, url, caption },
       "next": *[
         _type == "workType" &&
         category == ^.category &&

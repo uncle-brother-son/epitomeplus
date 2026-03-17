@@ -53,7 +53,7 @@ export default function Carousel({ images, videos, type, brand, campaign }: Caro
   return (
     <div className="w-full">
       <ul className="flex justify-center w-full transition-transform ease-linear transform-gpu overflow-hidden min-h-[274px] sm:min-h-[358px] md:min-h-[588px] lg:min-h-[702px] xl:min-h-[1062px] relative">
-        {type === 'image' && images?.map((img, idx) => (
+        {type === 'image' && images?.filter(img => img?.asset?.url).map((img, idx) => (
           <li
             key={idx}
             className="carouselItem absolute inset-0 flex justify-center"

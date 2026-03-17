@@ -9,5 +9,8 @@ const builder = imageUrlBuilder(client);
  * Returns an ImageUrlBuilder for chaining methods like .width(), .height(), .quality(), etc.
  */
 export function urlFor(source: SanityImageSource) {
+  if (!source) {
+    throw new Error('urlFor: source is null or undefined');
+  }
   return builder.image(source).auto('format').fit('max');
 }
