@@ -96,12 +96,12 @@ export default async function CategoryPage({ params }: Props) {
   }
 
   const workItems: WorkType[] = await getAllWorkByCategory(category);
-  const title = category === 'motion' ? 'Motion Projects' : 'Stills Projects';
+  const title = category === 'motion' ? 'Motion' : 'Stills';
 
   return (
     <main id="main-content">
       <FadeReveal className="flex flex-row gap-2 mx-2 mb-10">
-        <h1>{title}</h1>
+        <h1 className="text-xl font-medium uppercase">{title}</h1>
       </FadeReveal>
       <ul className="grid grid-cols-1 md:grid-cols-3 gap-y-5 md:gap-1 mx-2">
         {workItems.map((work, index) => {

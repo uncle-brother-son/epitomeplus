@@ -216,7 +216,7 @@ export default async function WorkPostPage({ params }: PageProps) {
                 </section>
             </FadeReveal>
 
-            <FadeReveal>
+            {/* <FadeReveal>
                 {category && (
                     <section className="grid5_">
                         <div className="col-start-1 col-end-4 md:col-end-6 flex gap-4 justify-center">
@@ -224,7 +224,7 @@ export default async function WorkPostPage({ params }: PageProps) {
                         </div>
                     </section>
                 )}
-            </FadeReveal>
+            </FadeReveal> */}
     </main>
   );
 }

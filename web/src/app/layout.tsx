@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Roboto } from "next/font/google";
 import { getSitedata } from "./queries/getSitedata";
 import { getNavigation } from "./queries/getNavigation";
 import { getAllInfoPages } from "./queries/getInfo";
@@ -12,12 +11,6 @@ import { OrganizationSchema, WebSiteSchema } from "./components/structuredData";
 import { ConditionalAnalytics } from "./components/conditionalAnalytics";
 import { CookieConsent } from "./components/cookieConsent";
 import "../styles/globals.css";
-
-const roboto = Roboto({
-  weight: ['400', '500'],
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 export async function generateMetadata(): Promise<Metadata> {
   const sitedata = await getSitedata();
@@ -48,12 +41,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <OrganizationSchema sitedata={sitedata} />
         <WebSiteSchema sitedata={sitedata} />
       </head>
-      <body className={roboto.className} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         {sitedata.googleAnalyticsId && (
           <ConditionalAnalytics gaId={sitedata.googleAnalyticsId} />
         )}
