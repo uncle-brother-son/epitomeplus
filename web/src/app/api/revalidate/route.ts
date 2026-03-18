@@ -16,82 +16,82 @@ export async function POST(request: NextRequest) {
     // Parse the webhook payload
     const body = await request.json();
     
-    // Sanity webhook payload structure
-    // body._type will contain the document type (e.g., 'homePage', 'workType', etc.)
-    // body.slug will contain the slug if available
-    
     const documentType = body._type;
     const slug = body.slug?.current || body.slug;
     
     console.log('Revalidating:', { documentType, slug });
 
-    // Track which paths were revalidated for cache warming
-    const pathsToWarm: string[] = [];
+    // The primary path to warm after revalidation
+    let warmPath: string | null = null;
 
     // Revalidate based on document type
     switch (documentType) {
       case 'homePage':
         revalidatePath('/');
-        pathsToWarm.push('/');
+        warmPath = '/';
         break;
         
       case 'workType':
-        // Revalidate homepage (latest work)
         revalidatePath('/');
-        pathsToWarm.push('/');
         
-        // Revalidate the specific project page
         if (slug && body.category) {
-          const projectPath = `/${body.category}/${slug}`;
-          revalidatePath(projectPath);
-          pathsToWarm.push(projectPath);
+          revalidatePath(`/${body.category}/${slug}`);
+          warmPath = `/${body.category}/${slug}`;
         }
         
-        // Revalidate the category page
         if (body.category) {
           revalidatePath(`/${body.category}`);
-          pathsToWarm.push(`/${body.category}`);
+        }
+
+        // Warm homepage and category page too
+        {
+          const baseUrl = request.nextUrl.origin;
+          fetch(`${baseUrl}/`, {
+            headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
+            cache: 'no-store',
+          }).catch(err => console.error('Homepage cache warming failed:', err));
+          if (body.category) {
+            fetch(`${baseUrl}/${body.category}`, {
+              headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
+              cache: 'no-store',
+            }).catch(err => console.error('Category cache warming failed:', err));
+          }
         }
         break;
         
       case 'aboutPage':
         revalidatePath('/about');
-        pathsToWarm.push('/about');
+        warmPath = '/about';
         break;
-        
+
       case 'infoPage':
         if (slug) {
-          const infoPath = `/info/${slug}`;
-          revalidatePath(infoPath);
-          pathsToWarm.push(infoPath);
+          revalidatePath(`/info/${slug}`);
+          warmPath = `/info/${slug}`;
         }
         break;
         
       case 'setNavigation':
       case 'setFooter':
       case 'setSitedata':
-        // These global settings affect all pages
+      case 'setCategoryMetadata':
         revalidatePath('/', 'layout');
-        pathsToWarm.push('/');
+        warmPath = '/';
         break;
         
       default:
-        // For unknown types, revalidate everything
         revalidatePath('/', 'layout');
-        pathsToWarm.push('/');
+        warmPath = '/';
     }
 
-    // Warm the cache by fetching revalidated pages
-    const baseUrl = request.nextUrl.origin;
-    pathsToWarm.forEach(path => {
-      const warmUrl = `${baseUrl}${path}`;
-      // Fire and forget - don't wait for the response
-      fetch(warmUrl, { 
+    // Warm the cache for the primary changed page only
+    if (warmPath) {
+      const baseUrl = request.nextUrl.origin;
+      fetch(`${baseUrl}${warmPath}`, {
         headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
-        cache: 'no-store' 
+        cache: 'no-store',
       }).catch(err => console.error('Cache warming failed:', err));
-      console.log('Warming cache for:', warmUrl);
-    });
+    }
 
     return NextResponse.json({
       revalidated: true,

@@ -14,12 +14,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.epitomeplus.co.uk' }],
-        destination: 'https://epitomeplus.co.uk/:path*',
-        permanent: true,
-      },
-      {
         source: '/info',
         destination: '/info/privacy-policy',
         permanent: true,
