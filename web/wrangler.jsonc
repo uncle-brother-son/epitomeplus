@@ -28,5 +28,8 @@
     }
   ],
   "workers_dev": true,
-  "preview_urls": false
+  "preview_urls": false,
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://epitomeplus.co.uk"
+  }
 }

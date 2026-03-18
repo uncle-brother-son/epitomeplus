@@ -11,7 +11,7 @@ export const OrganizationSchema = memo(function OrganizationSchema({ sitedata }:
     '@type': 'Organization',
     name: sitedata.title,
     description: sitedata.description,
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.epitomeplus.co.uk',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://epitomeplus.co.uk',
     ...(sitedata.ogImage?.asset?.url && {
       logo: {
         '@type': 'ImageObject',
@@ -34,7 +34,7 @@ export const WebSiteSchema = memo(function WebSiteSchema({ sitedata }: Organizat
     '@type': 'WebSite',
     name: sitedata.title,
     description: sitedata.description,
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.epitomeplus.co.uk',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://epitomeplus.co.uk',
   };
 
   return (
