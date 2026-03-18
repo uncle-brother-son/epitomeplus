@@ -1,6 +1,9 @@
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const CACHE_WARM_DELAY_MS = 5000; // Give Sanity CDN time to propagate before re-rendering
+
 export async function POST(request: NextRequest) {
   try {
     // Verify the revalidation secret
@@ -46,15 +49,19 @@ export async function POST(request: NextRequest) {
         // Warm homepage and category page too
         {
           const baseUrl = request.nextUrl.origin;
-          fetch(`${baseUrl}/`, {
-            headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
-            cache: 'no-store',
-          }).catch(err => console.error('Homepage cache warming failed:', err));
-          if (body.category) {
-            fetch(`${baseUrl}/${body.category}`, {
+          delay(CACHE_WARM_DELAY_MS).then(() =>
+            fetch(`${baseUrl}/`, {
               headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
               cache: 'no-store',
-            }).catch(err => console.error('Category cache warming failed:', err));
+            }).catch(err => console.error('Homepage cache warming failed:', err))
+          );
+          if (body.category) {
+            delay(CACHE_WARM_DELAY_MS).then(() =>
+              fetch(`${baseUrl}/${body.category}`, {
+                headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
+                cache: 'no-store',
+              }).catch(err => console.error('Category cache warming failed:', err))
+            );
           }
         }
         break;
@@ -87,10 +94,12 @@ export async function POST(request: NextRequest) {
     // Warm the cache for the primary changed page only
     if (warmPath) {
       const baseUrl = request.nextUrl.origin;
-      fetch(`${baseUrl}${warmPath}`, {
-        headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
-        cache: 'no-store',
-      }).catch(err => console.error('Cache warming failed:', err));
+      delay(CACHE_WARM_DELAY_MS).then(() =>
+        fetch(`${baseUrl}${warmPath}`, {
+          headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
+          cache: 'no-store',
+        }).catch(err => console.error('Cache warming failed:', err))
+      );
     }
 
     return NextResponse.json({
