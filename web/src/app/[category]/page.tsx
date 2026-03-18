@@ -123,6 +123,7 @@ export default async function CategoryPage({ params }: Props) {
                 category={category}
                 mediaUrl={mediaUrl}
                 mediaType={thumbnailGroup.thumbnail}
+                priority={index === 0}
                 loading={index < 3 ? "eager" : "lazy"}
               />
             </ScrollReveal>

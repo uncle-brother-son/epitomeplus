@@ -14,6 +14,7 @@ interface ProjectCardProps {
   mediaUrl: string;
   mediaType: 'image' | 'video';
   loading?: 'eager' | 'lazy';
+  priority?: boolean;
 }
 
 const ProjectCard = memo(function ProjectCard({
@@ -25,6 +26,7 @@ const ProjectCard = memo(function ProjectCard({
   mediaUrl,
   mediaType,
   loading = 'lazy',
+  priority = false,
 }: ProjectCardProps) {
   const [showOverlay, setShowOverlay] = useState(false);
 
@@ -51,13 +53,14 @@ const ProjectCard = memo(function ProjectCard({
         ) : (
           <div className="relative w-full" style={{ aspectRatio: '4/5' }}>
             <Image
-              src={urlFor(mediaUrl).width(800).quality(75).url()}
+              src={urlFor(mediaUrl).width(600).quality(75).url()}
               alt={`${brand} ${campaign}`}
-              width={800}
-              height={1000}
+              width={600}
+              height={750}
               className="absolute inset-0 w-full h-full object-cover rounded"
               sizes="(max-width: 767px) 100vw, 33vw"
-              loading={loading}
+              priority={priority}
+              loading={priority ? undefined : loading}
               placeholder="empty"
             />
           </div>

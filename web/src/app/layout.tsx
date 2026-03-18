@@ -72,7 +72,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://cdn.sanity.io" />
         <OrganizationSchema sitedata={sitedata} />
         <WebSiteSchema sitedata={sitedata} />
       </head>
