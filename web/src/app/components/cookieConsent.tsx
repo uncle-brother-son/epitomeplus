@@ -42,7 +42,7 @@ export const CookieConsent = memo(function CookieConsent() {
       <div className="max-w-screen-xl mx-auto flex flex-col gap-2 ">
         <div id="cookie-consent-title" className="">Cookie Preferences</div>
         <p id="cookie-consent-description" className="text-sm">
-          We use cookies to improve your experience and analyze site traffic. By clicking &ldquo;Accept&rdquo;, you consent to our use of analytics cookies. {' '} <Link href="/info/privacy-policy" className="underline hover:text-blue" prefetch={false}>Learn more</Link>
+          We use cookies to improve your experience and analyze site traffic. By clicking &ldquo;Accept&rdquo;, you consent to our use of analytics cookies. {' '} <Link href="/info/privacy-policy" className="underline hover:text-blue" prefetch={false}>Read our Privacy Policy</Link>
         </p>
         <div className="grow flex gap-2">
           <button onClick={handleDecline} className="grow px-3 py-1 text-sm border border-neutral transition duration-320 ease-epitome" aria-label="Decline cookies">
