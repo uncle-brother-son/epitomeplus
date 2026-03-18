@@ -135,7 +135,7 @@ export default function Header({ nav = [], siteTitle }: { nav?: NavItem[]; siteT
           </Link>
         </div>
 
-        <nav id="navigation-menu" className={showNav ? 'mx-2 grow content-center font-medium flex flex-col' : 'grow col-start-3 col-span-1 md:col-start-5 md:col-span-6 font-medium'}>
+        <nav id="navigation-menu" aria-label="Main navigation" className={showNav ? 'mx-2 grow content-center font-medium flex flex-col' : 'grow col-start-3 col-span-1 md:col-start-5 md:col-span-6 font-medium'}>
           {/* Menu button - visible on mobile, hidden on desktop */}
           {!showNav && (
             <div className="text-right block md:hidden">

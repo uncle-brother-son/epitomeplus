@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /_next
-Sitemap: https://www.epitomeplus.co.uk/sitemap.xml
+Sitemap: https://epitomeplus.co.uk/sitemap.xml

@@ -39,6 +39,7 @@ const ProjectCard = memo(function ProjectCard({
           <div className="relative w-full" style={{ aspectRatio: '4/5' }}>
             <video
               src={mediaUrl}
+              title={`${brand} - ${campaign}`}
               autoPlay
               muted
               loop

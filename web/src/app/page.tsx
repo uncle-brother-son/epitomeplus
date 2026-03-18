@@ -89,6 +89,7 @@ export default async function Page() {
             {thumbnailGroup.thumbnail === "video" && (thumbnailGroup.thumbnailVideoHomepage?.asset.url || thumbnailGroup.thumbnailVideo?.asset.url) ? (
                 <video
                   src={thumbnailGroup.thumbnailVideoHomepage?.asset.url || thumbnailGroup.thumbnailVideo?.asset.url}
+                  title={`${brand} - ${campaign}`}
                   autoPlay
                   muted
                   loop
