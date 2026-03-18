@@ -27,7 +27,7 @@
       "database_name": "epitomeplus-tag-cache"
     }
   ],
-  "workers_dev": true,
+  "workers_dev": false,
   "preview_urls": false,
   "vars": {
     "NEXT_PUBLIC_SITE_URL": "https://epitomeplus.co.uk"
