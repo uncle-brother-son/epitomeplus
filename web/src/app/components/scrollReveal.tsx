@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect, useRef, ReactNode } from 'react';
+import { useEffect, useRef, ReactNode, ElementType } from 'react';
 import { usePageTransition } from './loadingIndicator';
 
 interface ScrollRevealProps {
   children: ReactNode;
   className?: string;
+  as?: ElementType;
 }
 
-export default function ScrollReveal({ children, className = '' }: ScrollRevealProps) {
-  const elementRef = useRef<HTMLDivElement>(null);
+export default function ScrollReveal({ children, className = '', as: Tag = 'div' }: ScrollRevealProps) {
+  const elementRef = useRef<HTMLElement>(null);
   const { isTransitioning } = usePageTransition();
   const hasInitialized = useRef(false);
 
@@ -54,8 +55,9 @@ export default function ScrollReveal({ children, className = '' }: ScrollRevealP
   }, [isTransitioning]);
 
   return (
-    <div ref={elementRef} className={className} style={{ opacity: 0, transform: 'translateY(0.5rem)' }}>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    <Tag ref={elementRef as any} className={className} style={{ opacity: 0, transform: 'translateY(0.5rem)' }}>
       {children}
-    </div>
+    </Tag>
   );
 }

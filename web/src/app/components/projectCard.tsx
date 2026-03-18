@@ -29,12 +29,12 @@ const ProjectCard = memo(function ProjectCard({
   const [showOverlay, setShowOverlay] = useState(false);
 
   return (
-    <li
-      className="ease-epitome"
+    <article
+      className="relative flex flex-col h-full ease-epitome"
+      id={`post-${id}`}
       onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
     >
-      <article className="relative flex flex-col h-full" id={`post-${id}`}>
         {mediaType === 'video' ? (
           <div className="relative w-full" style={{ aspectRatio: '4/5' }}>
             <video
@@ -77,8 +77,7 @@ const ProjectCard = memo(function ProjectCard({
             </h2>
           </div>
         </Link>
-      </article>
-    </li>
+    </article>
   );
 });
 

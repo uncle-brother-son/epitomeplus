@@ -114,7 +114,7 @@ export default async function CategoryPage({ params }: Props) {
           if (!mediaUrl) return null;
 
           return (
-            <ScrollReveal key={_id}>
+            <ScrollReveal key={_id} as="li">
               <ProjectCard
                 id={_id}
                 slug={slug.current}
