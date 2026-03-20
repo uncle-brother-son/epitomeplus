@@ -148,7 +148,7 @@ export default async function WorkPostPage({ params }: PageProps) {
             )}
 
             {services?.length ? (
-                <FadeReveal className="col-start-1 col-end-4 md:col-start-5 md:col-end-6 mb-10 md:mb-10">
+                <FadeReveal className="col-start-1 col-end-4 md:col-start-5 md:col-end-6 mb-10 md:mb-10 rich">
                     <PortableText value={services} />
                 </FadeReveal>
             ) : null}
