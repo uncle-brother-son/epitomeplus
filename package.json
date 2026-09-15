@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.23.0",
+  "packageManager": "npm@10.8.2",
   "dependencies": {
     "next-view-transitions": "^0.3.4"
   }

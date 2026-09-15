@@ -2,14 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-        port: '',
-        pathname: '/images/**',
-      },
-    ],
+    unoptimized: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
   },
   async redirects() {
     return [
