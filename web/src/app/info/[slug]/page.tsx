@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 export const revalidate = false;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const pages = await getAllInfoPages();
