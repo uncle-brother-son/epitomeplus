@@ -9,7 +9,6 @@ import { getCategoryMetadata } from "../queries/getCategoryMetadata";
 import type { Metadata } from "next";
 
 export const revalidate = false;
-export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return [
@@ -107,6 +106,9 @@ export default async function CategoryPage({ params }: Props) {
       <ul className="grid grid-cols-1 md:grid-cols-3 gap-y-5 md:gap-1 mx-2">
         {workItems.map((work, index) => {
           const { _id, slug, brand, campaign, category, thumbnailGroup } = work;
+
+          if (!thumbnailGroup) return null;
+
           const mediaUrl =
             thumbnailGroup.thumbnail === "image"
               ? thumbnailGroup.thumbnailImage?.asset.url
