@@ -43,20 +43,6 @@ export async function POST(request: NextRequest) {
           revalidatePath(`/${body.category}`);
         }
 
-        // Warm homepage and category page too
-        {
-          const baseUrl = request.nextUrl.origin;
-          fetch(`${baseUrl}/`, {
-            headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
-            cache: 'no-store',
-          }).catch(err => console.error('Homepage cache warming failed:', err));
-          if (body.category) {
-            fetch(`${baseUrl}/${body.category}`, {
-              headers: { 'User-Agent': 'Sanity-Webhook-Cache-Warmer' },
-              cache: 'no-store',
-            }).catch(err => console.error('Category cache warming failed:', err));
-          }
-        }
         break;
         
       case 'aboutPage':
