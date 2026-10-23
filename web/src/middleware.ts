@@ -28,10 +28,7 @@ export function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl
   if (!ALLOWED_PATHS.some((re) => re.test(pathname))) {
-    return new NextResponse(
-      '<!doctype html><html><head><meta charset="utf-8"><title>404</title></head><body><h1>404 - Page Not Found</h1><p><a href="/">Go Back Home</a></p></body></html>',
-      { status: 404, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } }
-    )
+    return NextResponse.rewrite(new URL('/_not-found', request.url), { status: 404 })
   }
 
   return NextResponse.next()
